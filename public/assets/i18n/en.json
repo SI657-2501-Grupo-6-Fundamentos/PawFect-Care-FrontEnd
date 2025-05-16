@@ -1,0 +1,250 @@
+{
+  "section": {
+    "home": {
+      "title": "Welcome"
+    }
+  },
+  "section1": {
+    "home": {
+      "subtitle": "Welcome to PawfectCareApp"
+    }
+  },
+  "section2": {
+    "home": {
+      "description": "Your go-to platform for managing the health and\n  well-being of your pets. Whether you're a pet owner\n  or a veterinary professional, PawfectCareApp simplifies the\n  management of clinical records, appointments, and more,\n  all in one place. Enjoy a seamless experience with our intuitive\n  design and comprehensive features, designed to keep your furry friends\n  healthy and happy."
+    }
+  },
+
+  "pageDown": {
+    "home": {
+      "title": "Page Not Found"
+    }
+  },
+  "pageDown1": {
+    "home": {
+      "subtitle": "The path",
+      "subtitle1" : "{{invalidUrl}}",
+      "subtitle2" : "is not valid."
+    }
+  },
+  "pageDown2": {
+    "home": {
+      "goHome": "Home"
+    }
+  },
+
+  "pets": {
+    "home": {
+      "title": "List of registered pets",
+      "buttons":{
+        "edit":"Edit",
+        "history":"History"
+      }
+    }
+  },
+  "pets1": {
+    "home": {
+      "button": "Add new"
+    }
+  },
+  "pets2": {
+    "home": {
+      "edit": "Edit"
+    }
+  },
+  "pets3": {
+    "home": {
+      "history": "History"
+    }
+  },
+
+  "clients": {
+    "home": {
+      "title": "List of registered clients",
+      "buttons":{
+        "edit":"Edit"
+      }
+    }
+  },
+  "clients1": {
+    "home": {
+      "button": "Add new"
+    }
+  },
+  "clients2": {
+    "home": {
+      "edit": "Edit"
+    }
+  },
+
+  "event": {
+    "home": {
+      "title": "List Appointments",
+      "buttons":{
+        "edit":"Edit",
+        "check":"Check"
+      }
+    }
+  },
+  "event1": {
+    "home": {
+      "button": "Add new"
+    }
+  },
+  "event2": {
+    "home": {
+      "edit": "Edit"
+    }
+  },
+  "event3": {
+    "home": {
+      "button2": "Mark as complete"
+    }
+  },
+  "login-container": {
+    "login": {
+      "title": "Login",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "submitButton": "Submit",
+      "registerPrompt": "Don't have an account yet? Please register.",
+      "registerButton": "Register"
+    }
+  },
+  "register-container": {
+    "register": {
+      "title": "Register",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "submitButton": "Register",
+      "alreadyHaveAccount": "Already have an account? Sign in",
+      "loginButton": "Sign in",
+      "register": {
+        "errors": {
+          "required": "This field is required",
+          "invalidEmail": "Not a valid email"
+        }
+      }
+    }
+  },
+  "medicalHistory": {
+    "title": "Medical History",
+    "searchPlaceholder": "Search medical records",
+    "addRecordButton": "Add Record",
+    "noRecordsMessage": "No records available",
+    "columns": {
+      "recordId": "Record ID",
+      "petName": "Pet Name",
+      "date": "Date",
+      "diagnosis": "Diagnosis",
+      "treatment": "Treatment",
+      "actions": "Actions"
+    },
+    "buttons": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "addNewPetHistoryTitle": "Add New Pet History",
+    "addNewPetHistoryButton": "Add New History",
+    "chronologicalTitle": "Chronological List of Medical Events",
+    "downloadHistoryButton": "Download History",
+    "historyDescriptionPlaceholder": "Enter the medical event description...",
+    "petMedicalHistoryFormTitle": "Pet Medical History Form",
+    "timelineSubtitle": "Timeline of medical procedures and treatments"
+  },
+  "appointment": {
+    "newAppointmentTitle": "New Appointment",
+    "appointmentNameLabel": "Enter your appointment name",
+    "appointmentNamePlaceholder": "Full Name",
+    "startDateLabel": "Enter your start date",
+    "startDatePlaceholder": "Select date",
+    "startTimeLabel": "Enter your start time",
+    "startTimePlaceholder": "Select time",
+    "endDateLabel": "Enter your end date",
+    "endDatePlaceholder": "Select date",
+    "endTimeLabel": "Enter your end time",
+    "endTimePlaceholder": "Select time",
+    "isMedicalLabel": "Is this a medical appointment?",
+    "statusLabel": "Enter your status",
+    "statusPlaceholder": "Status",
+    "petLabel": "Select your pet",
+    "noSelectedPet": "No selected pet",
+    "addButton": "Add",
+    "cancelButton": "Cancel"
+  },
+  "editAppointment": {
+    "appointmentName": "Edit appointment name",
+    "appointmentNamePlaceholder": "Full Name",
+    "startDateAppointment": "Enter your appointment start date",
+    "startDateAppointmentPlaceholder": "Select time",
+    "startTimeAppointment": "Enter your appointment start time",
+    "startTimeAppointmentPlaceholder": "Select time",
+    "endDateAppointment": "Enter your appointment end date",
+    "endDateAppointmentPlaceholder": "Select time",
+    "endTimeAppointment": "Enter your appointment end time",
+    "endTimeAppointmentPlaceholder": "Select time",
+    "isMedical": "Is it a medical appointment?",
+    "status": "Enter the status",
+    "statusPlaceholder": "Status",
+    "pet": "Select a Pet",
+    "noSelectedPet": "No selected Pet",
+    "updateButton": "Update",
+    "cancelButton": "Cancel"
+  },
+  "newClient": {
+    "title": "New Client",
+    "fullName": "Enter your full name",
+    "fullNamePlaceholder": "Full Name",
+    "phoneNumber": "Enter your phone number",
+    "phoneNumberPlaceholder": "Phone",
+    "email": "Enter your email",
+    "emailPlaceholder": "Email",
+    "address": "Enter your address",
+    "addressPlaceholder": "Address",
+    "addButton": "Add",
+    "cancelButton": "Cancel"
+  },
+  "editClient": {
+    "title": "Edit Client",
+    "fullNamePlaceholder": "Full Name",
+    "phoneNumberPlaceholder": "Phone",
+    "emailPlaceholder": "Email",
+    "addressPlaceholder": "Address",
+    "updateButton": "Update",
+    "cancelButton": "Cancel"
+  },
+  "pet": {
+    "newPetTitle": "New Pet",
+    "ownerSelectedLabel": "Owner selected",
+    "ownerSelectedPlaceholder": "No selected owner",
+    "petNameLabel": "Enter your pet name",
+    "petNamePlaceholder": "Pet Name",
+    "birthDateLabel": "Enter your birth date",
+    "registrationDateLabel": "Enter your registration date",
+    "animalBreedLabel": "Enter your animal breed",
+    "genderLabel": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "addButton": "Add",
+    "cancelButton": "Cancel"
+  },
+  "petEdit": {
+    "editPetTitle": "Edit Pet",
+    "petNameLabel": "Pet Name",
+    "petNamePlaceholder": "Pet Name",
+    "birthDateLabel": "Birth Date",
+    "birthDatePlaceholder": "Birth Date",
+    "registrationDateLabel": "Registration Date",
+    "registrationDatePlaceholder": "Registration Date",
+    "breedLabel": "Breed",
+    "breedPlaceholder": "Breed",
+    "chooseOwnerLabel": "Choose owner",
+    "noOwnerSelected": "No selected owner",
+    "genderLabel": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "updateButton": "Update",
+    "cancelButton": "Cancel"
+  }
+}

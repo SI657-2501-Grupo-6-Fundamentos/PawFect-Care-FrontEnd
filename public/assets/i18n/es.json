@@ -1,0 +1,249 @@
+{
+  "section": {
+    "home": {
+      "title": "Bienvenido"
+    }
+  },
+  "section1": {
+    "home": {
+      "subtitle": "Bienvenido a PawfectCareApp"
+    }
+  },
+  "section2": {
+    "home": {
+      "description": "Su plataforma de referencia para gestionar la salud y\n      bienestar de tus mascotas. Si eres dueño de una mascota\n      o un profesional veterinario, PawfectCareApp simplifica la\n      gestión de historias clínicas, citas y más,\n      todo en un solo lugar. Disfrute de una experiencia perfecta con nuestro intuitivo\n      diseño y características integrales, diseñadas para mantener a tus amigos peludos\n      sano y feliz."
+    }
+  },
+
+  "pageDown": {
+    "home": {
+      "title": "La página no responde"
+    }
+  },
+  "pageDown1": {
+    "home": {
+      "subtitle": "The path",
+      "subtitle1" : "{{invalidUrl}}",
+      "subtitle2" : "is not valid."
+    }
+  },
+  "pageDown2": {
+    "home": {
+      "goHome": "Regresar"
+    }
+  },
+
+  "pets": {
+    "home": {
+      "title": "Lista de mascotas registradas",
+      "buttons":{
+        "edit":"Editar",
+        "history":"Historial"
+      }
+    }
+  },
+  "pets1": {
+    "home": {
+      "button": "Agregar nuevo"
+    }
+  },
+  "pets2": {
+    "home": {
+      "edit": "Editar"
+    }
+  },
+  "pets3": {
+    "home": {
+      "history": "Historial"
+    }
+  },
+
+  "clients": {
+    "home": {
+      "title": "Lista de clientes registrados",
+      "buttons":{
+        "edit":"Editar"
+      }
+    }
+  },
+  "clients1": {
+    "home": {
+      "button": "Agregar nuevo"
+    }
+  },
+  "clients2": {
+    "home": {
+      "edit": "Editar"
+    }
+  },
+
+  "event": {
+    "home": {
+      "title": "Lista de eventos",
+      "buttons":{
+        "edit":"Editar",
+        "check":"Terminar"
+      }
+    }
+  },
+  "event1": {
+    "home": {
+      "button": "Agregar nuevo"
+    }
+  },
+  "event2": {
+    "home": {
+      "edit": "Editar"
+    }
+  },
+  "event3": {
+    "home": {
+      "button2": "Marcar como completa"
+    }
+  },
+  "login-container": {
+    "login": {
+      "title": "Iniciar Sesión",
+      "emailPlaceholder": "Introduce tu correo electrónico",
+      "passwordPlaceholder": "Introduce tu contraseña",
+      "submitButton": "Enviar",
+      "registerPrompt": "¿Todavía no tienes cuenta? Regístrate por favor.",
+      "registerButton": "Registrarse"
+    }
+  },
+  "register-container": {
+    "register": {
+      "title": "Registro",
+      "emailPlaceholder": "Correo electrónico",
+      "passwordPlaceholder": "Contraseña",
+      "confirmPasswordPlaceholder": "Confirma tu contraseña",
+      "submitButton": "Registrar",
+      "alreadyHaveAccount": "¿Ya tienes una cuenta? Inicia sesión",
+      "loginButton": "Iniciar sesión",
+      "errors": {
+        "required": "Este campo es obligatorio",
+        "invalidEmail": "No es un correo válido"
+      }
+    }
+  },
+  "medicalHistory": {
+    "title": "Historial Médico",
+    "searchPlaceholder": "Buscar registros médicos",
+    "addRecordButton": "Agregar Registro",
+    "noRecordsMessage": "No hay registros disponibles",
+    "columns": {
+      "recordId": "ID del Registro",
+      "petName": "Nombre de la Mascota",
+      "date": "Fecha",
+      "diagnosis": "Diagnóstico",
+      "treatment": "Tratamiento",
+      "actions": "Acciones"
+    },
+    "buttons": {
+      "edit": "Editar",
+      "delete": "Eliminar"
+    },
+    "addNewPetHistoryTitle": "Agregar Nuevo Historial de Mascota",
+    "addNewPetHistoryButton": "Agregar Nuevo Historial",
+    "chronologicalTitle": "Lista Cronológica de Eventos Médicos",
+    "downloadHistoryButton": "Descargar Historial",
+    "historyDescriptionPlaceholder": "Ingrese la descripción del evento médico...",
+    "petMedicalHistoryFormTitle": "Formulario de Historial Médico de la Mascota",
+    "timelineSubtitle": "Cronología de procedimientos y tratamientos médicos"
+  },
+  "appointment": {
+    "newAppointmentTitle": "Nueva cita",
+    "appointmentNameLabel": "Ingresa el nombre de la cita",
+    "appointmentNamePlaceholder": "Nombre completo",
+    "startDateLabel": "Ingresa la fecha de inicio",
+    "startDatePlaceholder": "Selecciona la fecha",
+    "startTimeLabel": "Ingresa la hora de inicio",
+    "startTimePlaceholder": "Selecciona la hora",
+    "endDateLabel": "Ingresa la fecha de finalización",
+    "endDatePlaceholder": "Selecciona la fecha",
+    "endTimeLabel": "Ingresa la hora de finalización",
+    "endTimePlaceholder": "Selecciona la hora",
+    "isMedicalLabel": "¿Es una cita médica?",
+    "statusLabel": "Ingresa tu estado",
+    "statusPlaceholder": "Estado",
+    "petLabel": "Selecciona tu mascota",
+    "noSelectedPet": "No se seleccionó mascota",
+    "addButton": "Agregar",
+    "cancelButton": "Cancelar"
+  },
+  "editAppointment": {
+    "appointmentName": "Editar nombre de la cita",
+    "appointmentNamePlaceholder": "Nombre completo",
+    "startDateAppointment": "Ingresa la fecha de inicio de la cita",
+    "startDateAppointmentPlaceholder": "Seleccionar hora",
+    "startTimeAppointment": "Ingresa la hora de inicio de la cita",
+    "startTimeAppointmentPlaceholder": "Seleccionar hora",
+    "endDateAppointment": "Ingresa la fecha de finalización de la cita",
+    "endDateAppointmentPlaceholder": "Seleccionar hora",
+    "endTimeAppointment": "Ingresa la hora de finalización de la cita",
+    "endTimeAppointmentPlaceholder": "Seleccionar hora",
+    "isMedical": "¿Es una cita médica?",
+    "status": "Ingresa el estado",
+    "statusPlaceholder": "Estado",
+    "pet": "Selecciona una mascota",
+    "noSelectedPet": "No se ha seleccionado una mascota",
+    "updateButton": "Actualizar",
+    "cancelButton": "Cancelar"
+  },
+  "newClient": {
+    "title": "Nuevo Cliente",
+    "fullName": "Ingresa tu nombre completo",
+    "fullNamePlaceholder": "Nombre completo",
+    "phoneNumber": "Ingresa tu número de teléfono",
+    "phoneNumberPlaceholder": "Teléfono",
+    "email": "Ingresa tu correo electrónico",
+    "emailPlaceholder": "Correo electrónico",
+    "address": "Ingresa tu dirección",
+    "addressPlaceholder": "Dirección",
+    "addButton": "Agregar",
+    "cancelButton": "Cancelar"
+  },
+  "editClient": {
+    "title": "Editar Cliente",
+    "fullNamePlaceholder": "Nombre Completo",
+    "phoneNumberPlaceholder": "Teléfono",
+    "emailPlaceholder": "Correo Electrónico",
+    "addressPlaceholder": "Dirección",
+    "updateButton": "Actualizar",
+    "cancelButton": "Cancelar"
+  },
+  "pet": {
+    "newPetTitle": "Nueva Mascota",
+    "ownerSelectedLabel": "Propietario seleccionado",
+    "ownerSelectedPlaceholder": "Sin propietario seleccionado",
+    "petNameLabel": "Ingrese el nombre de su mascota",
+    "petNamePlaceholder": "Nombre de la mascota",
+    "birthDateLabel": "Ingrese la fecha de nacimiento",
+    "registrationDateLabel": "Ingrese la fecha de registro",
+    "animalBreedLabel": "Ingrese la raza del animal",
+    "genderLabel": "Género",
+    "male": "Masculino",
+    "female": "Femenino",
+    "addButton": "Agregar",
+    "cancelButton": "Cancelar"
+  },
+  "petEdit": {
+    "editPetTitle": "Editar Mascota",
+    "petNameLabel": "Nombre de la Mascota",
+    "petNamePlaceholder": "Nombre de la Mascota",
+    "birthDateLabel": "Fecha de Nacimiento",
+    "birthDatePlaceholder": "Fecha de Nacimiento",
+    "registrationDateLabel": "Fecha de Registro",
+    "registrationDatePlaceholder": "Fecha de Registro",
+    "breedLabel": "Raza",
+    "breedPlaceholder": "Raza",
+    "chooseOwnerLabel": "Seleccionar propietario",
+    "noOwnerSelected": "Ningún propietario seleccionado",
+    "genderLabel": "Género",
+    "male": "Masculino",
+    "female": "Femenino",
+    "updateButton": "Actualizar",
+    "cancelButton": "Cancelar"
+  }
+}
+

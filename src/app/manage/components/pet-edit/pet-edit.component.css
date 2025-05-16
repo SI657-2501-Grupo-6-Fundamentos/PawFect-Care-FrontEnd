@@ -1,0 +1,56 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: rgba(255, 255, 255, 0.9); /* Tonalidad blanca oscura */
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #f7d0a3; /* Naranja pastel */
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.mat-form-field {
+  margin-bottom: 24px; /* Mayor separación entre campos */
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}
+mat-slide-toggle {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+h2, p, input, select, button {
+  animation: fadeIn 1s ease-in-out;
+}
+
+
+.button-primary{
+  min-width: 120px;
+  background-color: orange !important;
+}
+.button-secondary:hover{
+background-color: rgba(255, 166, 0, 0.116);
+}
+.button-secondary{
+  min-width: 120px;
+  color: orange;
+}
+.container-actions{
+  padding: 1rem;
+  gap: 1rem;
+  display:flex;
+  flex-direction: row;
+}

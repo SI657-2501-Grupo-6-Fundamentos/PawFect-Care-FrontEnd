@@ -1,0 +1,32 @@
+.controls-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .button-primary{
+    background-color: orange;
+    min-width: 120px;
+  }
+  .button-secondary:hover{
+  background-color: rgba(255, 166, 0, 0.116);
+  }
+  .button-secondary{
+    color: orange;
+    min-width: 120px;
+  }
+  .container-actions{
+    padding: 1rem;
+    gap: 1rem;
+    display:flex;
+    flex-direction: row;
+  }
+  .button-add{
+    min-width: 120px;
+  }
+  .header-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }

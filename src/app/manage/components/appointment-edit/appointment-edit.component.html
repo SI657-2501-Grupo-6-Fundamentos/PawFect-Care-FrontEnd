@@ -1,0 +1,52 @@
+<h2>{{ 'editAppointment.appointmentName' | translate }}</h2>
+  <form #appointmentForm="ngForm" (submit)="onSubmit()" class="form">
+    <mat-form-field>
+      <mat-label>{{ 'editAppointment.appointmentName' | translate }}</mat-label>
+      <input matInput [(ngModel)]="appointment.appointmentName" name="appointmentName" placeholder="{{ 'editAppointment.appointmentNamePlaceholder' | translate }}" type="text" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'editAppointment.startDateAppointment' | translate }}</mat-label>
+      <input matInput name="startDateAppointment" [(ngModel)]="appointment.startDateAppointment" type="date" placeholder="{{ 'editAppointment.startDateAppointmentPlaceholder' | translate }}" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'editAppointment.startTimeAppointment' | translate }}</mat-label>
+      <input matInput name="startTimeAppointment" [(ngModel)]="appointment.startTimeAppointment" type="time" placeholder="{{ 'editAppointment.startTimeAppointmentPlaceholder' | translate }}" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'editAppointment.endDateAppointment' | translate }}</mat-label>
+      <input matInput name="endDateAppointment" [(ngModel)]="appointment.endDateAppointment" type="date" placeholder="{{ 'editAppointment.endDateAppointmentPlaceholder' | translate }}" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'editAppointment.endTimeAppointment' | translate }}</mat-label>
+      <input matInput name="endTimeAppointment" [(ngModel)]="appointment.endTimeAppointment" type="time" placeholder="{{ 'editAppointment.endTimeAppointmentPlaceholder' | translate }}" required />
+    </mat-form-field>
+
+    <p>
+      <mat-slide-toggle [(ngModel)]="appointment.isMedical" name="isMedical" labelPosition="before">{{ 'editAppointment.isMedical' | translate }}</mat-slide-toggle>
+    </p>
+
+    <mat-form-field>
+      <mat-label>{{ 'editAppointment.status' | translate }}</mat-label>
+      <input matInput [(ngModel)]="appointment.status" name="status" placeholder="{{ 'editAppointment.statusPlaceholder' | translate }}" type="text" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'editAppointment.pet' | translate }}</mat-label>
+      <mat-select disabled name="petId" [(ngModel)]="appointment.petId">
+        <mat-option [value]="0">{{ 'editAppointment.noSelectedPet' | translate }}</mat-option>
+        <mat-option *ngFor="let option of options" [value]="option.id">{{ option.petName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <div class="container-actions">
+      <button class="button-primary" mat-flat-button type="submit">{{ 'editAppointment.updateButton' | translate }}</button>
+      <button class="button-secondary" mat-raised-button type="button" (click)="onCancel()">{{ 'editAppointment.cancelButton' | translate }}</button>
+    </div>
+    
+  </form>
+

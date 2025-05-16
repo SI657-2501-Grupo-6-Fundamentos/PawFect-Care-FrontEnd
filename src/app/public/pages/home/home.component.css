@@ -1,0 +1,63 @@
+
+
+/* Contenedor con fondo blanco suave para el contenido */
+.container {
+  background: linear-gradient(135deg, #f9f9f9, #eaeaea); /* Fondo blanco suave para el contenido */
+  padding: 2rem;
+  border-radius: 15px; /* Esquinas redondeadas */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor del contenido */
+  max-width: 1200px; /* Limita el ancho del contenedor */
+  background-color: rgba(255, 255, 255, 0.9); /* Tonalidad blanca oscura */
+
+}
+
+/* Estilos para el contenido */
+h1, p, img {
+  animation: fadeIn 1s ease-in-out; /* Animación suave */
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: orange;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+p:first-of-type {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+p:last-of-type {
+  font-style: italic;
+  color: #777;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para la imagen */
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

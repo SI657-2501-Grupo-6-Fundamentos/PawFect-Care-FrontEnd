@@ -1,0 +1,129 @@
+
+.medical-history-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.add-history-section,
+.download-history-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Asegura que ambos se expandan de lado a lado */
+  margin-bottom: 16px; /* Agregué margen inferior para separación */
+}
+
+.history-list {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.record-container {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  background-color: #f9f9f9; /* Color de fondo suave para mejorar la visibilidad */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadí sombra sutil para un efecto de profundidad */
+}
+
+.record-date {
+  font-weight: bold;
+  margin-bottom: 12px; /* Ajusté el margen para que tenga una separación más uniforme */
+  color: #333; /* Mejoré el contraste con un tono más oscuro */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 2px solid #e0e0e0; /* Más visible para separar la cabecera */
+  background-color: #f5f5f5; /* Color de fondo más claro para la cabecera */
+}
+
+.record-description {
+  color: #555;
+  font-size: 1rem; /* Mejoré el tamaño para una mejor legibilidad */
+  line-height: 1.5; /* Aumento de la altura de línea para mayor claridad */
+}
+
+.no-data-message,
+.no-records-message {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 20px; /* Separación para evitar que se pegue al contenido */
+}
+
+.add-description-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%; /* Asegura que ocupe todo el espacio disponible */
+}
+
+.description-textarea {
+  min-width: 300px;
+  min-height: 80px; /* Aumenté la altura para que se vea más cómoda para escribir */
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc; /* Mejor contraste con borde claro */
+  resize: vertical; /* Permite cambiar el tamaño verticalmente */
+  font-size: 1rem; /* Para mayor confort en la lectura */
+}
+
+.record-item {
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  padding: 16px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.edit-form {
+  min-width: 200px;
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+.span-title {
+  font-weight: bold;
+  width: 120px;
+  margin-top: 16px;
+  text-align: left;
+  color: #333; /* Mejor contraste para los títulos de los campos */
+}
+
+.wrapper-input {
+  display: flex;
+  flex-direction: column; /* Cambio para que los campos de entrada estén apilados verticalmente */
+  gap: 16px; /* Aumenté el espacio entre las filas */
+  margin-top: 12px; /* Separación entre las secciones */
+  width: 100%;
+}
+
+.wrapper-input .mat-form-field {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .add-description-section {
+    flex-direction: column; /* Cambia la dirección en pantallas pequeñas para más comodidad */
+    align-items: flex-start;
+  }
+
+  .record-container {
+    padding: 12px; /* Reducido el padding en pantallas pequeñas */
+  }
+}
+

@@ -1,0 +1,87 @@
+.client-list {
+  padding: 20px;
+  background-color: #f9f9f9;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.header-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.search-full-width {
+  width: 100%;
+}
+
+
+.button-add:hover {
+  background-color: #e4b18c;
+}
+
+table.mat-elevation-z8 {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+mat-header-cell {
+  background-color: #f7d0a3;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+mat-cell {
+  padding: 10px;
+  text-align: left;
+}
+
+mat-paginator {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+mat-header-row {
+  background-color: #f9f9f9;
+}
+
+mat-row {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+.button-add {
+  width: 180px;
+  margin-top: 12px;
+}
+
+.button-primary{
+  min-width: 120px;
+  background-color: orange !important;
+}
+.button-secondary:hover{
+background-color: rgba(255, 166, 0, 0.116);
+}
+.button-secondary{
+  min-width: 120px;
+  color: orange;
+}
+.container-actions{
+  padding: 1rem;
+  gap: 1rem;
+  display:flex;
+  flex-direction: row;
+}
+

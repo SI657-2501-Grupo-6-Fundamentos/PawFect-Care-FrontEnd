@@ -1,0 +1,23 @@
+.button-primary {
+    background-color: orange  !important;
+}
+
+.button-secondary:hover {
+    background-color: rgba(255, 166, 0, 0.116) !important;;
+}
+
+.button-secondary {
+    color: orange !important;;
+}
+
+.container-actions {
+    padding: 1rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}

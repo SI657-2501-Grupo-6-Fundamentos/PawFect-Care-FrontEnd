@@ -1,0 +1,44 @@
+<h2>{{ 'pet.newPetTitle' | translate }}</h2>
+<form #petForm="ngForm" (submit)="onSubmit()" class="form">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'pet.ownerSelectedLabel' | translate }}</mat-label>
+    <mat-select name="ownerId" [(ngModel)]="clientId" disabled>
+      <mat-option [value]="0">
+        {{ 'pet.ownerSelectedPlaceholder' | translate }}
+      </mat-option>
+      <mat-option *ngFor="let option of options" [value]="option.id">
+        {{ option.fullName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'pet.petNameLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.petName" name="petName" placeholder="{{ 'pet.petNamePlaceholder' | translate }}" required />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'pet.birthDateLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.birthDate" name="birthDate" placeholder="Birth Date" type="date" required />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'pet.registrationDateLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.registrationDate" name="registrationDate" type="date" placeholder="Registration Date" required />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'pet.animalBreedLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.animalBreed" name="animalBreed" type="text" placeholder="Animal Breed" required />
+  </mat-form-field>
+
+  <mat-radio-group id="gender-form-field" name="petGender" [(ngModel)]="pet.petGender">
+    <mat-radio-button value="MALE">{{ 'pet.male' | translate }}</mat-radio-button>
+    <mat-radio-button value="FEMALE">{{ 'pet.female' | translate }}</mat-radio-button>
+  </mat-radio-group>
+
+  <div class="container-actions">
+    <button class="button-primary" mat-flat-button type="submit">{{ 'pet.addButton' | translate }}</button>
+    <button class="button-secondary" mat-raised-button type="button" (click)="onCancel()">{{ 'pet.cancelButton' | translate }}</button>
+  </div>
+</form>

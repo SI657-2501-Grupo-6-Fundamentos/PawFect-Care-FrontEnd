@@ -1,0 +1,14 @@
+.mat-button-toggle-group .mat-button-toggle {
+  transition: transform 0.3s ease-in-out;
+  background-color: rgba(255, 166, 0, 0.286);
+}
+
+.mat-button-toggle:hover {
+  transform: scale(1.1);
+}
+
+.toggle-wrapper-language{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+}

@@ -1,0 +1,206 @@
+{
+  "pets": [
+    {
+      "id": 1,
+      "name": "Bella Martinez",
+      "birthDate": "05-12-2017",
+      "registrationDate": "06-01-2018",
+      "breed": "Persian",
+      "gender": "F",
+      "hc": 1
+    },
+    {
+      "id": 2,
+      "name": "Max Rodriguez",
+      "birthDate": "08-08-2015",
+      "registrationDate": "15-09-2016",
+      "breed": "Maine Coon",
+      "gender": "M",
+      "hc": 2
+    },
+    {
+      "id": 3,
+      "name": "Luna Garcia",
+      "birthDate": "17-03-2018",
+      "registrationDate": "20-03-2019",
+      "breed": "Bengal",
+      "gender": "F",
+      "hc": 3
+    },
+    {
+      "id": 4,
+      "name": "Charlie Fernandez",
+      "birthDate": "22-10-2014",
+      "registrationDate": "30-10-2015",
+      "breed": "Ragdoll",
+      "gender": "M",
+      "hc": 4
+    },
+    {
+      "id": 5,
+      "name": "Lucy Lopez",
+      "birthDate": "14-04-2016",
+      "registrationDate": "18-04-2017",
+      "breed": "Sphynx",
+      "gender": "F",
+      "hc": 5
+    },
+    {
+      "id": 6,
+      "name": "Rocky Jimenez",
+      "birthDate": "29-11-2017",
+      "registrationDate": "02-12-2018",
+      "breed": "Abyssinian",
+      "gender": "M",
+      "hc": 6
+    },
+    {
+      "id": 7,
+      "name": "Milo Perez",
+      "birthDate": "18-01-2019",
+      "registrationDate": "25-01-2020",
+      "breed": "Scottish Fold",
+      "gender": "M",
+      "hc": 7
+    },
+    {
+      "id": 8,
+      "name": "Koko",
+      "birthDate": "2005-03-20",
+      "registrationDate": "2025-03-03",
+      "breed": "Bred",
+      "gender": "M",
+      "hc": 234234
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "petName": "Tom Gonzales",
+      "startDate": "10-03-2016",
+      "client": "Alberto Sanchez",
+      "contactNumber": "941695232",
+      "status": "ACTIVE",
+      "eventType": "Deworming"
+    },
+    {
+      "id": 2,
+      "petName": "Bella Martinez",
+      "startDate": "12-05-2017",
+      "client": "Carlos López",
+      "contactNumber": "987654321",
+      "status": "COMPLETED",
+      "eventType": "Vaccination"
+    },
+    {
+      "id": 3,
+      "petName": "Max Ramirez",
+      "startDate": "20-08-2018",
+      "client": "Patricia Perez",
+      "contactNumber": "956231487",
+      "status": "ACTIVE",
+      "eventType": "Grooming"
+    },
+    {
+      "id": 4,
+      "petName": "Luna Fernandez",
+      "startDate": "15-09-2019",
+      "client": "Luis Gutierrez",
+      "contactNumber": "912345678",
+      "status": "PENDING",
+      "eventType": "Checkup"
+    },
+    {
+      "id": 5,
+      "petName": "Rocky Vargas",
+      "startDate": "05-11-2020",
+      "client": "Marta Herrera",
+      "contactNumber": "923467890",
+      "status": "ACTIVE",
+      "eventType": "Dental Cleaning"
+    },
+    {
+      "id": 6,
+      "petName": "Charlie Gomez",
+      "startDate": "01-02-2021",
+      "client": "Miguel Sánchez",
+      "contactNumber": "934561278",
+      "status": "CANCELLED",
+      "eventType": "Surgery"
+    },
+    {
+      "id": 7,
+      "petName": "Carlos",
+      "startDate": "2222-02-12",
+      "client": "Gonzalo",
+      "contactNumber": "12314212",
+      "status": "PENDING",
+      "eventType": "General"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "fullName": "Alberto Sanchez",
+      "phone": "941695232",
+      "email": "alberto.sanchez@example.com",
+      "address": "123 Main St, Lima, Peru",
+      "status": "Active",
+      "hc": 101
+    },
+    {
+      "id": 2,
+      "fullName": "Carla Martinez",
+      "phone": "947812345",
+      "email": "carla.martinez@example.com",
+      "address": "456 Elm St, Arequipa, Peru",
+      "status": "Inactive",
+      "hc": 102
+    },
+    {
+      "id": 3,
+      "fullName": "Diego Torres",
+      "phone": "963258741",
+      "email": "diego.torres@example.com",
+      "address": "789 Maple St, Cusco, Peru",
+      "status": "Active",
+      "hc": 103
+    },
+    {
+      "id": 4,
+      "fullName": "Lucia Ramirez",
+      "phone": "951357246",
+      "email": "lucia.ramirez@example.com",
+      "address": "321 Oak St, Trujillo, Peru",
+      "status": "Active",
+      "hc": 104
+    },
+    {
+      "id": 5,
+      "fullName": "Fernando Gomez",
+      "phone": "958123456",
+      "email": "fernando.gomez@example.com",
+      "address": "654 Pine St, Piura, Peru",
+      "status": "Inactive",
+      "hc": 105
+    },
+    {
+      "id": 6,
+      "fullName": "Juan",
+      "phone": "9999999",
+      "email": "jaun@gmail.com",
+      "address": "Miraflores",
+      "status": "ACTIVO",
+      "hc": "111111"
+    },
+    {
+      "id": 7,
+      "fullName": "Lucho",
+      "phone": "9999999",
+      "email": "luch@gmail.com",
+      "address": "Ancon",
+      "status": "Activo",
+      "hc": "352352352"
+    }
+  ]
+}

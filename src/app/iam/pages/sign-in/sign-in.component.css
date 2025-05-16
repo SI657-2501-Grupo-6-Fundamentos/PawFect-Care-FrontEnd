@@ -1,0 +1,88 @@
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333; /* Color del título */
+}
+
+mat-card {
+  min-width: 400px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px; /* Bordes redondeados para el card */
+  background-color: #fff; /* Fondo blanco para el card */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #f7d0a3; /* Botón de color naranja pastel */
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.submit-button:hover {
+  background-color: #e4b18c; /* Color más oscuro al pasar el mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.register-prompt {
+  margin-top: 15px;
+  text-align: center;
+  color: #555; /* Color para el texto del mensaje */
+}
+
+.register-prompt button {
+  width: 100%;
+  color: #f7d0a3; /* Color del texto del botón Sign In */
+  font-weight: bold;
+  transition: color 0.3s ease; /* Transición suave */
+}
+
+.register-prompt button:hover {
+  color: #e4b18c; /* Hover con el color más oscuro */
+}
+
+mat-form-field .mat-label {
+  color: #777; /* Color más suave para las etiquetas de los campos */
+}
+
+mat-error {
+  color: #f44336; /* Color rojo para los errores de validación */
+}
+
+.mat-button-toggle-group .mat-button-toggle-checked {
+  background-color: #f7d0a3; /* Resalta el idioma seleccionado con el color del tema */
+}
+
+
+.button-primary{
+  background-color: orange;
+}
+.button-secondary:hover{
+background-color: rgba(255, 166, 0, 0.116);
+}
+.button-secondary{
+  color: orange;
+}
+.container-actions{
+  padding: 1rem;
+  gap: 1rem;
+  display:flex;
+  flex-direction: column;
+}
+.text-center{
+  text-align: center;
+}

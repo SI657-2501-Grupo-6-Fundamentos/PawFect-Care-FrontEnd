@@ -1,0 +1,129 @@
+/* Estilo para el contenedor del sidenav */
+mat-sidenav-container {
+  height: 100vh;
+  /* Hace que ocupe toda la altura de la pantalla */
+}
+
+/* Estilo del sidenav (barra lateral) */
+mat-sidenav {
+  color: #333;
+  width: 300px;
+  padding: 1rem;
+  /* Ajusta el ancho del sidebar */
+}
+
+/* Contenido del sidenav */
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: padding-left 0.3s ease;
+  /* Transición suave cuando se abra o cierre el sidenav */
+}
+
+.router-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 2rem;
+  /* background-color: #f7d0a3; */
+}
+
+
+/* Estilo de la barra de herramientas del sidenav */
+mat-toolbar {
+  border-bottom: 2px #33333343 solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3rem;
+}
+
+
+
+.list-item-nav{
+  margin-bottom: 0.5rem;
+ 
+}
+.item-nav-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.menu-icon{
+  color: orange;
+}
+.left-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+}
+
+mat-icon-button {
+  color: white;
+}
+
+
+.logo-text span{
+  color: #333;
+  font-size: 1rem;
+
+}
+.logo-text h2{
+  font-size: 1.5rem;
+  /* Ajuste del tamaño de fuente */
+  color: black;
+  /* Color negro */
+  font-weight: 700;
+  /* Negrita */
+
+}
+
+/* Ajuste para el botón de Login */
+mat-stroked-button {
+  background-color: white;
+  color: #f7d0a3;
+  font-weight: bold;
+}
+
+mat-stroked-button:hover {
+  background-color: #f7d0a3;
+  color: white;
+}
+
+.header-sidenav{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px orange solid;
+  border-radius: 20px;
+  padding: 0.5rem;
+
+}
+.header-sidenav span{ 
+  font-size: 1.5rem;
+  font-weight: 500;
+
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Estilo de la imagen del logo */
+.logo-img {
+  width: 40px;
+  /* Tamaño ajustado del logo */
+  height: auto;
+  border-radius: 50%;
+  /* Si deseas bordes redondeados en la imagen */
+}

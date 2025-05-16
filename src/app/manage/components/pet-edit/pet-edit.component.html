@@ -1,0 +1,44 @@
+<h2>{{ 'petEdit.editPetTitle' | translate }}</h2>
+<form #petForm="ngForm" (submit)="onSubmit()" class="form">
+  <mat-form-field id="name-form-field">
+    <mat-label>{{ 'petEdit.petNameLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.petName" name="petName" placeholder="{{ 'petEdit.petNamePlaceholder' | translate }}" required />
+  </mat-form-field>
+
+  <mat-form-field id="birth-date-form-field">
+    <mat-label>{{ 'petEdit.birthDateLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.birthDate" name="birthDate" placeholder="{{ 'petEdit.birthDatePlaceholder' | translate }}" required type="date" />
+  </mat-form-field>
+
+  <mat-form-field id="registration-date-form-field">
+    <mat-label>{{ 'petEdit.registrationDateLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.registrationDate" name="registrationDate" placeholder="{{ 'petEdit.registrationDatePlaceholder' | translate }}" required type="date" />
+  </mat-form-field>
+
+  <mat-form-field id="breed-form-field">
+    <mat-label>{{ 'petEdit.breedLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.animalBreed" name="animalBreed" placeholder="{{ 'petEdit.breedPlaceholder' | translate }}" required />
+  </mat-form-field>
+
+  <mat-form-field id="owner-form-field" appearance="fill">
+    <mat-label>{{ 'petEdit.chooseOwnerLabel' | translate }}</mat-label>
+    <mat-select name="ownerId" [(ngModel)]="pet.ownerId" disabled>
+      <mat-option [value]="0">
+        {{ 'petEdit.noOwnerSelected' | translate }}
+      </mat-option>
+      <mat-option *ngFor="let option of options" [value]="option.id">
+        {{ option.fullName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-radio-group id="gender-form-field" name="petGender" [(ngModel)]="pet.petGender">
+    <mat-radio-button value="MALE">{{ 'petEdit.male' | translate }}</mat-radio-button>
+    <mat-radio-button value="FEMALE">{{ 'petEdit.female' | translate }}</mat-radio-button>
+  </mat-radio-group>
+
+  <div class="container-actions">
+    <button class="button-primary" mat-flat-button type="submit">{{ 'petEdit.updateButton' | translate }}</button>
+    <button class="button-secondary" mat-raised-button type="button" (click)="onCancel()">{{ 'petEdit.cancelButton' | translate }}</button>
+  </div>
+</form>

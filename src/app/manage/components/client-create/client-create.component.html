@@ -1,0 +1,36 @@
+<h2>{{ 'newClient.title' | translate }}</h2>
+
+<div class="form-section">
+  <form #clientForm="ngForm" (submit)="onSubmit()" class="form">
+
+    <!-- Campo de nombre completo -->
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'newClient.fullName' | translate }}</mat-label>
+      <input matInput [(ngModel)]="client.fullName" name="fullName" placeholder="{{ 'newClient.fullNamePlaceholder' | translate }}" type="text" required />
+    </mat-form-field>
+
+    <!-- Campo de teléfono -->
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'newClient.phoneNumber' | translate }}</mat-label>
+      <input matInput [(ngModel)]="client.phoneNumber" name="phoneNumber" placeholder="{{ 'newClient.phoneNumberPlaceholder' | translate }}" type="number" required />
+    </mat-form-field>
+
+    <!-- Campo de correo electrónico -->
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'newClient.email' | translate }}</mat-label>
+      <input matInput [(ngModel)]="client.email" name="email" placeholder="{{ 'newClient.emailPlaceholder' | translate }}" type="email" required />
+    </mat-form-field>
+
+    <!-- Campo de dirección -->
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'newClient.address' | translate }}</mat-label>
+      <input matInput [(ngModel)]="client.address" name="address" placeholder="{{ 'newClient.addressPlaceholder' | translate }}" type="text" required />
+    </mat-form-field>
+
+  <div class="container-actions">
+    <button class="button-primary" mat-flat-button type="submit">{{ 'newClient.addButton' | translate }}</button>
+    <button class="button-secondary" mat-raised-button type="button" (click)="onCancel()">{{ 'newClient.cancelButton' | translate }}</button>
+  </div>
+  </form>
+</div>
+

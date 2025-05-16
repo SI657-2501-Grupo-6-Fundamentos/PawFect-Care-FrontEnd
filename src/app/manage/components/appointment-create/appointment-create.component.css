@@ -1,0 +1,55 @@
+
+h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.9); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  min-width: 500px;
+}
+
+.mat-form-field {
+  margin-bottom: 16px;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+
+mat-slide-toggle {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+h2, p, input, select, button {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.button-primary{
+  background-color: orange;
+  min-width: 120px;
+}
+.button-secondary:hover{
+background-color: rgba(255, 166, 0, 0.116);
+}
+.button-secondary{
+  color: orange;
+  min-width: 120px;
+}
+.container-actions{
+  padding: 1rem;
+  gap: 1rem;
+  display:flex;
+  flex-direction: row;
+}
+
