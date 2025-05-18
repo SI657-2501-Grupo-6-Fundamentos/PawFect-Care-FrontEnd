@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
+import {MatOption, MatSelect} from "@angular/material/select";
 
 /**
  * Sign up component
@@ -24,7 +25,9 @@ import { Router } from '@angular/router';
     MatButtonModule,
     CommonModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelect,
+    MatOption
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
@@ -32,13 +35,14 @@ import { Router } from '@angular/router';
 export class SignUpComponent extends BaseFormComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
+  roles: string[] = ['ROLE_USER', 'ROLE_ADMIN']; // Available roles
 
   /**
    * Constructor
    * @param builder {@link FormBuilder} instance
    * @param authenticationService {@link AuthenticationService} instance
    */
-  constructor(private router: Router,private builder: FormBuilder, private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private builder: FormBuilder, private authenticationService: AuthenticationService) {
     super();
   }
 
@@ -52,6 +56,7 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
     this.form = this.builder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      role: ['ROLE_USER', Validators.required], // Default role
     });
   }
 
@@ -63,15 +68,13 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
    */
   onSubmit(): void {
     if (this.form.invalid) return;
-    let username = this.form.value.username;
-    let password = this.form.value.password;
-    const signUpRequest = new SignUpRequest(username, password);
+    const { username, password, role } = this.form.value;
+    const signUpRequest = new SignUpRequest(username, password, role); // Include role
     this.authenticationService.signUp(signUpRequest);
     this.submitted = true;
   }
 
   navigateToLogin(): void {
-    this.router.navigate(['/sign-in'])
+    this.router.navigate(['/sign-in']);
   }
-
 }

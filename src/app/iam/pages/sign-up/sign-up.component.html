@@ -5,7 +5,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
 
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label> Username</mat-label>
+        <mat-label> Username </mat-label>
         <input title="username" matInput placeholder="Username" id="username" name="username" required
           formControlName="username" />
         @if (isInvalidControl(form, 'username')) {
@@ -22,7 +22,17 @@
         }
       </mat-form-field>
 
- 
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label> Role </mat-label>
+        <mat-select title="role" id="role" formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="isInvalidControl(form, 'role')">
+          {{ errorMessagesForControl(form, 'role') }}
+        </mat-error>
+      </mat-form-field>
+
+
       <div class="container-actions">
         <button class="button-primary" type="submit"  mat-flat-button>  {{ 'register-container.register.submitButton' | translate }}</button>
         <span class="text-center">
