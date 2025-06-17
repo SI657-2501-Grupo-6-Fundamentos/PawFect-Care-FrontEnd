@@ -3,18 +3,18 @@
  */
 export class SignInResponse {
   public id: number;
-  public username: string;
+  public email: string;
   public token: string;
 
   /**
    * Constructor for SignInResponse
    * @param id The user id
-   * @param username The username
+   * @param email The email
    * @param token The generated token
    */
-  constructor(id: number, username: string, token: string) {
+  constructor(id: number, email: string, token: string) {
     this.id = id;
-    this.username = username;
+    this.email = email;
     this.token = token;
   }
 }

@@ -5,11 +5,11 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
 
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label> Username </mat-label>
-        <input title="username" matInput placeholder="Username" id="username" name="username" required
-          formControlName="username" />
-        @if (isInvalidControl(form, 'username')) {
-        <mat-error>{{ errorMessagesForControl(form, 'username')}}</mat-error>
+        <mat-label> Email </mat-label>
+        <input title="email" matInput placeholder="Email" id="email" name="email" required
+          formControlName="email" />
+        @if (isInvalidControl(form, 'email')) {
+        <mat-error>{{ errorMessagesForControl(form, 'email')}}</mat-error>
         }
       </mat-form-field>
 

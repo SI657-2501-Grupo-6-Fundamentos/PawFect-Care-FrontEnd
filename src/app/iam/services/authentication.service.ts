@@ -14,7 +14,7 @@ import { environments } from '../../../environments/environment.development';
  * <p>
  *   This service is responsible for handling user authentication.
  *   It provides methods for signing up, signing in, and signing out.
- *   It also provides observables for the signed in state, the current user id, and the current username.
+ *   It also provides observables for the signed in state, the current user id, and the current email.
  * </p>
  */
 @Injectable({ providedIn: 'root' })
@@ -25,14 +25,14 @@ export class AuthenticationService {
   // states
   private signedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private signedInUserId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private signedInUsername: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private signedInEmail: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   /**
    * Constructor
    * @param router the router
    * @param http the http client
    */
-  constructor(private router: Router, private http: HttpClient) { 
+  constructor(private router: Router, private http: HttpClient) {
     const token = localStorage.getItem('token');
     console.log(token)
     if (token) {
@@ -57,13 +57,14 @@ export class AuthenticationService {
   }
 
   /**
-   * Gets the current username
+   * Gets the current email
    */
-  get currentUsername() {
-    return this.signedInUsername.asObservable();
+  get currentEmail() {
+    return this.signedInEmail.asObservable();
   }
 
   // actions
+
 
   /**
    * Signs up a new user
@@ -76,10 +77,10 @@ export class AuthenticationService {
    * @param signUpRequest The {@link SignUpRequest} object
    */
   signUp(signUpRequest: SignUpRequest) {
-    return this.http.post<SignUpResponse>(`${this.basePath}/api/v1/authentication/sign-up`, signUpRequest, this.httpOptions)
+    return this.http.post<SignUpResponse>(`${this.basePath}account-service/api/auth/register`, signUpRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
-          console.log(`Signed up as ${response.username} with id ${response.id}`);
+          console.log(`Signed up as ${response.email} with id ${response.id}`);
           this.router.navigate(['/sign-in']).then();
         },
         error: (error) => {
@@ -99,15 +100,15 @@ export class AuthenticationService {
    * @param signInRequest The {@link SignInRequest} object
    */
   signIn(signInRequest: SignInRequest) {
-  
-    return this.http.post<SignInResponse>(`${this.basePath}/api/v1/authentication/sign-in`, signInRequest, this.httpOptions)
+
+    return this.http.post<SignInResponse>(`${this.basePath}account-service/api/auth/login`, signInRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
           this.signedIn.next(true);
           this.signedInUserId.next(response.id);
-          this.signedInUsername.next(response.username);
+          this.signedInEmail.next(response.email);
           localStorage.setItem('token', response.token);
-          console.log(`Signed in as ${response.username} with token ${response.token}`);
+          console.log(`Signed in as ${response.email} with token ${response.token}`);
           this.router.navigate(['/']).then();
         },
         error: (error) => {
@@ -126,7 +127,7 @@ export class AuthenticationService {
   signOut() {
     this.signedIn.next(false);
     this.signedInUserId.next(0);
-    this.signedInUsername.next('');
+    this.signedInEmail.next('');
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']).then();
   }

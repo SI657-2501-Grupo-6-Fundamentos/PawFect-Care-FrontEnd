@@ -3,10 +3,10 @@
     <h2>{{ 'login-container.login.title' | translate }}</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Username</mat-label>
-        <input matInput placeholder="Username" id="username" name="username" required formControlName="username" />
-        @if (isInvalidControl(form, 'username')) {
-        <mat-error>{{ errorMessagesForControl(form, 'username')}}</mat-error>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" id="email" name="email" required formControlName="email" />
+        @if (isInvalidControl(form, 'email')) {
+        <mat-error>{{ errorMessagesForControl(form, 'email')}}</mat-error>
         }
       </mat-form-field>
 

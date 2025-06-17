@@ -35,7 +35,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 export class SignUpComponent extends BaseFormComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
-  roles: string[] = ['ROLE_USER', 'ROLE_ADMIN']; // Available roles
+  roles: string[] = ['USER', 'ADMIN']; // Available roles
 
   /**
    * Constructor
@@ -54,9 +54,9 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
    */
   ngOnInit(): void {
     this.form = this.builder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
-      role: ['ROLE_USER', Validators.required], // Default role
+      role: ['USER', Validators.required], // Default role
     });
   }
 
@@ -68,8 +68,8 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
    */
   onSubmit(): void {
     if (this.form.invalid) return;
-    const { username, password, role } = this.form.value;
-    const signUpRequest = new SignUpRequest(username, password, role); // Include role
+    const { email, password, role } = this.form.value;
+    const signUpRequest = new SignUpRequest(email, password, role); // Include role
     this.authenticationService.signUp(signUpRequest);
     this.submitted = true;
   }

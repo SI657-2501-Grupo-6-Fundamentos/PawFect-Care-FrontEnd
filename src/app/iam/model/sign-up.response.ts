@@ -5,18 +5,18 @@ import { UserRole } from './sign-up.request';
  */
 export class SignUpResponse {
   public id: number;
-  public username: string;
+  public email: string;
   public roles: UserRole[];
 
   /**
    * Constructor for SignUpResponse
    * @param id The id
-   * @param username The username
+   * @param email The email
    * @param roles The roles
    */
-  constructor(id: number, username: string, roles: UserRole[]) {
+  constructor(id: number, email: string, roles: UserRole[]) {
     this.id = id;
-    this.username = username;
+    this.email = email;
     this.roles = roles;
   }
 }

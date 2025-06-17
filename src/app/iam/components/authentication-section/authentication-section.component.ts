@@ -20,14 +20,13 @@ import { LanguageSwitcherComponent } from "../../../public/components/language-s
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    LanguageSwitcherComponent
+    MatButtonModule
 ],
   templateUrl: './authentication-section.component.html',
   styleUrl: './authentication-section.component.css'
 })
 export class AuthenticationSectionComponent {
-  currentUsername: string = '';
+  currentEmail: string = '';
   isSignedIn: boolean = false;
 
   /**
@@ -36,7 +35,7 @@ export class AuthenticationSectionComponent {
    * @param authenticationService the authentication service
    */
   constructor(private router: Router, private authenticationService: AuthenticationService) {
-    this.authenticationService.currentUsername.subscribe(username => this.currentUsername = username);
+    this.authenticationService.currentEmail.subscribe(email => this.currentEmail = email);
     this.authenticationService.isSignedIn.subscribe(isSignedIn => this.isSignedIn = isSignedIn);
   }
 
