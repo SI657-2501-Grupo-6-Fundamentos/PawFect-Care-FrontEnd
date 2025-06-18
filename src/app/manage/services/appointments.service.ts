@@ -9,6 +9,6 @@ export class AppointmentsService extends BaseService<Appointment> {
 
   constructor() {
     super();
-    this.resourceEndPoint = '/api/v1/appointments';
+    this.resourceEndPoint = 'appointment-service/api/v1/appointments';
   }
 }

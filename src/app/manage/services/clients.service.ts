@@ -6,9 +6,9 @@ import { BaseService } from '../../shared/services/base.service';
   providedIn: 'root'
 })
 export class ClientsService extends BaseService<Client> {
-  constructor() { 
+  constructor() {
     super();
-    this.resourceEndPoint = '/api/v1/owners';
+    this.resourceEndPoint = 'client-service/api/v1/owners';
   }
 }
 

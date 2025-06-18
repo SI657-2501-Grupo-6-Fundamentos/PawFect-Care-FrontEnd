@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PetsService extends BaseService<Pet>{
-  constructor() { 
+  constructor() {
     super();
-    this.resourceEndPoint = '/api/v1/pets';
+    this.resourceEndPoint = 'pet-service/api/v1/pets';
   }
   public getPetsByOwnerId(ownerId: number): Observable<Pet[]> {
-    const url = `${this.basePath}/api/v1/owners/${ownerId}/pets`;
+    const url = `${this.basePath}pet-service/api/v1/owners/${ownerId}/pets`;
     return this.http.get<Pet[]>(url, this.httpOptions);
   }
 }
