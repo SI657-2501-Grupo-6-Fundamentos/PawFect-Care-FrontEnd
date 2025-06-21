@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class PetsService extends BaseService<Pet>{
   constructor() {
     super();
-    this.resourceEndPoint = 'pet-service/api/v1/pets';
+    this.resourceEndPoint = '/pet-service/api/v1/pets';
   }
   public getPetsByOwnerId(ownerId: number): Observable<Pet[]> {
     const url = `${this.basePath}pet-service/api/v1/owners/${ownerId}/pets`;

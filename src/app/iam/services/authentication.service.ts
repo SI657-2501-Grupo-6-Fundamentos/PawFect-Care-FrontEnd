@@ -14,7 +14,7 @@ import { environments } from '../../../environments/environment.development';
  * <p>
  *   This service is responsible for handling user authentication.
  *   It provides methods for signing up, signing in, and signing out.
- *   It also provides observables for the signed in state, the current user id, and the current email.
+ *   It also provides observables for the signed in state, the current user id, and the current username.
  * </p>
  */
 @Injectable({ providedIn: 'root' })
@@ -57,14 +57,13 @@ export class AuthenticationService {
   }
 
   /**
-   * Gets the current email
+   * Gets the current username
    */
   get currentEmail() {
     return this.signedInEmail.asObservable();
   }
 
   // actions
-
 
   /**
    * Signs up a new user
@@ -77,7 +76,7 @@ export class AuthenticationService {
    * @param signUpRequest The {@link SignUpRequest} object
    */
   signUp(signUpRequest: SignUpRequest) {
-    return this.http.post<SignUpResponse>(`${this.basePath}account-service/api/auth/register`, signUpRequest, this.httpOptions)
+    return this.http.post<SignUpResponse>(`${this.basePath}/account-service/api/auth/register`, signUpRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
           console.log(`Signed up as ${response.email} with id ${response.id}`);
@@ -101,7 +100,7 @@ export class AuthenticationService {
    */
   signIn(signInRequest: SignInRequest) {
 
-    return this.http.post<SignInResponse>(`${this.basePath}account-service/api/auth/login`, signInRequest, this.httpOptions)
+    return this.http.post<SignInResponse>(`${this.basePath}/account-service/api/auth/login`, signInRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
           this.signedIn.next(true);

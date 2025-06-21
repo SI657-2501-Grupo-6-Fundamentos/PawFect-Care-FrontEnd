@@ -14,6 +14,9 @@ import { MedicalHistoryManagementComponent } from "./manage/pages/medicalHistory
 import { SignInComponent } from './iam/pages/sign-in/sign-in.component';
 import { SignUpComponent } from './iam/pages/sign-up/sign-up.component';
 import { authenticationGuard } from './iam/services/authentication.guard';
+import {ReviewsManagementComponent} from "./manage/pages/reviews-management/reviews-management.component";
+import {ReviewEditComponent} from "./manage/components/review-edit/review-edit.component";
+import {ReviewCreateComponent} from "./manage/components/review-create/review-create.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -27,6 +30,9 @@ export const routes: Routes = [
     { path: 'manage/appointments', component: AppointmentsManagementComponent, canActivate: [authenticationGuard] },
     { path: 'manage/appointments/add', component: AppointmentCreateComponent, canActivate: [authenticationGuard] },
     { path: 'manage/appointments/edit/:id', component: AppointmentEditComponent, canActivate: [authenticationGuard] },
+    { path: 'manage/appointments/review/:id', component: ReviewsManagementComponent, canActivate: [authenticationGuard] },
+    { path: 'manage/appointments/add-review/:id', component: ReviewCreateComponent, canActivate: [authenticationGuard] },
+    { path: 'manage/appointments/edit-review/:id', component: ReviewEditComponent, canActivate: [authenticationGuard] },
     { path: 'sign-in', component: SignInComponent },
     { path: 'sign-up', component: SignUpComponent },
     { path: '**', component: PageNotFoundComponent },

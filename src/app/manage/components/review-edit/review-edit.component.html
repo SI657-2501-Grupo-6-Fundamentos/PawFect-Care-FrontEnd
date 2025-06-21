@@ -1,0 +1,16 @@
+<form #reviewForm="ngForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Rating (1-5)</mat-label>
+    <input matInput type="number" name="rating" [(ngModel)]="review.rating" min="1" max="5" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Commentary</mat-label>
+    <textarea matInput name="content" [(ngModel)]="review.content" required></textarea>
+  </mat-form-field>
+
+  <div class="button-row">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!reviewForm.form.valid" (click)="onSubmit()">Guardar</button>
+    <button mat-stroked-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>

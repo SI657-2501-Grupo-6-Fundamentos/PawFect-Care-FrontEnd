@@ -82,7 +82,8 @@
       "title": "Lista de eventos",
       "buttons":{
         "edit":"Editar",
-        "check":"Terminar"
+        "check":"Terminar",
+        "review": "Comentar"
       }
     }
   },

@@ -41,13 +41,13 @@ import {AppointmentsService} from "../../services/appointments.service";
     MatTable,
     MatHeaderCellDef,
     MatButtonModule,
-    TranslateModule, 
-    MatButtonToggleGroup, 
+    TranslateModule,
+    MatButtonToggleGroup,
     MatButtonToggle,
-    FormsModule, 
-    MatFormFieldModule, 
+    FormsModule,
+    MatFormFieldModule,
     MatInputModule
-  
+
   ],
   templateUrl: './appointments-management.component.html',
   styleUrl: './appointments-management.component.css'
@@ -63,7 +63,7 @@ export class AppointmentsManagementComponent implements OnInit {
     "isMedical",
     "actions"
   ];
-  protected   searchQuery: string = ''; 
+  protected   searchQuery: string = '';
   @ViewChild(MatSort, {static: false})
   protected sort!: MatSort;
 
@@ -80,9 +80,9 @@ export class AppointmentsManagementComponent implements OnInit {
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchQuery.trim().toLowerCase();  
+    this.dataSource.filter = this.searchQuery.trim().toLowerCase();
   }
-  
+
   ngOnInit() {
     this.getAllAppointments();
   }
@@ -104,5 +104,9 @@ export class AppointmentsManagementComponent implements OnInit {
   }
   navigateToEditAppointment(idAppointments: number) {
     this.router.navigate([`/manage/appointments/edit/${idAppointments}`]);
+  }
+
+  navigateToCreateReview(idAppointments: number) {
+    this.router.navigate([`/manage/appointments/add-review/${idAppointments}`]);
   }
 }

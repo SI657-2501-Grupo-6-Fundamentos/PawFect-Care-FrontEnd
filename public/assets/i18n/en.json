@@ -82,7 +82,8 @@
       "title": "List Appointments",
       "buttons":{
         "edit":"Edit",
-        "check":"Check"
+        "check":"Check",
+        "review": "Review"
       }
     }
   },

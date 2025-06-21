@@ -36,7 +36,7 @@
     <ng-container matColumnDef="endDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by endDate">
         {{ 'endDate' | translate }}
-       
+
       </th>
       <td mat-cell *matCellDef="let appointment">
         {{  appointment.endDate | date: 'dd/MM/yyyy, h:mm a' }}
@@ -61,6 +61,7 @@
       <td mat-cell *matCellDef="let appointment">
         <div class="container-actions">
           <button type="button" (click)="navigateToEditAppointment(appointment.id)" class="button-primary" mat-flat-button>  {{ 'event.home.buttons.edit' | translate }}</button>
+          <button type="button" (click)="navigateToCreateReview(appointment.id)" class="button-primary" mat-flat-button>  {{ 'event.home.buttons.review' | translate }}</button>
         </div>
       </td>
     </ng-container>

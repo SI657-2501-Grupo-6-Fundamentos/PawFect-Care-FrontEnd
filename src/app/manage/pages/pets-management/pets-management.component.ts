@@ -25,24 +25,24 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
   selector: 'app-pets-management',
   standalone: true,
   imports: [
-    CommonModule, 
-    MatCell, 
-    MatCellDef, 
-    MatColumnDef, 
-    MatHeaderCell, 
-    MatHeaderRow, 
-    MatHeaderRowDef, 
-    MatPaginator, 
-    MatRow, 
-    MatRowDef, 
-    MatSort, 
-    MatSortHeader, 
-    MatTable, 
+    CommonModule,
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatPaginator,
+    MatRow,
+    MatRowDef,
+    MatSort,
+    MatSortHeader,
+    MatTable,
     MatHeaderCellDef,
     MatButtonModule,
     TranslateModule,
-    FormsModule, 
-    MatFormFieldModule, 
+    FormsModule,
+    MatFormFieldModule,
     MatInputModule
   ],
   templateUrl: './pets-management.component.html',
@@ -66,7 +66,7 @@ export class PetsManagementComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: false})
   protected paginator!: MatPaginator;
-  protected   searchQuery: string = ''; 
+  protected   searchQuery: string = '';
 
   protected dataSource!: MatTableDataSource<Pet>;
 
@@ -76,7 +76,7 @@ export class PetsManagementComponent implements OnInit {
     this.petData = new Pet({});
     this.dataSource = new MatTableDataSource();
   }
-  
+
   ngOnInit() {
     this.getAllPets();
   }
@@ -92,7 +92,7 @@ export class PetsManagementComponent implements OnInit {
     });
   }
   applyFilter() {
-    this.dataSource.filter = this.searchQuery.trim().toLowerCase();  
+    this.dataSource.filter = this.searchQuery.trim().toLowerCase();
   }
 
   navigateToAddClient() {
@@ -108,6 +108,6 @@ export class PetsManagementComponent implements OnInit {
   navigateToMedicalHistory(medicalHistoryId: number) {
     this.router.navigate([`/manage/medicalHistory/${medicalHistoryId}`]);
   }
-  
+
 
 }
