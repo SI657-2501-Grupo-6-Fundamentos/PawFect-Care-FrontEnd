@@ -2,7 +2,7 @@
  * Enum for user roles
  */
 export enum UserRole {
-  USER = 'USER',
+  USER = 'ROLE_USER',
   ADMIN = 'ROLE_ADMIN',
 }
 
@@ -10,19 +10,31 @@ export enum UserRole {
  * Model class for SignUpRequest
  */
 export class SignUpRequest {
-  public email: string;
-  public password: string;
+  public userName: string;
   public role: UserRole;
+  public fullName: string;
+  public phoneNumber: string;
+  public email: string;
+  public address: string;
+  public password: string;
 
   /**
    * Constructor for SignUpRequest
-   * @param email The email
-   * @param password The password
+   * @param userName The userName
    * @param role The user role
+   * @param fullName The full name
+   * @param phoneNumber The phone number
+   * @param email The email
+   * @param address The address
+   * @param password The password
    */
-  constructor(email: string, password: string, role: UserRole) {
+  constructor(userName: string, role: UserRole, fullName: string, phoneNumber: string, email: string, address: string, password: string) {
+    this.userName = userName;
+    this.role = UserRole.USER; // Default role is USER
+    this.fullName = fullName;
+    this.phoneNumber = phoneNumber;
     this.email = email;
+    this.address = address;
     this.password = password;
-    this.role = role;
   }
 }

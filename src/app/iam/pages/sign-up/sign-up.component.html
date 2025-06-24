@@ -1,15 +1,15 @@
 
-  <mat-card>
+  <!--<mat-card>
     <h2>{{ 'register-container.register.title' | translate }}</h2>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
 
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label> Email </mat-label>
-        <input title="email" matInput placeholder="Email" id="email" name="email" required
-          formControlName="email" />
-        @if (isInvalidControl(form, 'email')) {
-        <mat-error>{{ errorMessagesForControl(form, 'email')}}</mat-error>
+        <mat-label> User Name </mat-label>
+        <input title="user name" matInput placeholder="User Name" id="userName" name="userName" required
+          formControlName="userName" />
+        @if (isInvalidControl(form, 'userName')) {
+        <mat-error>{{ errorMessagesForControl(form, 'userName')}}</mat-error>
         }
       </mat-form-field>
 
@@ -42,6 +42,85 @@
       </div>
 
     </form>
+  </mat-card>-->
+
+  <mat-card>
+    <h2>{{ 'register-container.register.title' | translate }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Full Name</mat-label>
+        <input matInput placeholder="Full Name" formControlName="fullName" required />
+        @if (isInvalidControl(form, 'fullName')) {
+          <mat-error>{{ errorMessagesForControl(form, 'fullName') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>User Name</mat-label>
+        <input matInput placeholder="User Name" formControlName="userName" required />
+        @if (isInvalidControl(form, 'userName')) {
+          <mat-error>{{ errorMessagesForControl(form, 'userName') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" type="email" required />
+        @if (isInvalidControl(form, 'email')) {
+          <mat-error>{{ errorMessagesForControl(form, 'email') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Phone Number</mat-label>
+        <input matInput placeholder="Phone Number" formControlName="phoneNumber" required />
+        @if (isInvalidControl(form, 'phoneNumber')) {
+          <mat-error>{{ errorMessagesForControl(form, 'phoneNumber') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" formControlName="address" required />
+        @if (isInvalidControl(form, 'address')) {
+          <mat-error>{{ errorMessagesForControl(form, 'address') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" formControlName="password" type="password" required />
+        @if (isInvalidControl(form, 'password')) {
+          <mat-error>{{ errorMessagesForControl(form, 'password') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="isInvalidControl(form, 'role')">
+          {{ errorMessagesForControl(form, 'role') }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="container-actions">
+        <button class="button-primary" type="submit" mat-flat-button>
+          {{ 'register-container.register.submitButton' | translate }}
+        </button>
+        <span class="text-center">
+        {{ 'register-container.register.alreadyHaveAccount' | translate }}
+      </span>
+        <button class="button-secondary" mat-raised-button type="button" (click)="navigateToLogin()">
+          {{ 'register-container.register.loginButton' | translate }}
+        </button>
+      </div>
+
+    </form>
   </mat-card>
+
 
 

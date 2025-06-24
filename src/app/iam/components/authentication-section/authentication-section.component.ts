@@ -26,7 +26,7 @@ import { LanguageSwitcherComponent } from "../../../public/components/language-s
   styleUrl: './authentication-section.component.css'
 })
 export class AuthenticationSectionComponent {
-  currentEmail: string = '';
+  currentUserName: string = '';
   isSignedIn: boolean = false;
 
   /**
@@ -35,7 +35,7 @@ export class AuthenticationSectionComponent {
    * @param authenticationService the authentication service
    */
   constructor(private router: Router, private authenticationService: AuthenticationService) {
-    this.authenticationService.currentEmail.subscribe(email => this.currentEmail = email);
+    this.authenticationService.currentUserName.subscribe(userName => this.currentUserName = userName);
     this.authenticationService.isSignedIn.subscribe(isSignedIn => this.isSignedIn = isSignedIn);
   }
 

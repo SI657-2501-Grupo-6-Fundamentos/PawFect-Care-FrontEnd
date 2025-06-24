@@ -50,7 +50,7 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
    */
     ngOnInit(): void {
       this.form = this.builder.group({
-        email: ['', Validators.required],
+        userName: ['', Validators.required],
         password: ['', Validators.required]
       });
     }
@@ -63,9 +63,9 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
      */
     onSubmit() {
       if (this.form.invalid) return;
-      let email = this.form.value.email;
+      let userName = this.form.value.userName;
       let password = this.form.value.password;
-      const signInRequest = new SignInRequest(email, password);
+      const signInRequest = new SignInRequest(userName, password);
       this.authenticationService.signIn(signInRequest);
       this.submitted = true;
     }

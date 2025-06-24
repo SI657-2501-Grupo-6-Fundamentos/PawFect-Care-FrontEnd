@@ -35,7 +35,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 export class SignUpComponent extends BaseFormComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
-  roles: string[] = ['USER', 'ADMIN']; // Available roles
+  roles: string[] = ['ROLE_USER']; // Available roles
 
   /**
    * Constructor
@@ -52,11 +52,23 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
    *  Initialize component
    * </p>
    */
+  /*ngOnInit(): void {
+    this.form = this.builder.group({
+      userName : ['', Validators.required],
+      password: ['', Validators.required],
+      role: ['ROLE_USER', Validators.required], // Default role
+    });
+  }*/
+
   ngOnInit(): void {
     this.form = this.builder.group({
-      email: ['', Validators.required],
+      fullName: ['', Validators.required],
+      userName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', Validators.required],
+      address: ['', Validators.required],
       password: ['', Validators.required],
-      role: ['USER', Validators.required], // Default role
+      role: ['USER', Validators.required] // Valor por defecto si lo deseas
     });
   }
 
@@ -66,10 +78,36 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
    *  Submit form
    * </p>
    */
+  /*onSubmit(): void {
+    if (this.form.invalid) return;
+    const { userName, password, role } = this.form.value;
+    const signUpRequest = new SignUpRequest(userName, password, role); // Include role
+    this.authenticationService.signUp(signUpRequest);
+    this.submitted = true;
+  }*/
   onSubmit(): void {
     if (this.form.invalid) return;
-    const { email, password, role } = this.form.value;
-    const signUpRequest = new SignUpRequest(email, password, role); // Include role
+
+    const {
+      fullName,
+      userName,
+      email,
+      phoneNumber,
+      address,
+      password,
+      role
+    } = this.form.value;
+
+    const signUpRequest = new SignUpRequest(
+      userName,
+      role,
+      fullName,
+      phoneNumber,
+      email,
+      address,
+      password
+    );
+
     this.authenticationService.signUp(signUpRequest);
     this.submitted = true;
   }

@@ -2,16 +2,16 @@
  * Model class for SignInRequest
  */
 export class SignInRequest {
-  public email: string;
+  public userName: string;
   public password: string;
 
   /**
    * Constructor for SignInRequest
-   * @param email The email
+   * @param userName The userName
    * @param password The password
    */
-  constructor(email: string, password: string) {
-    this.email = email;
+  constructor(userName: string, password: string) {
+    this.userName = userName;
     this.password = password;
   }
 }

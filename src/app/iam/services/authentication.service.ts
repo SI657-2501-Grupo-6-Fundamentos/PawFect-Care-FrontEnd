@@ -25,7 +25,7 @@ export class AuthenticationService {
   // states
   private signedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private signedInUserId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private signedInEmail: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private signedInUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   /**
    * Constructor
@@ -59,8 +59,8 @@ export class AuthenticationService {
   /**
    * Gets the current username
    */
-  get currentEmail() {
-    return this.signedInEmail.asObservable();
+  get currentUserName() {
+    return this.signedInUserName.asObservable();
   }
 
   // actions
@@ -75,16 +75,51 @@ export class AuthenticationService {
    * </p>
    * @param signUpRequest The {@link SignUpRequest} object
    */
-  signUp(signUpRequest: SignUpRequest) {
-    return this.http.post<SignUpResponse>(`${this.basePath}/account-service/api/auth/register`, signUpRequest, this.httpOptions)
+  signUp(signUpRequest: SignUpRequest): void {
+    this.http.post<SignUpResponse>(`${this.basePath}/account-service/api/auth/register`, signUpRequest, this.httpOptions)
+      .subscribe({
+        next: (accountResponse) => {
+          console.log(`Signed up as ${accountResponse.userName} with id ${accountResponse.id}`);
+
+          const petOwnerRequest = {
+            userId: accountResponse.id,
+            fullName: accountResponse.fullName,
+            phoneNumber: accountResponse.phoneNumber,
+            email: accountResponse.email,
+            address: accountResponse.address
+          };
+
+          this.http.post(`${this.basePath}/pet-owner-service/api/v1/pet-owners`, petOwnerRequest, this.httpOptions)
+            .subscribe({
+              next: () => {
+                console.log('Pet owner registered successfully');
+                this.router.navigate(['/sign-in']).then();
+              },
+              error: (error) => {
+                console.error('Error registering pet owner', error);
+                this.router.navigate(['/sign-up']).then();
+              }
+            });
+        },
+        error: (error) => {
+          console.error('Error signing up in account-service', error);
+          this.router.navigate(['/sign-up']).then();
+        }
+      });
+  }
+
+
+
+  signUpVet(signUpRequest: SignUpRequest) {
+    return this.http.post<SignUpResponse>(`${this.basePath}/account-service/api/auth/register-vet`, signUpRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
-          console.log(`Signed up as ${response.email} with id ${response.id}`);
+          console.log(`Signed up as ${response.userName} with id ${response.id}`);
           this.router.navigate(['/sign-in']).then();
         },
         error: (error) => {
           console.error('Error signing up', error);
-          this.router.navigate(['/sign-up']).then();
+          this.router.navigate(['/sign-up-vet']).then();
         }
       });
   }
@@ -105,9 +140,9 @@ export class AuthenticationService {
         next: (response) => {
           this.signedIn.next(true);
           this.signedInUserId.next(response.id);
-          this.signedInEmail.next(response.email);
+          this.signedInUserName.next(response.userName);
           localStorage.setItem('token', response.token);
-          console.log(`Signed in as ${response.email} with token ${response.token}`);
+          console.log(`Signed in as ${response.userName} with token ${response.token}`);
           this.router.navigate(['/']).then();
         },
         error: (error) => {
@@ -126,7 +161,7 @@ export class AuthenticationService {
   signOut() {
     this.signedIn.next(false);
     this.signedInUserId.next(0);
-    this.signedInEmail.next('');
+    this.signedInUserName.next('');
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']).then();
   }
