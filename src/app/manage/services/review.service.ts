@@ -10,17 +10,17 @@ import {Pet} from "../model/pet.entity";
 export class ReviewService extends BaseService<Review>{
   constructor() {
     super();
-    this.resourceEndPoint = '/feedback-service/api/v1/reviews';
+    this.resourceEndPoint = '/review-service/api/v1/reviews';
   }
 
   /*public getAllReviewsByMedicalAppointmentId(medicalAppointmentId: number): Observable<Review[]> {
-    const url = `${this.basePath}/feedback-service/api/v1/reviews/${medicalAppointmentId}`;
+    const url = `${this.basePath}/review-service/api/v1/reviews/${medicalAppointmentId}`;
     return this.http.get<Review[]>(url, this.httpOptions);
   }*/
 
 
   public getAllReviewsByMedicalAppointmentId(medicalAppointmentId: number): Observable<Review[]> {
-    const url = `${this.basePath}/feedback-service/api/v1/reviews/by-appointment/${medicalAppointmentId}`;
+    const url = `${this.basePath}/review-service/api/v1/reviews/by-appointment/${medicalAppointmentId}`;
     return this.http.get<Review[]>(url, this.httpOptions);
   }
 }
