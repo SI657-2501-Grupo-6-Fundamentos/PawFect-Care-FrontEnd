@@ -20,7 +20,7 @@ export class SignUpResponse {
    * @param phoneNumber The phone number
    * @param email The email
    * @param address The address
-   * @param rol The rol
+   * @param role The rol
    */
   constructor(id: number, userName: string, fullName: string, phoneNumber: string, email: string, address: string, role: UserRole) {
     this.id = id;

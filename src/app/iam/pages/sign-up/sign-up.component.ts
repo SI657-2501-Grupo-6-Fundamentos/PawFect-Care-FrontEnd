@@ -52,14 +52,6 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
    *  Initialize component
    * </p>
    */
-  /*ngOnInit(): void {
-    this.form = this.builder.group({
-      userName : ['', Validators.required],
-      password: ['', Validators.required],
-      role: ['ROLE_USER', Validators.required], // Default role
-    });
-  }*/
-
   ngOnInit(): void {
     this.form = this.builder.group({
       fullName: ['', Validators.required],
@@ -78,13 +70,6 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
    *  Submit form
    * </p>
    */
-  /*onSubmit(): void {
-    if (this.form.invalid) return;
-    const { userName, password, role } = this.form.value;
-    const signUpRequest = new SignUpRequest(userName, password, role); // Include role
-    this.authenticationService.signUp(signUpRequest);
-    this.submitted = true;
-  }*/
   onSubmit(): void {
     if (this.form.invalid) return;
 

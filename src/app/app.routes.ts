@@ -17,6 +17,7 @@ import { authenticationGuard } from './iam/services/authentication.guard';
 import {ReviewsManagementComponent} from "./manage/pages/reviews-management/reviews-management.component";
 import {ReviewEditComponent} from "./manage/components/review-edit/review-edit.component";
 import {ReviewCreateComponent} from "./manage/components/review-create/review-create.component";
+import {SignUpVetComponent} from "./iam/pages/sign-up-vet/sign-up-vet.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -35,5 +36,6 @@ export const routes: Routes = [
     { path: 'manage/appointments/edit-review/:id', component: ReviewEditComponent, canActivate: [authenticationGuard] },
     { path: 'sign-in', component: SignInComponent },
     { path: 'sign-up', component: SignUpComponent },
+    { path: 'sign-up-vet', component: SignUpVetComponent },
     { path: '**', component: PageNotFoundComponent },
 ];

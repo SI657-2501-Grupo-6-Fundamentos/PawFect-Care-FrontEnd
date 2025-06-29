@@ -8,6 +8,8 @@ import {SignUpResponse} from "../model/sign-up.response";
 import {SignInRequest} from "../model/sign-in.request";
 import {SignInResponse} from "../model/sign-in.response";
 import { environments } from '../../../environments/environment.development';
+import {SignUpVetRequest} from "../model/sign-up-vet.request";
+import {SignUpVetResponse} from "../model/sign-up-vet.response";
 
 /**
  * Authentication service
@@ -76,7 +78,7 @@ export class AuthenticationService {
    * @param signUpRequest The {@link SignUpRequest} object
    */
   signUp(signUpRequest: SignUpRequest): void {
-    this.http.post<SignUpResponse>(`${this.basePath}/account-service/api/auth/register`, signUpRequest, this.httpOptions)
+    this.http.post<SignUpResponse>(`${this.basePath}/iam-service/api/v1/authentication/sign-up`, signUpRequest, this.httpOptions)
       .subscribe({
         next: (accountResponse) => {
           console.log(`Signed up as ${accountResponse.userName} with id ${accountResponse.id}`);
@@ -102,7 +104,7 @@ export class AuthenticationService {
             });
         },
         error: (error) => {
-          console.error('Error signing up in account-service', error);
+          console.error('Error signing up in iam-service', error);
           this.router.navigate(['/sign-up']).then();
         }
       });
@@ -110,16 +112,38 @@ export class AuthenticationService {
 
 
 
-  signUpVet(signUpRequest: SignUpRequest) {
-    return this.http.post<SignUpResponse>(`${this.basePath}/account-service/api/auth/register-vet`, signUpRequest, this.httpOptions)
+  signUpVet(signUpVetRequest: SignUpVetRequest) {
+    return this.http.post<SignUpVetResponse>(`${this.basePath}/account-service/api/auth/register-vet`, signUpVetRequest, this.httpOptions)
       .subscribe({
-        next: (response) => {
-          console.log(`Signed up as ${response.userName} with id ${response.id}`);
-          this.router.navigate(['/sign-in']).then();
+        next: (accountResponse) => {
+          console.log(`Signed up as ${accountResponse.userName} with id ${accountResponse.id}`);
+
+          const vetRequest = {
+            userId: accountResponse.id,
+            fullName: accountResponse.fullName,
+            phoneNumber: accountResponse.phoneNumber,
+            email: accountResponse.email,
+            dni: accountResponse.dni,
+            speciality: signUpVetRequest.speciality,
+            availableStartTime: accountResponse.availableStartTime,
+            availableEndTime: accountResponse.availableEndTime
+          };
+
+          this.http.post(`${this.basePath}/veterinarian-service/api/v1/veterinarians`, vetRequest, this.httpOptions)
+            .subscribe({
+              next: () => {
+                console.log('Veterinary registered successfully');
+                this.router.navigate(['/sign-in']).then();
+              },
+              error: (error) => {
+                console.error('Error registering veterinary', error);
+                this.router.navigate(['/sign-up-vet']).then();
+              }
+            });
         },
         error: (error) => {
-          console.error('Error signing up', error);
-          this.router.navigate(['/sign-up-vet']).then();
+          console.error('Error signing up in account-service', error);
+          this.router.navigate(['/sign-up']).then();
         }
       });
   }
