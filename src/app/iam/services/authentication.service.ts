@@ -10,6 +10,7 @@ import {SignInResponse} from "../model/sign-in.response";
 import { environments } from '../../../environments/environment.development';
 import {SignUpVetRequest} from "../model/sign-up-vet.request";
 import {SignUpVetResponse} from "../model/sign-up-vet.response";
+import {GoogleSignInRequest} from "../model/google-sign-in.request";
 
 /**
  * Authentication service
@@ -110,8 +111,6 @@ export class AuthenticationService {
       });
   }
 
-
-
   signUpVet(signUpVetRequest: SignUpVetRequest) {
     return this.http.post<SignUpVetResponse>(`${this.basePath}/account-service/api/auth/register-vet`, signUpVetRequest, this.httpOptions)
       .subscribe({
@@ -158,7 +157,6 @@ export class AuthenticationService {
    * @param signInRequest The {@link SignInRequest} object
    */
   signIn(signInRequest: SignInRequest) {
-
     return this.http.post<SignInResponse>(`${this.basePath}/account-service/api/auth/login`, signInRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
@@ -175,6 +173,41 @@ export class AuthenticationService {
         }
       });
   }
+
+  /**
+   * Signs in a user with Google
+   * <p>
+   *   This method sends a Google sign-in request to the server.
+   *   If the request is successful, the user is signed in and redirected to the home page.
+   *   If the request fails, an error message is logged and the user stays on the sign-in page.
+   * </p>
+   * @param googleToken The Google ID token
+   */
+  signInWithGoogle(googleToken: string): void {
+    const googleSignInRequest = new GoogleSignInRequest(googleToken);
+
+    this.http.post<SignInResponse>(
+      `${this.basePath}/iam-service/api/v1/auth/google/sign-in`,
+      googleSignInRequest,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true // ⬅️ Esto es clave para cookies o sesiones si las usas
+      }
+    ).subscribe({
+      next: (response) => {
+        this.signedIn.next(true);
+        this.signedInUserId.next(response.id);
+        this.signedInUserName.next(response.userName);
+        localStorage.setItem('token', response.token);
+        console.log(`Signed in with Google as ${response.userName} with token ${response.token}`);
+        this.router.navigate(['/']).then();
+      },
+      error: (error) => {
+        console.error('Error signing in with Google', error);
+      }
+    });
+  }
+
 
   /**
    * Signs out the current user
