@@ -1,18 +1,6 @@
 <mat-card>
   <h2>{{ 'login-container.login.title' | translate }}</h2>
 
-  <!-- Google Sign-In Button -->
-  <div class="google-sign-in-container">
-    <div id="googleSignInBtn"></div>
-  </div>
-
-  <!-- Divider -->
-  <div class="divider-container">
-    <div class="divider-line"></div>
-    <span class="divider-text">or</span>
-    <div class="divider-line"></div>
-  </div>
-
   <!-- Traditional Login Form -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
     <mat-form-field appearance="fill" class="form-field">
@@ -34,10 +22,23 @@
 
     <div class="container-actions">
       <button class="button-primary" type="submit"  mat-flat-button>  {{ 'login-container.login.submitButton' | translate }}</button>
-      <span class="text-center">
+     <!-- <span class="text-center">
         {{ 'login-container.login.registerPrompt' | translate }}
-      </span>
+      </span>-->
       <button class="button-secondary"  mat-raised-button type="button" (click)="navigateToRegister()"  mat-flat-button> {{ 'login-container.login.registerButton' | translate }}</button>
     </div>
+
+    <!-- Divider -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+      <span class="divider-text">or</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Google Sign-In Button -->
+    <div class="google-sign-in-container">
+      <div id="googleSignInBtn"></div>
+    </div>
+
   </form>
 </mat-card>
