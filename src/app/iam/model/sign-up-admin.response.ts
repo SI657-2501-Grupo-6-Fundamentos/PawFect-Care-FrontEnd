@@ -3,7 +3,7 @@ import { UserRole } from './sign-up.request';
 /**
  * Model for the response of the sign-up-vet endpoint
  */
-export class SignUpVetResponse {
+export class SignUpAdminResponse {
   public id: number;
   public userName: string;
   public fullName: string;
@@ -16,7 +16,7 @@ export class SignUpVetResponse {
   public role: UserRole;
 
   /**
-   * Constructor for SignUpVetResponse
+   * Constructor for SignUpAdminResponse
    * @param id The id
    * @param userName The userName
    * @param fullName The full name

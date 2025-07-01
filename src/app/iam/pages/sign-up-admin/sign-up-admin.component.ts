@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BaseFormComponent} from "../../../shared/components/base-form.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services/authentication.service";
-import {SignUpVetRequest} from "../../model/sign-up-vet.request";
+import {SignUpAdminRequest} from "../../model/sign-up-admin.request";
 import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -33,7 +33,7 @@ export enum VeterinarianSpeciality {
  * Sign up vet component
  */
 @Component({
-  selector: 'app-sign-up-vet',
+  selector: 'app-sign-up-admin',
   standalone: true,
   imports: [
     TranslateModule,
@@ -46,10 +46,10 @@ export enum VeterinarianSpeciality {
     MatSelect,
     MatOption
   ],
-  templateUrl: './sign-up-vet.component.html',
-  styleUrl: './sign-up-vet.component.css'
+  templateUrl: './sign-up-admin.component.html',
+  styleUrl: './sign-up-admin.component.css'
 })
-export class SignUpVetComponent extends BaseFormComponent implements OnInit {
+export class SignUpAdminComponent extends BaseFormComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
   roles: string[] = ['ROLE_ADMIN']; // Available roles
@@ -120,7 +120,7 @@ export class SignUpVetComponent extends BaseFormComponent implements OnInit {
     const startTime = new Date(`${today}T${availableStartTime}:00`);
     const endTime = new Date(`${today}T${availableEndTime}:00`);
 
-    const signUpVetRequest = new SignUpVetRequest(
+    const signUpAdminRequest = new SignUpAdminRequest(
       userName,
       role,
       fullName,
@@ -133,7 +133,7 @@ export class SignUpVetComponent extends BaseFormComponent implements OnInit {
       password
     );
 
-    this.authenticationService.signUpVet(signUpVetRequest);
+    this.authenticationService.signUpAdmin(signUpAdminRequest);
     this.submitted = true;
   }
 

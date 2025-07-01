@@ -1,5 +1,3 @@
-import {VeterinarianSpeciality} from "./sign-up-vet.request";
-
 export class VeterinarianRequest {
   public userId: number;
   public fullName: string;
@@ -29,4 +27,6 @@ export class VeterinarianRequest {
     this.availableStartTime = availableStartTime;
     this.availableEndTime = availableEndTime;
   }
-}
+}import {VeterinarianSpeciality} from "./sign-up-admin.request";
+
+

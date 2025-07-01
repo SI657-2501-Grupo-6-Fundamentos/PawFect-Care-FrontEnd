@@ -23,7 +23,7 @@ export enum VeterinarianSpeciality {
 /**
  * Model for the response of the sign-up endpoint
  */
-export class SignUpVetRequest {
+export class SignUpAdminRequest {
   public userName: string;
   public role: UserRole;
   public fullName: string;

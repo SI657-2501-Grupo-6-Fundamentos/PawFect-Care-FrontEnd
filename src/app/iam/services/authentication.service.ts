@@ -8,8 +8,8 @@ import {SignUpResponse} from "../model/sign-up.response";
 import {SignInRequest} from "../model/sign-in.request";
 import {SignInResponse} from "../model/sign-in.response";
 import { environments } from '../../../environments/environment.development';
-import {SignUpVetRequest} from "../model/sign-up-vet.request";
-import {SignUpVetResponse} from "../model/sign-up-vet.response";
+import {SignUpAdminRequest} from "../model/sign-up-admin.request";
+import {SignUpAdminResponse} from "../model/sign-up-admin.response";
 import {GoogleSignInRequest} from "../model/google-sign-in.request";
 
 /**
@@ -111,8 +111,8 @@ export class AuthenticationService {
       });
   }
 
-  signUpVet(signUpVetRequest: SignUpVetRequest) {
-    return this.http.post<SignUpVetResponse>(`${this.basePath}/account-service/api/auth/register-vet`, signUpVetRequest, this.httpOptions)
+  signUpAdmin(signUpAdminRequest: SignUpAdminRequest) {
+    return this.http.post<SignUpAdminResponse>(`${this.basePath}/iam-service/api/v1/authentication/sign-up-admin`, signUpAdminRequest, this.httpOptions)
       .subscribe({
         next: (accountResponse) => {
           console.log(`Signed up as ${accountResponse.userName} with id ${accountResponse.id}`);
@@ -123,9 +123,9 @@ export class AuthenticationService {
             phoneNumber: accountResponse.phoneNumber,
             email: accountResponse.email,
             dni: accountResponse.dni,
-            speciality: signUpVetRequest.speciality,
-            availableStartTime: accountResponse.availableStartTime,
-            availableEndTime: accountResponse.availableEndTime
+            speciality: signUpAdminRequest.speciality,
+            availableStartTime: signUpAdminRequest.availableStartTime,
+            availableEndTime: signUpAdminRequest.availableEndTime
           };
 
           this.http.post(`${this.basePath}/veterinarian-service/api/v1/veterinarians`, vetRequest, this.httpOptions)
@@ -136,13 +136,14 @@ export class AuthenticationService {
               },
               error: (error) => {
                 console.error('Error registering veterinary', error);
-                this.router.navigate(['/sign-up-vet']).then();
+                this.router.navigate(['/sign-up-admin']).then();
               }
             });
         },
+
         error: (error) => {
-          console.error('Error signing up in account-service', error);
-          this.router.navigate(['/sign-up']).then();
+          console.error('Error signing up in iam-service', error);
+          this.router.navigate(['/sign-up-admin']).then();
         }
       });
   }
@@ -157,7 +158,7 @@ export class AuthenticationService {
    * @param signInRequest The {@link SignInRequest} object
    */
   signIn(signInRequest: SignInRequest) {
-    return this.http.post<SignInResponse>(`${this.basePath}/account-service/api/auth/login`, signInRequest, this.httpOptions)
+    return this.http.post<SignInResponse>(`${this.basePath}/iam-service/api/v1/authentication/sign-in`, signInRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
           this.signedIn.next(true);
