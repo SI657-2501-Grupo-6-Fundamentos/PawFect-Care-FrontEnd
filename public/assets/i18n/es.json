@@ -221,12 +221,16 @@
     "petNamePlaceholder": "Nombre de la mascota",
     "birthDateLabel": "Ingrese la fecha de nacimiento",
     "registrationDateLabel": "Ingrese la fecha de registro",
+    "animalTypeLabel": "Ingresa el tipo de mascota",
     "animalBreedLabel": "Ingrese la raza del animal",
     "genderLabel": "Género",
     "male": "Masculino",
     "female": "Femenino",
     "addButton": "Agregar",
-    "cancelButton": "Cancelar"
+    "cancelButton": "Cancelar",
+    "dog": "Perro",
+    "cat": "Gato",
+    "parrot": "Loro"
   },
   "petEdit": {
     "editPetTitle": "Editar Mascota",

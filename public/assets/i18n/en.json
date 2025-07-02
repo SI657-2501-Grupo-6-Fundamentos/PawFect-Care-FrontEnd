@@ -223,12 +223,16 @@
     "petNamePlaceholder": "Pet Name",
     "birthDateLabel": "Enter your birth date",
     "registrationDateLabel": "Enter your registration date",
+    "animalTypeLabel": "Enter your pet's animal type",
     "animalBreedLabel": "Enter your animal breed",
     "genderLabel": "Gender",
     "male": "Male",
     "female": "Female",
     "addButton": "Add",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "dog": "Dog",
+    "cat": "Cat",
+    "parrot": "Parrot"
   },
   "petEdit": {
     "editPetTitle": "Edit Pet",

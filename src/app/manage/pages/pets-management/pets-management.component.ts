@@ -55,6 +55,7 @@ export class PetsManagementComponent implements OnInit {
     "petName",
     "birthDate",
     "registrationDate",
+    "animalType",
     "animalBreed",
     "petGender",
     "hc",

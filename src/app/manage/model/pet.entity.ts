@@ -3,6 +3,7 @@ export class Pet {
   petName: string;
   birthDate: string;
   registrationDate: string;
+  animalType: string;
   animalBreed: string;
   petGender: string;
   ownerId: number;
@@ -13,6 +14,7 @@ export class Pet {
     petName?: string;
     birthDate?: string;
     registrationDate?: string;
+    animalType?: string;
     animalBreed?: string;
     petGender?: string;
     ownerId?: number;
@@ -22,7 +24,8 @@ export class Pet {
     this.petName = pet.petName || '';
     this.birthDate = pet.birthDate || '';
     this.registrationDate = pet.registrationDate || '';
-    this.animalBreed = pet.animalBreed || '';
+    this.animalType = pet.animalType?.toUpperCase().toLowerCase() || '';
+    this.animalBreed = pet.animalBreed?.toUpperCase().toLowerCase() || '';
     this.petGender = pet.petGender || 'MALE';
     this.ownerId = pet.ownerId || 0;
     this.medicalHistoryId = pet.medicalHistoryId || 0;
