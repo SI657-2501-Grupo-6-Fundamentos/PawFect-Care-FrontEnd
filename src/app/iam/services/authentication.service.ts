@@ -128,7 +128,7 @@ export class AuthenticationService {
             availableEndTime: signUpAdminRequest.availableEndTime
           };
 
-          this.http.post(`${this.basePath}/veterinarian-service/api/v1/veterinarians`, vetRequest, this.httpOptions)
+          this.http.post(`${this.basePath}/veterinary-service/api/v1/veterinarians`, vetRequest, this.httpOptions)
             .subscribe({
               next: () => {
                 console.log('Veterinary registered successfully');
