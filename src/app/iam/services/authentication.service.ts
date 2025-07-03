@@ -34,8 +34,13 @@ export class AuthenticationService {
    * Constructor
    * @param router the router
    * @param http the http client
+   * @param googleTokenService
    */
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private googleTokenService: GoogleTokenService
+  ) {
     const token = localStorage.getItem('token');
     console.log(token)
     if (token) {
@@ -196,6 +201,23 @@ export class AuthenticationService {
    * @param googleToken The Google ID token
    */
   signInUserAdminWithGoogle(googleToken: string): void {
+    // Decode the token to obtain the claims
+    const claims = this.googleTokenService.decodeGoogleToken(googleToken);
+
+    if (!claims) {
+      console.error('Unable to decode Google token');
+      return;
+    }
+
+    // Check if the token has expired
+    if (this.googleTokenService.isTokenExpired(claims)) {
+      console.error('Google token has expired');
+      return;
+    }
+
+    console.log('Google token claims:', claims);
+
+
     const googleSignInUserAdminRequest = new GoogleSignInRequest(googleToken);
 
     this.http.post<SignInResponse>(
@@ -207,9 +229,9 @@ export class AuthenticationService {
       }
     ).subscribe({
       next: (response) => {
-        console.log(`Signed in with Google as ${response.userName} with id ${response.id}`);
+        console.log(`Signed in with Google as ${claims.name} with id ${response.id}`);
 
-        // Creates a Veterinary
+        // Create a Veterinary
 
         const now = new Date();
         const startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0); // 9:00 AM
@@ -217,9 +239,9 @@ export class AuthenticationService {
 
         const vetRequest = {
           userId: response.id,
-          fullName: response.userName,
+          fullName: claims.name || `${claims.given_name} ${claims.family_name}`.trim(),
           phoneNumber: 'N/A',
-          email: response.userName || '',
+          email: claims.email || '',
           dni: 'N/A',
           speciality: 'GENERAL MEDICINE', // Value
           availableStartTime: startTime.toISOString().slice(0, 19), // Format YYYY-MM-DDTHH:mm:ss
@@ -230,12 +252,12 @@ export class AuthenticationService {
           .subscribe({
             next: () => {
               console.log('Veterinary registered successfully');
-              // Actualizar estado de autenticación solo después de crear el perfil
+              // Update authentication status only after profile creation
               this.signedIn.next(true);
               this.signedInUserId.next(response.id);
-              this.signedInUserName.next(response.userName);
+              this.signedInUserName.next(claims.name);
               localStorage.setItem('token', response.token);
-              console.log(`Authentication completed for ${response.userName} with token ${response.token}`);
+              console.log(`Authentication completed for ${claims.name} with token ${response.token}`);
               this.router.navigate(['/']).then();
             },
             error: (error) => {
@@ -261,6 +283,22 @@ export class AuthenticationService {
    * @param googleToken The Google ID token
    */
   signInUserWithGoogle(googleToken: string): void {
+    // Decode the token to obtain the claims
+    const claims = this.googleTokenService.decodeGoogleToken(googleToken);
+
+    if (!claims) {
+      console.error('Unable to decode Google token');
+      return;
+    }
+
+    // Check if the token has expired
+    if (this.googleTokenService.isTokenExpired(claims)) {
+      console.error('Google token has expired');
+      return;
+    }
+    console.log('Google token claims:', claims);
+
+
     const googleSignInUserRequest = new GoogleSignInRequest(googleToken);
 
     this.http.post<SignInResponse>(
@@ -272,14 +310,14 @@ export class AuthenticationService {
       }
     ).subscribe({
       next: (response) => {
-        console.log(`Signed in with Google as ${response.userName} with id ${response.id}`);
+        console.log(`Signed in with Google as ${claims.name} with id ${response.id}`);
 
-        // Creates a Pet Owner
+        // Create a Pet Owner
         const petOwnerRequest = {
           userId: response.id,
-          fullName: response.userName,
+          fullName: claims.name || `${claims.given_name} ${claims.family_name}`.trim(),
           phoneNumber: 'N/A',
-          email: response.userName || '',
+          email: claims.email || '',
           address: 'N/A'
         };
 
@@ -287,12 +325,12 @@ export class AuthenticationService {
           .subscribe({
             next: () => {
               console.log('Pet owner registered successfully');
-              // Actualizar estado de autenticación solo después de crear el perfil
+              // Update authentication status only after profile creation
               this.signedIn.next(true);
               this.signedInUserId.next(response.id);
-              this.signedInUserName.next(response.userName);
+              this.signedInUserName.next(claims.name);
               localStorage.setItem('token', response.token);
-              console.log(`Authentication completed for ${response.userName} with token ${response.token}`);
+              console.log(`Authentication completed for ${claims.name} with token ${response.token}`);
               this.router.navigate(['/']).then();
             },
             error: (error) => {
@@ -319,5 +357,90 @@ export class AuthenticationService {
     this.signedInUserName.next('');
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']).then();
+  }
+}
+
+
+/**
+ * Google claims with user info
+ */
+export interface GoogleTokenClaims {
+  email: string;
+  name: string;
+  picture: string;
+  given_name: string;
+  family_name: string;
+  sub: string; // Google user ID
+  aud: string; // audience
+  exp: number; // expiration time
+  iat: number; // issued at time
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GoogleTokenService {
+
+  /**
+   * Decode a JWT Google token without verifying the signature
+   * @param token Google's JWT token
+   * @returns The claims of the decoded token
+   */
+  decodeGoogleToken(token: string): GoogleTokenClaims | null {
+    try {
+      // A JWT has 3 parts separated by periods: header.payload.signature
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        console.error('Invalid JWT format');
+        return null;
+      }
+
+      // Decoding the payload (part two)
+      const payload = parts[1];
+
+      // Decode base64URL
+      const decodedPayload = this.base64UrlDecode(payload);
+
+      // Parse JSON
+      const claims = JSON.parse(decodedPayload) as GoogleTokenClaims;
+
+      return claims;
+    } catch (error) {
+      console.error('Error decoding Google token:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Decode a base64URL string
+   * @param str The base64URL string to decode
+   * @returns The decoded string
+   */
+  private base64UrlDecode(str: string): string {
+    // Convert base64URL to standard base64
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+
+    // Add padding if necessary
+    while (str.length % 4) {
+      str += '=';
+    }
+
+    // Decode base64
+    return decodeURIComponent(
+      atob(str)
+        .split('')
+        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+  }
+
+  /**
+   * Check if the token has expired
+   * @param claims The token claims
+   * @returns true if the token has expired
+   */
+  isTokenExpired(claims: GoogleTokenClaims): boolean {
+    const now = Math.floor(Date.now() / 1000);
+    return claims.exp < now;
   }
 }
