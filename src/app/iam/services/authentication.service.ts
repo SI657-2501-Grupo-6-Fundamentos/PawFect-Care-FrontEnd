@@ -252,19 +252,19 @@ export class AuthenticationService {
           .subscribe({
             next: () => {
               console.log('Veterinary registered successfully');
-              // Update authentication status only after profile creation
-              this.signedIn.next(true);
-              this.signedInUserId.next(response.id);
-              this.signedInUserName.next(claims.name);
-              localStorage.setItem('token', response.token);
-              console.log(`Authentication completed for ${claims.name} with token ${response.token}`);
-              this.router.navigate(['/']).then();
+              this.completeGoogleSignIn(response, claims.name);
             },
             error: (error) => {
-              console.error('Error registering veterinary', error);
-              this.router.navigate(['/sign-in']).then();
+              if (error.status === 409) {
+                console.warn('Veterinarian already exists. Continuing login...');
+                this.completeGoogleSignIn(response, claims.name);
+              } else {
+                console.error('Error registering veterinary', error);
+                this.router.navigate(['/sign-in']).then();
+              }
             }
           });
+
       },
       error: (error) => {
         console.error('Error signing in with Google', error);
@@ -325,17 +325,16 @@ export class AuthenticationService {
           .subscribe({
             next: () => {
               console.log('Pet owner registered successfully');
-              // Update authentication status only after profile creation
-              this.signedIn.next(true);
-              this.signedInUserId.next(response.id);
-              this.signedInUserName.next(claims.name);
-              localStorage.setItem('token', response.token);
-              console.log(`Authentication completed for ${claims.name} with token ${response.token}`);
-              this.router.navigate(['/']).then();
+              this.completeGoogleSignIn(response, claims.name);
             },
             error: (error) => {
-              console.error('Error registering pet owner', error);
-              this.router.navigate(['/sign-in']).then();
+              if (error.status === 409) {
+                console.warn('Pet owner already exists. Continuing login...');
+                this.completeGoogleSignIn(response, claims.name);
+              } else {
+                console.error('Error registering pet owner', error);
+                this.router.navigate(['/sign-in']).then();
+              }
             }
           });
       },
@@ -357,6 +356,15 @@ export class AuthenticationService {
     this.signedInUserName.next('');
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']).then();
+  }
+
+  private completeGoogleSignIn(response: SignInResponse, name: string): void {
+    this.signedIn.next(true);
+    this.signedInUserId.next(response.id);
+    this.signedInUserName.next(name);
+    localStorage.setItem('token', response.token);
+    console.log(`Authentication completed for ${name} with token ${response.token}`);
+    this.router.navigate(['/']).then();
   }
 }
 
