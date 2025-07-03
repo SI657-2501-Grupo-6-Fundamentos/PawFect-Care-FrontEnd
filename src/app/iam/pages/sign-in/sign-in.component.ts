@@ -111,7 +111,7 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
     console.log('Google ID Token received:', idToken);
 
     // Call your authentication service to handle Google sign-in
-    this.authenticationService.signInWithGoogle(idToken);
+    this.authenticationService.signInUserWithGoogle(idToken);
   }
 
   /**

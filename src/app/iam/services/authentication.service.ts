@@ -69,7 +69,7 @@ export class AuthenticationService {
   // actions
 
   /**
-   * Signs up a new user
+   * Signs up a new user and a pet owner
    * <p>
    *   This method sends a sign-up request to the server.
    *   If the request is successful, the user is redirected to the sign-in page.
@@ -111,6 +111,16 @@ export class AuthenticationService {
       });
   }
 
+  /**
+   * Signs up a new user admin and a veterinarian
+   * <p>
+   *   This method sends a sign-up request to the server.
+   *   If the request is successful, the user is redirected to the sign-in page.
+   *   If the request fails, an error message is logged and the user is redirected to the sign-up page.
+   *   The user is not signed in automatically after signing up.
+   * </p>
+   * @param signUpAdminRequest The {@link SignUpAdminRequest} object
+   */
   signUpAdmin(signUpAdminRequest: SignUpAdminRequest) {
     return this.http.post<SignUpAdminResponse>(`${this.basePath}/iam-service/api/v1/authentication/sign-up-admin`, signUpAdminRequest, this.httpOptions)
       .subscribe({
@@ -176,32 +186,63 @@ export class AuthenticationService {
   }
 
   /**
-   * Signs in a user with Google
+   * Signs as user admin with Google and create a veterinarian
    * <p>
    *   This method sends a Google sign-in request to the server.
-   *   If the request is successful, the user is signed in and redirected to the home page.
+   *   If the request is successful, the user admin account is created and signed in.
+   *   Then a veterinarian profile is created and the user is redirected to the home page.
    *   If the request fails, an error message is logged and the user stays on the sign-in page.
    * </p>
    * @param googleToken The Google ID token
    */
-  signInWithGoogle(googleToken: string): void {
-    const googleSignInRequest = new GoogleSignInRequest(googleToken);
+  signInUserAdminWithGoogle(googleToken: string): void {
+    const googleSignInUserAdminRequest = new GoogleSignInRequest(googleToken);
 
     this.http.post<SignInResponse>(
-      `${this.basePath}/iam-service/api/v1/auth/google/sign-in`,
-      googleSignInRequest,
+      `${this.basePath}/iam-service/api/v1/auth/google/sign-in-user-admin`,
+      googleSignInUserAdminRequest,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-        withCredentials: true // ⬅️ Esto es clave para cookies o sesiones si las usas
+        withCredentials: true
       }
     ).subscribe({
       next: (response) => {
-        this.signedIn.next(true);
-        this.signedInUserId.next(response.id);
-        this.signedInUserName.next(response.userName);
-        localStorage.setItem('token', response.token);
-        console.log(`Signed in with Google as ${response.userName} with token ${response.token}`);
-        this.router.navigate(['/']).then();
+        console.log(`Signed in with Google as ${response.userName} with id ${response.id}`);
+
+        // Creates a Veterinary
+
+        const now = new Date();
+        const startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0); // 9:00 AM
+        const endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 0, 0); // 5:00 PM
+
+        const vetRequest = {
+          userId: response.id,
+          fullName: response.userName,
+          phoneNumber: 'N/A',
+          email: response.userName || '',
+          dni: 'N/A',
+          speciality: 'GENERAL MEDICINE', // Value
+          availableStartTime: startTime.toISOString().slice(0, 19), // Format YYYY-MM-DDTHH:mm:ss
+          availableEndTime: endTime.toISOString().slice(0, 19) // Format YYYY-MM-DDTHH:mm:ss
+        };
+
+        this.http.post(`${this.basePath}/veterinary-service/api/v1/veterinarians`, vetRequest, this.httpOptions)
+          .subscribe({
+            next: () => {
+              console.log('Veterinary registered successfully');
+              // Actualizar estado de autenticación solo después de crear el perfil
+              this.signedIn.next(true);
+              this.signedInUserId.next(response.id);
+              this.signedInUserName.next(response.userName);
+              localStorage.setItem('token', response.token);
+              console.log(`Authentication completed for ${response.userName} with token ${response.token}`);
+              this.router.navigate(['/']).then();
+            },
+            error: (error) => {
+              console.error('Error registering veterinary', error);
+              this.router.navigate(['/sign-in']).then();
+            }
+          });
       },
       error: (error) => {
         console.error('Error signing in with Google', error);
@@ -209,6 +250,62 @@ export class AuthenticationService {
     });
   }
 
+  /**
+   * Signs in as user with Google and create a pet owner
+   * <p>
+   *   This method sends a Google sign-in request to the server.
+   *   If the request is successful, the user account is created and signed in.
+   *   Then a pet owner profile is created and the user is redirected to the home page.
+   *   If the request fails, an error message is logged and the user stays on the sign-in page.
+   * </p>
+   * @param googleToken The Google ID token
+   */
+  signInUserWithGoogle(googleToken: string): void {
+    const googleSignInUserRequest = new GoogleSignInRequest(googleToken);
+
+    this.http.post<SignInResponse>(
+      `${this.basePath}/iam-service/api/v1/auth/google/sign-in-user`,
+      googleSignInUserRequest,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true
+      }
+    ).subscribe({
+      next: (response) => {
+        console.log(`Signed in with Google as ${response.userName} with id ${response.id}`);
+
+        // Creates a Pet Owner
+        const petOwnerRequest = {
+          userId: response.id,
+          fullName: response.userName,
+          phoneNumber: 'N/A',
+          email: response.userName || '',
+          address: 'N/A'
+        };
+
+        this.http.post(`${this.basePath}/pet-owner-service/api/v1/pet-owners`, petOwnerRequest, this.httpOptions)
+          .subscribe({
+            next: () => {
+              console.log('Pet owner registered successfully');
+              // Actualizar estado de autenticación solo después de crear el perfil
+              this.signedIn.next(true);
+              this.signedInUserId.next(response.id);
+              this.signedInUserName.next(response.userName);
+              localStorage.setItem('token', response.token);
+              console.log(`Authentication completed for ${response.userName} with token ${response.token}`);
+              this.router.navigate(['/']).then();
+            },
+            error: (error) => {
+              console.error('Error registering pet owner', error);
+              this.router.navigate(['/sign-in']).then();
+            }
+          });
+      },
+      error: (error) => {
+        console.error('Error signing in with Google', error);
+      }
+    });
+  }
 
   /**
    * Signs out the current user

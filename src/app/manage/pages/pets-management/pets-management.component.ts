@@ -58,7 +58,6 @@ export class PetsManagementComponent implements OnInit {
     "animalType",
     "animalBreed",
     "petGender",
-    "hc",
     "actions"
   ];
 

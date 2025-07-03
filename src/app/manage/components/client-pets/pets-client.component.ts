@@ -56,7 +56,6 @@ export class PetsClientComponent implements OnInit {
     "animalType",
     "animalBreed",
     "petGender",
-    "hc",
     "actions"
   ];
 
