@@ -28,6 +28,11 @@
   </mat-form-field>
 
   <mat-form-field>
+    <mat-label>{{ 'pet.animalTypeLabel' | translate }}</mat-label>
+    <input matInput [(ngModel)]="pet.animalType" name="animalType" type="text" placeholder="Animal Type" required />
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-label>{{ 'pet.animalBreedLabel' | translate }}</mat-label>
     <input matInput [(ngModel)]="pet.animalBreed" name="animalBreed" type="text" placeholder="Animal Breed" required />
   </mat-form-field>

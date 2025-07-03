@@ -40,8 +40,6 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
     MatTable,
     MatHeaderCellDef,
     FormsModule,
-    MatFormField,
-    MatInput,
     MatButtonModule,
     TranslateModule
   ],
@@ -55,6 +53,7 @@ export class PetsClientComponent implements OnInit {
     "petName",
     "birthDate",
     "registrationDate",
+    "animalType",
     "animalBreed",
     "petGender",
     "hc",

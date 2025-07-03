@@ -13,6 +13,7 @@ import { Client } from '../../model/client.entity';
 import { ClientsService } from '../../services/clients.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { TranslateModule } from "@ngx-translate/core";
+
 @Component({
   selector: 'app-pet-create',
   standalone: true,
@@ -41,11 +42,9 @@ export class PetCreateComponent implements OnInit {
   clientId!: number;
   options: Client[] = [];
 
-
   constructor(private route: ActivatedRoute, private router: Router, private petService: PetsService, private clientService: ClientsService) {
     this.pet = new Pet({});
   }
-
 
   ngOnInit() {
     this.clientId = +this.route.snapshot.paramMap.get('id')!;
@@ -67,9 +66,7 @@ export class PetCreateComponent implements OnInit {
     });
   }
 
-
   onSubmit() {
-
     if (this.isValid()) {
       this.createPet();
     } else {
@@ -78,19 +75,43 @@ export class PetCreateComponent implements OnInit {
   }
 
   createPet() {
-    const dataPet = {
-      ...this.pet,
-      ownerId: this.clientId
+    // Validate that animalType is selected
+    if (!this.pet.animalType) {
+      console.error('Animal type is required');
+      alert('Please select an animal type');
+      return;
     }
-    this.petService.create(dataPet).subscribe((response: Pet) => {
-      console.log(response)
-      this.router.navigate([`/manage/clients/edit/${response.ownerId}`]);
+
+    // Clean and validate the data before sending
+    const cleanedPet = {
+      petName: this.pet.petName?.trim() || '',
+      birthDate: this.pet.birthDate || '',
+      registrationDate: this.pet.registrationDate || '',
+      animalType: this.pet.animalType.toUpperCase(), // Remove the fallback to empty string
+      animalBreed: this.pet.animalBreed?.trim() || '',
+      petGender: this.pet.petGender || 'MALE',
+      ownerId: this.clientId
+    };
+
+    // Log the data being sent for debugging
+    console.log('Sending pet data:', cleanedPet);
+
+    this.petService.create(cleanedPet).subscribe({
+      next: (response: Pet) => {
+        console.log('Pet created successfully:', response);
+        this.router.navigate([`/manage/clients/edit/${response.ownerId}`]);
+      },
+      error: (error) => {
+        console.error('Error creating pet:', error);
+        // Log the full error details for debugging
+        if (error.error) {
+          console.error('Error details:', error.error);
+        }
+      }
     });
   }
 
   onCancel() {
     this.router.navigate([`/manage/clients/edit/${this.clientId}`]);
   }
-
-
 }
