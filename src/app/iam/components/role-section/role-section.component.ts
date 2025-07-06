@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import {TranslateModule} from "@ngx-translate/core";
 
 /**
  * Role selection component
@@ -16,7 +17,8 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    TranslateModule
   ],
   templateUrl: './role-section.component.html',
   styleUrl: './role-section.component.css'
@@ -48,29 +50,11 @@ export class RoleSelectionComponent {
   }
 
   /**
-   * Navigate to pet owner Google sign in
-   */
-  onSelectPetOwnerGoogle() {
-    this.router.navigate(['/sign-in'], {
-      queryParams: { role: 'pet-owner', method: 'google' }
-    });
-  }
-
-  /**
-   * Navigate to veterinary Google sign in
-   */
-  onSelectVeterinaryGoogle() {
-    this.router.navigate(['/sign-in'], {
-      queryParams: { role: 'veterinary', method: 'google' }
-    });
-  }
-
-  /**
    * Navigate to pet owner sign in
    */
   onSignInPetOwner() {
     this.router.navigate(['/sign-in'], {
-      queryParams: { role: 'pet-owner', method: 'normal' }
+      queryParams: { role: 'pet-owner' }
     });
   }
 
@@ -79,7 +63,7 @@ export class RoleSelectionComponent {
    */
   onSignInVeterinary() {
     this.router.navigate(['/sign-in'], {
-      queryParams: { role: 'veterinary', method: 'normal' }
+      queryParams: { role: 'veterinary' }
     });
   }
 

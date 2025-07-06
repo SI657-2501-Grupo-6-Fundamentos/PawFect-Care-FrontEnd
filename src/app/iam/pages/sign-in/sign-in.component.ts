@@ -7,6 +7,7 @@ import {MatCard, MatCardContent, MatCardHeader, MatCardModule, MatCardTitle} fro
 import {MatError, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,6 +25,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatIconModule,
     TranslateModule
   ],
   templateUrl: './sign-in.component.html',
@@ -34,9 +36,8 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
   submitted = false;
   private clientId = '943349664550-d4lnk7sa26hl4n8n0siq13e2n9gq6i3a.apps.googleusercontent.com'; // Replace with your actual client ID
 
-  // Role and method from query params
+  // Role from query params
   selectedRole: string = '';
-  authMethod: string = '';
 
   /**
    * Constructor
@@ -68,12 +69,9 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
     // Get query parameters
     this.route.queryParams.subscribe(params => {
       this.selectedRole = params['role'] || '';
-      this.authMethod = params['method'] || '';
 
-      // If it's a Google authentication, initialize Google Sign-In
-      if (this.authMethod === 'google') {
-        this.loadGoogleSignIn();
-      }
+      // Always load Google Sign-In
+      this.loadGoogleSignIn();
     });
   }
 
@@ -140,7 +138,7 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
   /**
    * On Submit Event Handler
    * <p>
-   *  Submit the form data to the server
+   *  Submit the form data to the server for traditional login
    * </p>
    */
   onSubmit() {
@@ -152,6 +150,9 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
     this.submitted = true;
   }
 
+  /**
+   * Navigate back to role selection
+   */
   navigateToRegister(): void {
     this.router.navigate(['/select-role']);
   }

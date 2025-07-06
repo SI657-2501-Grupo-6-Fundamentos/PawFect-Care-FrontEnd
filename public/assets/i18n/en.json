@@ -251,5 +251,29 @@
     "female": "Female",
     "updateButton": "Update",
     "cancelButton": "Cancel"
+  },
+  "role": {
+    "sectionTitleH2": "Select your role",
+    "sectionTitleLine": "Choose the type of account you want to create",
+    "petOwnerCard": {
+      "title": "Pet Owner",
+      "description": "To take care of your pets",
+      "about": "Register your pets, schedule veterinary appointments, and keep track of their health.",
+      "feature1": "Manage your pets' profiles",
+      "feature2": "Schedule veterinary appointments",
+      "feature3": "Access medical history"
+    },
+    "veterinaryCard": {
+      "title": "Veterinarian",
+      "description": "For veterinary professionals",
+      "about": "Manage your veterinary practice, see patients, and schedule appointments.",
+      "feature1": "Manage your appointment schedule",
+      "feature2": "Access medical records",
+      "feature3": "Manage diagnostics of treatments",
+      "feature4": "Indicate your available schedules"
+    },
+    "signUpButton": "Sign Up",
+    "signInButton": "Sign In",
+    "returnToHome": "Return to Home"
   }
 }

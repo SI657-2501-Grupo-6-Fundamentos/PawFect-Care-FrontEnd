@@ -1,6 +1,18 @@
 <mat-card>
   <h2>{{ 'login-container.login.title' | translate }}</h2>
 
+  <!-- Role indicator -->
+  <div class="role-indicator">
+    <p *ngIf="selectedRole === 'pet-owner'">
+      <mat-icon>pets</mat-icon>
+      Iniciar sesión como Dueño de Mascota
+    </p>
+    <p *ngIf="selectedRole === 'veterinary'">
+      <mat-icon>medical_services</mat-icon>
+      Iniciar sesión como Veterinario
+    </p>
+  </div>
+
   <!-- Traditional Login Form -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
     <mat-form-field appearance="fill" class="form-field">
@@ -21,41 +33,36 @@
     </mat-form-field>
 
     <div class="container-actions">
-      <button class="button-primary" type="submit"  mat-flat-button>  {{ 'login-container.login.submitButton' | translate }}</button>
-      <button class="button-secondary"  mat-raised-button type="button" (click)="navigateToRegister()"  mat-flat-button> {{ 'login-container.login.registerButton' | translate }}</button>
+      <button class="button-primary" type="submit" mat-flat-button>
+        {{ 'login-container.login.submitButton' | translate }}
+      </button>
     </div>
 
-    <!-- Show Google Sign-In section only if method is 'google' -->
-    @if (authMethod === 'google') {
-      <!-- Divider -->
-      <div class="divider-container">
-        <div class="divider-line"></div>
-        <span class="divider-text">or</span>
-        <div class="divider-line"></div>
-      </div>
+    <!-- Divider -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+      <span class="divider-text">o</span>
+      <div class="divider-line"></div>
+    </div>
 
-      <!-- Google Sign-In Button -->
-      <div class="google-sign-in-container">
-        <div id="googleSignInBtn"></div>
-      </div>
-    }
+    <!-- Google Sign-In Button -->
+    <div class="google-sign-in-container">
+      <div id="googleSignInBtn"></div>
+    </div>
 
-    <!-- Show traditional login options if not Google method -->
-    @if (authMethod !== 'google') {
-      <!-- Divider -->
-      <div class="divider-container">
-        <div class="divider-line"></div>
-        <span class="divider-text">or</span>
-        <div class="divider-line"></div>
-      </div>
+    <!-- Divider -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+      <span class="divider-text">o</span>
+      <div class="divider-line"></div>
+    </div>
 
-      <!-- Back to role selection -->
-      <div class="back-to-role-container">
-        <button type="button" mat-stroked-button (click)="navigateToRegister()">
-          Volver a selección de rol
-        </button>
-      </div>
-    }
+    <!-- Navigation buttons -->
+    <div class="navigation-actions">
+      <button type="button" mat-stroked-button (click)="navigateToRegister()">
+        Volver a selección de rol
+      </button>
+    </div>
 
   </form>
 </mat-card>

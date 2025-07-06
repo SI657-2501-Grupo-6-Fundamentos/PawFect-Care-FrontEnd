@@ -249,6 +249,30 @@
     "female": "Femenino",
     "updateButton": "Actualizar",
     "cancelButton": "Cancelar"
+  },
+  "role": {
+    "sectionTitleH2": "Selecciona tu rol",
+    "sectionTitleLine": "Elige el tipo de cuenta que deseas crear",
+    "petOwnerCard": {
+      "title": "Dueño de Mascota",
+      "description": "Para cuidar de tus mascotas",
+      "about": "Registra a tus mascotas, agenda citas veterinarias y mantén un seguimiento de su salud.",
+      "feature1": "Gestiona el perfil de tus mascotas",
+      "feature2": "Agenda citas con veterinarios",
+      "feature3": "Accede al historial médico"
+    },
+    "veterinaryCard": {
+      "title": "Veterinario",
+      "description": "Para profesionales veterinarios",
+      "about": "Gestiona tu consulta veterinaria, atiende pacientes y administra citas médicas.",
+      "feature1": "Gestiona tu agenda de citas",
+      "feature2": "Accede a historiales médicos",
+      "feature3": "Registra diagnósticos de tratamientos",
+      "feature4": "Indica tus horarios disponibles"
+    },
+    "signUpButton": "Registrarse",
+    "signInButton": "Iniciar Sesión",
+    "returnToHome": "Volver al inicio"
   }
 }
 

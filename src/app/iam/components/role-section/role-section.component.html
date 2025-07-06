@@ -1,7 +1,7 @@
 <div class="role-selection-container">
   <div class="header">
-    <h2>Selecciona tu rol</h2>
-    <p>Elige el tipo de cuenta que deseas crear</p>
+    <h2>{{ 'role.sectionTitleH2' | translate }}</h2>
+    <p>{{ 'role.sectionTitleLine' | translate }}</p>
   </div>
 
   <div class="role-cards">
@@ -9,31 +9,27 @@
     <mat-card class="role-card pet-owner-card">
       <mat-card-header>
         <mat-icon mat-card-avatar>pets</mat-icon>
-        <mat-card-title>Dueño de Mascota</mat-card-title>
-        <mat-card-subtitle>Para cuidar de tus mascotas</mat-card-subtitle>
+        <mat-card-title>{{ 'role.petOwnerCard.title' | translate  }}</mat-card-title>
+        <mat-card-subtitle>{{ 'role.petOwnerCard.description' | translate }}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
-        <p>Registra a tus mascotas, agenda citas veterinarias y mantén un seguimiento de su salud.</p>
+        <p>{{ 'role.petOwnerCard.about' | translate }}</p>
         <ul>
-          <li>Gestiona el perfil de tus mascotas</li>
-          <li>Agenda citas con veterinarios</li>
-          <li>Accede al historial médico</li>
+          <li>{{ 'role.petOwnerCard.feature1' | translate }}</li>
+          <li>{{ 'role.petOwnerCard.feature2' | translate }}</li>
+          <li>{{ 'role.petOwnerCard.feature3' | translate }}</li>
         </ul>
       </mat-card-content>
 
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="onSelectPetOwner()">
           <mat-icon>person_add</mat-icon>
-          Registro Normal
-        </button>
-        <button mat-raised-button color="accent" (click)="onSelectPetOwnerGoogle()">
-          <mat-icon>g_translate</mat-icon>
-          Registro con Google
+          {{ 'role.signUpButton' | translate }}
         </button>
         <button mat-stroked-button color="primary" (click)="onSignInPetOwner()">
           <mat-icon>login</mat-icon>
-          Iniciar Sesión
+          {{ 'role.signInButton' | translate }}
         </button>
       </mat-card-actions>
     </mat-card>
@@ -42,32 +38,28 @@
     <mat-card class="role-card veterinary-card">
       <mat-card-header>
         <mat-icon mat-card-avatar>medical_services</mat-icon>
-        <mat-card-title>Veterinario</mat-card-title>
-        <mat-card-subtitle>Para profesionales veterinarios</mat-card-subtitle>
+        <mat-card-title>{{ 'role.veterinaryCard.title' | translate  }}</mat-card-title>
+        <mat-card-subtitle>{{ 'role.veterinaryCard.description' | translate  }}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
-        <p>Gestiona tu consulta veterinaria, atiende pacientes y administra citas médicas.</p>
+        <p>{{ 'role.veterinaryCard.about' | translate  }}</p>
         <ul>
-          <li>Gestiona tu agenda de citas</li>
-          <li>Accede a historiales médicos</li>
-          <li>Registra diagnósticos y tratamientos</li>
-          <li>Indica tus horarios disponibles</li>
+          <li>{{ 'role.veterinaryCard.feature1' | translate  }}</li>
+          <li>{{ 'role.veterinaryCard.feature2' | translate  }}</li>
+          <li>{{ 'role.veterinaryCard.feature3' | translate  }}</li>
+          <li>{{ 'role.veterinaryCard.feature4' | translate  }}</li>
         </ul>
       </mat-card-content>
 
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="onSelectVeterinary()">
           <mat-icon>person_add</mat-icon>
-          Registro Normal
-        </button>
-        <button mat-raised-button color="accent" (click)="onSelectVeterinaryGoogle()">
-          <mat-icon>g_translate</mat-icon>
-          Registro con Google
+          {{ 'role.signUpButton' | translate }}
         </button>
         <button mat-stroked-button color="primary" (click)="onSignInVeterinary()">
           <mat-icon>login</mat-icon>
-          Iniciar Sesión
+          {{ 'role.signInButton' | translate }}
         </button>
       </mat-card-actions>
     </mat-card>
@@ -76,7 +68,7 @@
   <div class="back-action">
     <button mat-stroked-button (click)="onBackToHome()">
       <mat-icon>home</mat-icon>
-      Volver al inicio
+      {{ 'role.returnToHome' | translate }}
     </button>
   </div>
 </div>
