@@ -30,6 +30,9 @@ export class AuthenticationService {
   private signedInUserId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private signedInUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
+  private currentUserRoleSubject = new BehaviorSubject<string | null>(null);
+  public currentUserRole = this.currentUserRoleSubject.asObservable();
+
   /**
    * Constructor
    * @param router the router
@@ -42,9 +45,14 @@ export class AuthenticationService {
     private googleTokenService: GoogleTokenService
   ) {
     const token = localStorage.getItem('token');
+    const savedRole = localStorage.getItem('userRole');
+
     console.log(token)
     if (token) {
       this.signedIn.next(true);
+      if (savedRole) {
+        this.currentUserRoleSubject.next(savedRole);
+      }
     } else {
       this.signedIn.next(false);
     }
@@ -63,6 +71,24 @@ export class AuthenticationService {
   get currentUserId() {
     return this.signedInUserId.asObservable();
   }
+
+  /**
+   * Method to set the user role after login
+   * @param role
+   */
+  setUserRole(role: string) {
+    this.currentUserRoleSubject.next(role);
+    // Optional: Storages for persistence
+    localStorage.setItem('userRole', role);
+  }
+
+  /**
+   * Method to get the current role
+   */
+  getCurrentUserRole(): string | null {
+    return this.currentUserRoleSubject.value || localStorage.getItem('userRole');
+  }
+
 
   /**
    * Gets the current username
@@ -180,14 +206,40 @@ export class AuthenticationService {
           this.signedInUserId.next(response.id);
           this.signedInUserName.next(response.userName);
           localStorage.setItem('token', response.token);
-          console.log(`Signed in as ${response.userName} with token ${response.token}`);
-          this.router.navigate(['/']).then();
+
+          // Set the user's role based on the response
+          const role = (response as any).role || 'pet-owner';
+          this.setUserRole(role);
+
+          console.log(`Signed in as ${response.userName} with token ${response.token} and role ${role}`);
+
+          // Redirects by the role
+          this.redirectAfterLogin(role);
         },
         error: (error) => {
           console.error('Error signing in', error);
           this.router.navigate(['/sign-in']).then();
         }
       });
+  }
+
+  /**
+   * Method to redirect based on role
+   * @param userRole
+   * @private
+   */
+  private redirectAfterLogin(userRole: string): void {
+    switch (userRole) {
+      case 'veterinary':
+      case 'admin':
+        this.router.navigate(['/manage/clients']).then();
+        break;
+      case 'pet-owner':
+        this.router.navigate(['/manage/pets']).then();
+        break;
+      default:
+        this.router.navigate(['/']).then();
+    }
   }
 
   /**
@@ -230,6 +282,9 @@ export class AuthenticationService {
     ).subscribe({
       next: (response) => {
         console.log(`Signed in with Google as ${claimsAdmin.name} with id ${response.id}`);
+
+        // Set the role as veterinary
+        this.setUserRole('veterinary');
 
         // Create a Veterinary
 
@@ -312,6 +367,9 @@ export class AuthenticationService {
       next: (response) => {
         console.log(`Signed in with Google as ${claims.name} with id ${response.id}`);
 
+        // Set the role as pet-owner
+        this.setUserRole('pet-owner');
+
         // Create a Pet Owner
         const petOwnerRequest = {
           userId: response.id,
@@ -356,15 +414,23 @@ export class AuthenticationService {
     this.signedInUserName.next('');
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']).then();
+    this.currentUserRoleSubject.next(null);
+    localStorage.removeItem('userRole');
   }
 
-  private completeGoogleSignIn(response: SignInResponse, name: string): void {
+  private completeGoogleSignIn(response: SignInResponse, name: string, role: string = 'pet-owner'): void {
     this.signedIn.next(true);
     this.signedInUserId.next(response.id);
     this.signedInUserName.next(name);
     localStorage.setItem('token', response.token);
-    console.log(`Authentication completed for ${name} with token ${response.token}`);
-    this.router.navigate(['/']).then();
+
+    // Set the role
+    this.setUserRole(role);
+
+    console.log(`Authentication completed for ${name} with token ${response.token} and role ${role}`);
+
+    // Redirects by the role
+    this.redirectAfterLogin(role);
   }
 }
 

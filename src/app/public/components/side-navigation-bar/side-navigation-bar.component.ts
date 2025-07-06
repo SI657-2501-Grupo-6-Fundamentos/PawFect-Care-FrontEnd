@@ -8,7 +8,7 @@ import { MatButtonModule, MatIconButton } from "@angular/material/button";
 import { Router, RouterLink } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterOutlet } from '@angular/router';
-import {LanguageSwitcherComponent} from "../language-switcher/language-switcher.component";
+import { LanguageSwitcherComponent } from "../language-switcher/language-switcher.component";
 import { AuthenticationSectionComponent } from "../../../iam/components/authentication-section/authentication-section.component";
 import { AuthenticationService } from '../../../iam/services/authentication.service';
 @Component({
@@ -38,6 +38,7 @@ export class SideNavigationBarComponent {
     { path: '/', title: 'Home',icon: 'home' },
     { path: '/manage/pets', title: 'List pets',icon: 'pets' },
     { path: '/manage/clients', title: 'List clients',icon: 'group' },
+    { path: '/manage/veterinarians', title: 'List veterinarians',icon: 'local_hospital' },
     { path: '/manage/appointments', title: 'List appointments',icon: 'event' },
     { path: '/manage/tariffs', title: 'List services',icon: 'inventory ' },
   ];

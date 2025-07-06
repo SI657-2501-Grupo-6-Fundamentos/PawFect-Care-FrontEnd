@@ -1,0 +1,103 @@
+.veterinary-management-card {
+  margin: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.veterinary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.veterinary-table th {
+  font-weight: bold;
+  background-color: #f5f5f5;
+  padding: 12px;
+  text-align: left;
+}
+
+.veterinary-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.veterinary-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-buttons button {
+  min-width: 40px;
+  height: 40px;
+}
+
+.speciality-badge {
+  background-color: #e3f2fd;
+  color: orange;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-data-message mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.no-data-message p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.view-schedules-from-veterinarians {
+  color: orange;
+}
+
+@media (max-width: 768px) {
+  .veterinary-management-card {
+    margin: 10px;
+  }
+
+  .table-container {
+    overflow-x: scroll;
+  }
+
+  .veterinary-table {
+    min-width: 800px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .action-buttons button {
+    width: 100%;
+    min-width: 32px;
+    height: 32px;
+  }
+}

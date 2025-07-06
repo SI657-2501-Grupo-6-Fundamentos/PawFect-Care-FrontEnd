@@ -1,0 +1,54 @@
+<div class="schedule-management-container">
+  <mat-toolbar color="primary">
+    <span *ngIf="veterinarianId; else allSchedules">
+      Schedules for Veterinarian ID: {{ veterinarianId }}
+    </span>
+    <ng-template #allSchedules>
+      <span>All Veterinary Schedules</span>
+    </ng-template>
+  </mat-toolbar>
+
+  <div class="schedule-grid" *ngIf="schedules.length > 0; else noSchedules">
+    <mat-card
+      *ngFor="let schedule of schedules"
+      class="schedule-item-card highlight">
+      <mat-card-header>
+        <mat-card-title>Schedule #{{ schedule.id }}</mat-card-title>
+        <mat-card-subtitle>{{ formatAvailableDays(schedule.availableDays) }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="schedule-details">
+          <div class="detail-item">
+            <mat-icon>schedule</mat-icon>
+            <span class="detail-label">Start:</span>
+            <span class="detail-value">{{ formatDateTime(schedule.startDateTime) }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>schedule</mat-icon>
+            <span class="detail-label">End:</span>
+            <span class="detail-value">{{ formatDateTime(schedule.endDateTime) }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>person</mat-icon>
+            <span class="detail-label">Veterinarian ID:</span>
+            <span class="detail-value">{{ schedule.veterinarianId }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <ng-template #noSchedules>
+    <div class="no-schedules">
+      <mat-icon class="no-schedules-icon">event_busy</mat-icon>
+      <h3>No Schedules Found</h3>
+      <p *ngIf="veterinarianId; else noSchedulesGeneral">
+        No schedules found for this veterinarian.
+      </p>
+      <ng-template #noSchedulesGeneral>
+        <p>No schedules available at the moment.</p>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>

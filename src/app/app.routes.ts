@@ -18,32 +18,77 @@ import { ReviewsManagementComponent } from "./manage/pages/reviews-management/re
 import { ReviewEditComponent } from "./manage/components/review-edit/review-edit.component";
 import { ReviewCreateComponent } from "./manage/components/review-create/review-create.component";
 import { SignUpAdminComponent } from "./iam/pages/sign-up-admin/sign-up-admin.component";
-import { RoleSelectionComponent} from "./iam/components/role-section/role-section.component";
-import {TariffCreateComponent} from "./manage/components/tariff-create/tariff-create.component";
-import {TariffManagementComponent} from "./manage/pages/tariff-management/tariff-management.component";
-import {TariffEditComponent} from "./manage/components/tariff-edit/tariff-edit.component";
+import { RoleSelectionComponent } from "./iam/components/role-section/role-section.component";
+import { TariffCreateComponent } from "./manage/components/tariff-create/tariff-create.component";
+import { TariffManagementComponent } from "./manage/pages/tariff-management/tariff-management.component";
+import { TariffEditComponent } from "./manage/components/tariff-edit/tariff-edit.component";
+import { VeterinaryManagementComponent } from "./manage/pages/veterinary-management/veterinary-management.component";
+import { ScheduleManagementComponent } from "./manage/pages/schedule-management/schedule-management.component";
+import {RoleGuard} from "./iam/services/role.guard";
+import {AccessDeniedComponent} from "./shared/components/access-denied.component";
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'manage/medicalHistory/:id', component: MedicalHistoryManagementComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/pets', component: PetsManagementComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/pets/edit/:id', component: PetEditComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/clients/:id/add_pet', component: PetCreateComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/clients/add', component: ClientCreateComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/clients/edit/:id', component: ClientEditComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/clients', component: ClientsManagementComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/appointments', component: AppointmentsManagementComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/appointments/add', component: AppointmentCreateComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/appointments/edit/:id', component: AppointmentEditComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/appointments/review/:id', component: ReviewsManagementComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/appointments/add-review/:id', component: ReviewCreateComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/appointments/edit-review/:id', component: ReviewEditComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/tariffs', component: TariffManagementComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/add-tariffs', component: TariffCreateComponent, canActivate: [authenticationGuard] },
-    { path: 'manage/edit-tariff/:id', component: TariffEditComponent, canActivate: [authenticationGuard] },
-    { path: 'sign-in', component: SignInComponent },
-    { path: 'sign-up', component: SignUpComponent },
-    { path: 'sign-up-admin', component: SignUpAdminComponent },
-    { path: 'select-role', component: RoleSelectionComponent },
-    { path: '**', component: PageNotFoundComponent },
+  { path: '', component: HomeComponent },
+
+  // Routes for veterinarians (UserAdmins)
+  {
+    path: 'manage/clients',
+    component: ClientsManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/clients/add',
+    component: ClientCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/veterinarians',
+    component: VeterinaryManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/tariffs',
+    component: TariffManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+
+  // Routes for Pet Owners (Users)
+  {
+    path: 'manage/pets',
+    component: PetsManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/appointments',
+    component: AppointmentsManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+
+  // Shared routes (ambos roles)
+  {
+    path: 'manage/medicalHistory/:id',
+    component: MedicalHistoryManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner', 'veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/appointments/review/:id',
+    component: ReviewsManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner', 'veterinary', 'admin'] }
+  },
+
+  // Public routes
+  { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-up-admin', component: SignUpAdminComponent },
+  { path: 'select-role', component: RoleSelectionComponent },
+  { path: 'access-denied', component: AccessDeniedComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
