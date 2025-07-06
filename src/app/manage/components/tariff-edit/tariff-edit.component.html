@@ -1,0 +1,51 @@
+<div class="tariff-form-container">
+  <h2>Editar servicio</h2>
+
+  <form [formGroup]="tariffForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="serviceName">Servicio</label>
+      <select id="serviceName" formControlName="serviceName">
+        <option value="" disabled>Seleccione un servicio</option>
+        <option *ngFor="let name of serviceNames" [value]="name">
+          {{ getFormattedServiceName(name) }}
+        </option>
+      </select>
+      <div class="error" *ngIf="tariffForm.get('serviceName')?.touched && tariffForm.get('serviceName')?.invalid">
+        Campo requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cost">Costo</label>
+      <input id="cost" type="number" formControlName="cost" />
+      <div class="error" *ngIf="tariffForm.get('cost')?.touched && tariffForm.get('cost')?.invalid">
+        Ingrese un costo válido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="minimumCost">Costo Mínimo</label>
+      <input id="minimumCost" type="number" formControlName="minCost" />
+      <div class="error" *ngIf="tariffForm.get('minCost')?.touched && tariffForm.get('minCost')?.invalid">
+        Ingrese un mínimo válido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="maximumCost">Costo Máximo</label>
+      <input id="maximumCost" type="number" formControlName="maxCost" />
+      <div class="error" *ngIf="tariffForm.get('maxCost')?.touched && tariffForm.get('maxCost')?.invalid">
+        Ingrese un máximo válido.
+      </div>
+    </div>
+
+    <div class="error" *ngIf="isCostRangeInvalid">
+      El costo debe estar entre el mínimo y el máximo.
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" [disabled]="tariffForm.invalid">Actualizar Servicio</button>
+      <button type="button" class="cancel-btn" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

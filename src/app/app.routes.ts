@@ -19,6 +19,9 @@ import { ReviewEditComponent } from "./manage/components/review-edit/review-edit
 import { ReviewCreateComponent } from "./manage/components/review-create/review-create.component";
 import { SignUpAdminComponent } from "./iam/pages/sign-up-admin/sign-up-admin.component";
 import { RoleSelectionComponent} from "./iam/components/role-section/role-section.component";
+import {TariffCreateComponent} from "./manage/components/tariff-create/tariff-create.component";
+import {TariffManagementComponent} from "./manage/pages/tariff-management/tariff-management.component";
+import {TariffEditComponent} from "./manage/components/tariff-edit/tariff-edit.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -35,6 +38,9 @@ export const routes: Routes = [
     { path: 'manage/appointments/review/:id', component: ReviewsManagementComponent, canActivate: [authenticationGuard] },
     { path: 'manage/appointments/add-review/:id', component: ReviewCreateComponent, canActivate: [authenticationGuard] },
     { path: 'manage/appointments/edit-review/:id', component: ReviewEditComponent, canActivate: [authenticationGuard] },
+    { path: 'manage/tariffs', component: TariffManagementComponent, canActivate: [authenticationGuard] },
+    { path: 'manage/add-tariffs', component: TariffCreateComponent, canActivate: [authenticationGuard] },
+    { path: 'manage/edit-tariff/:id', component: TariffEditComponent, canActivate: [authenticationGuard] },
     { path: 'sign-in', component: SignInComponent },
     { path: 'sign-up', component: SignUpComponent },
     { path: 'sign-up-admin', component: SignUpAdminComponent },

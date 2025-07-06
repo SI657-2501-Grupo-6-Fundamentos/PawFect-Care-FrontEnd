@@ -39,7 +39,7 @@ export class SideNavigationBarComponent {
     { path: '/manage/pets', title: 'List pets',icon: 'pets' },
     { path: '/manage/clients', title: 'List clients',icon: 'group' },
     { path: '/manage/appointments', title: 'List appointments',icon: 'event' },
-    //{ path: '/manage/reviews', title: 'List reviews',icon: 'comment' },
+    { path: '/manage/tariffs', title: 'List services',icon: 'inventory ' },
   ];
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
