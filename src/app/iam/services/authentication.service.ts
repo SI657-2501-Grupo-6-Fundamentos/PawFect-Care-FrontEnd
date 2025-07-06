@@ -202,20 +202,20 @@ export class AuthenticationService {
    */
   signInUserAdminWithGoogle(googleToken: string): void {
     // Decode the token to obtain the claims
-    const claims = this.googleTokenService.decodeGoogleToken(googleToken);
+    const claimsAdmin = this.googleTokenService.decodeGoogleToken(googleToken);
 
-    if (!claims) {
+    if (!claimsAdmin) {
       console.error('Unable to decode Google token');
       return;
     }
 
     // Check if the token has expired
-    if (this.googleTokenService.isTokenExpired(claims)) {
+    if (this.googleTokenService.isTokenExpired(claimsAdmin)) {
       console.error('Google token has expired');
       return;
     }
 
-    console.log('Google token claims:', claims);
+    console.log('Google token claims:', claimsAdmin);
 
 
     const googleSignInUserAdminRequest = new GoogleSignInRequest(googleToken);
@@ -229,7 +229,7 @@ export class AuthenticationService {
       }
     ).subscribe({
       next: (response) => {
-        console.log(`Signed in with Google as ${claims.name} with id ${response.id}`);
+        console.log(`Signed in with Google as ${claimsAdmin.name} with id ${response.id}`);
 
         // Create a Veterinary
 
@@ -239,9 +239,9 @@ export class AuthenticationService {
 
         const vetRequest = {
           userId: response.id,
-          fullName: claims.name || `${claims.given_name} ${claims.family_name}`.trim(),
+          fullName: claimsAdmin.name || `${claimsAdmin.given_name} ${claimsAdmin.family_name}`.trim(),
           phoneNumber: 'N/A',
-          email: claims.email || '',
+          email: claimsAdmin.email || '',
           dni: 'N/A',
           speciality: 'GENERAL MEDICINE', // Value
           availableStartTime: startTime.toISOString().slice(0, 19), // Format YYYY-MM-DDTHH:mm:ss
@@ -252,12 +252,12 @@ export class AuthenticationService {
           .subscribe({
             next: () => {
               console.log('Veterinary registered successfully');
-              this.completeGoogleSignIn(response, claims.name);
+              this.completeGoogleSignIn(response, claimsAdmin.name);
             },
             error: (error) => {
               if (error.status === 409) {
                 console.warn('Veterinarian already exists. Continuing login...');
-                this.completeGoogleSignIn(response, claims.name);
+                this.completeGoogleSignIn(response, claimsAdmin.name);
               } else {
                 console.error('Error registering veterinary', error);
                 this.router.navigate(['/sign-in']).then();
@@ -411,7 +411,6 @@ export class GoogleTokenService {
 
       // Parse JSON
       const claims = JSON.parse(decodedPayload) as GoogleTokenClaims;
-
       return claims;
     } catch (error) {
       console.error('Error decoding Google token:', error);

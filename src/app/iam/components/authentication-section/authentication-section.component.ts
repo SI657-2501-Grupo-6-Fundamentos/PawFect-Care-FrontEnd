@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { LanguageSwitcherComponent } from "../../../public/components/language-switcher/language-switcher.component";
 
-
 /**
  * Authentication section component
  */
@@ -21,7 +20,7 @@ import { LanguageSwitcherComponent } from "../../../public/components/language-s
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
-],
+  ],
   templateUrl: './authentication-section.component.html',
   styleUrl: './authentication-section.component.css'
 })
@@ -40,17 +39,17 @@ export class AuthenticationSectionComponent {
   }
 
   /**
-   * Sign In Event Handler
+   * Sign In Event Handler - Navigate to role selection first
    */
   onSignIn() {
-    this.router.navigate(['/sign-in']).then();
+    this.router.navigate(['/select-role']).then();
   }
 
   /**
-   * Sign Up Event Handler
+   * Sign Up Event Handler - Navigate to role selection
    */
   onSignUp() {
-    this.router.navigate(['/sign-up']).then();
+    this.router.navigate(['/select-role']).then();
   }
 
   /**

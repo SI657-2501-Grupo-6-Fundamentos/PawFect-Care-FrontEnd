@@ -9,7 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /**
  * Sign in component
@@ -34,12 +34,22 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
   submitted = false;
   private clientId = '943349664550-d4lnk7sa26hl4n8n0siq13e2n9gq6i3a.apps.googleusercontent.com'; // Replace with your actual client ID
 
+  // Role and method from query params
+  selectedRole: string = '';
+  authMethod: string = '';
+
   /**
    * Constructor
    * @param builder {@link FormBuilder} instance
    * @param authenticationService {@link AuthenticationService} instance
+   * @param route {@link ActivatedRoute} instance
    */
-  constructor(private router: Router, private builder: FormBuilder, private authenticationService: AuthenticationService) {
+  constructor(
+    private router: Router,
+    private builder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute
+  ) {
     super();
   }
 
@@ -55,8 +65,16 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
       password: ['', Validators.required]
     });
 
-    // Initialize Google Sign-In after component loads
-    this.loadGoogleSignIn();
+    // Get query parameters
+    this.route.queryParams.subscribe(params => {
+      this.selectedRole = params['role'] || '';
+      this.authMethod = params['method'] || '';
+
+      // If it's a Google authentication, initialize Google Sign-In
+      if (this.authMethod === 'google') {
+        this.loadGoogleSignIn();
+      }
+    });
   }
 
   /**
@@ -110,8 +128,13 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
     const idToken = response.credential;
     console.log('Google ID Token received:', idToken);
 
-    // Call your authentication service to handle Google sign-in
-    this.authenticationService.signInUserWithGoogle(idToken);
+    // Call the appropriate authentication method based on selected role
+    if (this.selectedRole === 'veterinary') {
+      this.authenticationService.signInUserAdminWithGoogle(idToken);
+    } else {
+      // Default to pet owner (regular user)
+      this.authenticationService.signInUserWithGoogle(idToken);
+    }
   }
 
   /**
@@ -130,6 +153,6 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
   }
 
   navigateToRegister(): void {
-    this.router.navigate(['/sign-up']);
+    this.router.navigate(['/select-role']);
   }
 }

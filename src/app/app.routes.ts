@@ -14,10 +14,11 @@ import { MedicalHistoryManagementComponent } from "./manage/pages/medicalHistory
 import { SignInComponent } from './iam/pages/sign-in/sign-in.component';
 import { SignUpComponent } from './iam/pages/sign-up/sign-up.component';
 import { authenticationGuard } from './iam/services/authentication.guard';
-import {ReviewsManagementComponent} from "./manage/pages/reviews-management/reviews-management.component";
-import {ReviewEditComponent} from "./manage/components/review-edit/review-edit.component";
-import {ReviewCreateComponent} from "./manage/components/review-create/review-create.component";
-import {SignUpAdminComponent} from "./iam/pages/sign-up-admin/sign-up-admin.component";
+import { ReviewsManagementComponent } from "./manage/pages/reviews-management/reviews-management.component";
+import { ReviewEditComponent } from "./manage/components/review-edit/review-edit.component";
+import { ReviewCreateComponent } from "./manage/components/review-create/review-create.component";
+import { SignUpAdminComponent } from "./iam/pages/sign-up-admin/sign-up-admin.component";
+import { RoleSelectionComponent} from "./iam/components/role-section/role-section.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -37,5 +38,6 @@ export const routes: Routes = [
     { path: 'sign-in', component: SignInComponent },
     { path: 'sign-up', component: SignUpComponent },
     { path: 'sign-up-admin', component: SignUpAdminComponent },
+    { path: 'select-role', component: RoleSelectionComponent },
     { path: '**', component: PageNotFoundComponent },
 ];

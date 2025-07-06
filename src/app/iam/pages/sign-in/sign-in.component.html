@@ -22,23 +22,40 @@
 
     <div class="container-actions">
       <button class="button-primary" type="submit"  mat-flat-button>  {{ 'login-container.login.submitButton' | translate }}</button>
-     <!-- <span class="text-center">
-        {{ 'login-container.login.registerPrompt' | translate }}
-      </span>-->
       <button class="button-secondary"  mat-raised-button type="button" (click)="navigateToRegister()"  mat-flat-button> {{ 'login-container.login.registerButton' | translate }}</button>
     </div>
 
-    <!-- Divider -->
-    <div class="divider-container">
-      <div class="divider-line"></div>
-      <span class="divider-text">or</span>
-      <div class="divider-line"></div>
-    </div>
+    <!-- Show Google Sign-In section only if method is 'google' -->
+    @if (authMethod === 'google') {
+      <!-- Divider -->
+      <div class="divider-container">
+        <div class="divider-line"></div>
+        <span class="divider-text">or</span>
+        <div class="divider-line"></div>
+      </div>
 
-    <!-- Google Sign-In Button -->
-    <div class="google-sign-in-container">
-      <div id="googleSignInBtn"></div>
-    </div>
+      <!-- Google Sign-In Button -->
+      <div class="google-sign-in-container">
+        <div id="googleSignInBtn"></div>
+      </div>
+    }
+
+    <!-- Show traditional login options if not Google method -->
+    @if (authMethod !== 'google') {
+      <!-- Divider -->
+      <div class="divider-container">
+        <div class="divider-line"></div>
+        <span class="divider-text">or</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Back to role selection -->
+      <div class="back-to-role-container">
+        <button type="button" mat-stroked-button (click)="navigateToRegister()">
+          Volver a selección de rol
+        </button>
+      </div>
+    }
 
   </form>
 </mat-card>
