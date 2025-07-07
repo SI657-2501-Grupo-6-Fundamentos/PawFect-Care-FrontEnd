@@ -35,7 +35,7 @@ export const routes: Routes = [
     path: 'manage/clients',
     component: ClientsManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
-    data: { roles: ['veterinary', 'admin'] }
+    data: { roles: ['pet-owner'] }
   },
   {
     path: 'manage/clients/add',

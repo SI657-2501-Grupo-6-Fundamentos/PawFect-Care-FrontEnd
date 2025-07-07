@@ -89,7 +89,6 @@ export class AuthenticationService {
     return this.currentUserRoleSubject.value || localStorage.getItem('userRole');
   }
 
-
   /**
    * Gets the current username
    */
@@ -127,6 +126,10 @@ export class AuthenticationService {
             .subscribe({
               next: () => {
                 console.log('Pet owner registered successfully');
+                // Set role as pet-owner during sign-up
+                this.setUserRole('pet-owner');
+                console.log(`User signed up successfully with role pet-owner`);
+
                 this.router.navigate(['/sign-in']).then();
               },
               error: (error) => {
@@ -173,6 +176,10 @@ export class AuthenticationService {
             .subscribe({
               next: () => {
                 console.log('Veterinary registered successfully');
+                // Set role as veterinary during admin sign-up
+                this.setUserRole('veterinary')
+                console.log(`User signed up successfully with role veterinary`);
+
                 this.router.navigate(['/sign-in']).then();
               },
               error: (error) => {
@@ -207,9 +214,14 @@ export class AuthenticationService {
           this.signedInUserName.next(response.userName);
           localStorage.setItem('token', response.token);
 
-          // Set the user's role based on the response
-          const role = (response as any).role || 'pet-owner';
-          this.setUserRole(role);
+          // Get the user's role from localStorage (set during sign-up) or from server response
+          const savedRole = localStorage.getItem('userRole');
+          const role = savedRole || (response as any).role || 'pet-owner';
+
+          // Only set role if it's not already set
+          if (!savedRole) {
+            this.setUserRole(role);
+          }
 
           console.log(`Signed in as ${response.userName} with token ${response.token} and role ${role}`);
 
@@ -269,7 +281,6 @@ export class AuthenticationService {
 
     console.log('Google token claims:', claimsAdmin);
 
-
     const googleSignInUserAdminRequest = new GoogleSignInRequest(googleToken);
 
     this.http.post<SignInResponse>(
@@ -283,11 +294,10 @@ export class AuthenticationService {
       next: (response) => {
         console.log(`Signed in with Google as ${claimsAdmin.name} with id ${response.id}`);
 
-        // Set the role as veterinary
+        // Set the role as veterinary during Google admin sign-up
         this.setUserRole('veterinary');
 
         // Create a Veterinary
-
         const now = new Date();
         const startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0); // 9:00 AM
         const endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 0, 0); // 5:00 PM
@@ -307,12 +317,12 @@ export class AuthenticationService {
           .subscribe({
             next: () => {
               console.log('Veterinary registered successfully');
-              this.completeGoogleSignIn(response, claimsAdmin.name);
+              this.completeGoogleSignIn(response, claimsAdmin.name, 'veterinary');
             },
             error: (error) => {
               if (error.status === 409) {
                 console.warn('Veterinarian already exists. Continuing login...');
-                this.completeGoogleSignIn(response, claimsAdmin.name);
+                this.completeGoogleSignIn(response, claimsAdmin.name, 'veterinary');
               } else {
                 console.error('Error registering veterinary', error);
                 this.router.navigate(['/sign-in']).then();
@@ -353,7 +363,6 @@ export class AuthenticationService {
     }
     console.log('Google token claims:', claims);
 
-
     const googleSignInUserRequest = new GoogleSignInRequest(googleToken);
 
     this.http.post<SignInResponse>(
@@ -367,7 +376,7 @@ export class AuthenticationService {
       next: (response) => {
         console.log(`Signed in with Google as ${claims.name} with id ${response.id}`);
 
-        // Set the role as pet-owner
+        // Set the role as pet-owner during Google user sign-up
         this.setUserRole('pet-owner');
 
         // Create a Pet Owner
@@ -383,12 +392,12 @@ export class AuthenticationService {
           .subscribe({
             next: () => {
               console.log('Pet owner registered successfully');
-              this.completeGoogleSignIn(response, claims.name);
+              this.completeGoogleSignIn(response, claims.name, 'pet-owner');
             },
             error: (error) => {
               if (error.status === 409) {
                 console.warn('Pet owner already exists. Continuing login...');
-                this.completeGoogleSignIn(response, claims.name);
+                this.completeGoogleSignIn(response, claims.name, 'pet-owner');
               } else {
                 console.error('Error registering pet owner', error);
                 this.router.navigate(['/sign-in']).then();
@@ -418,13 +427,14 @@ export class AuthenticationService {
     localStorage.removeItem('userRole');
   }
 
-  private completeGoogleSignIn(response: SignInResponse, name: string, role: string = 'pet-owner'): void {
+  private completeGoogleSignIn(response: SignInResponse, name: string, role: string): void {
     this.signedIn.next(true);
     this.signedInUserId.next(response.id);
     this.signedInUserName.next(name);
     localStorage.setItem('token', response.token);
 
-    // Set the role
+    // Role should already be set during the Google sign-up process
+    // but ensure it's set here as well
     this.setUserRole(role);
 
     console.log(`Authentication completed for ${name} with token ${response.token} and role ${role}`);
@@ -433,7 +443,6 @@ export class AuthenticationService {
     this.redirectAfterLogin(role);
   }
 }
-
 
 /**
  * Google claims with user info
