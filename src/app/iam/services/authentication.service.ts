@@ -235,6 +235,46 @@ export class AuthenticationService {
       });
   }
 
+
+  /**
+   * Signs in a user admin
+   * <p>
+   *   This method sends a sign-in request to the server.
+   *   If the request is successful, the user is signed in and redirected to the home page.
+   *   If the request fails, an error message is logged and the user is redirected to the sign-in page.
+   * </p>
+   * @param signInRequest The {@link SignInRequest} object
+   */
+  signInAdmin(signInRequest: SignInRequest) {
+    return this.http.post<SignInResponse>(`${this.basePath}/iam-service/api/v1/authentication/sign-in-admin`, signInRequest, this.httpOptions)
+      .subscribe({
+        next: (response) => {
+          this.signedIn.next(true);
+          this.signedInUserId.next(response.id);
+          this.signedInUserName.next(response.userName);
+          localStorage.setItem('token', response.token);
+
+          // Get the user's role from localStorage (set during sign-up) or from server response
+          const savedRole = localStorage.getItem('userRole');
+          const role = savedRole || (response as any).role || 'veterinary';
+
+          // Only set role if it's not already set
+          if (!savedRole) {
+            this.setUserRole(role);
+          }
+
+          console.log(`Signed in as ${response.userName} with token ${response.token} and role ${role}`);
+
+          // Redirects by the role
+          this.redirectAfterLogin(role);
+        },
+        error: (error) => {
+          console.error('Error signing in', error);
+          this.router.navigate(['/sign-in-admin']).then();
+        }
+      });
+  }
+
   /**
    * Method to redirect based on role
    * @param userRole

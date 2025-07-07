@@ -26,6 +26,7 @@ import { VeterinaryManagementComponent } from "./manage/pages/veterinary-managem
 import { ScheduleManagementComponent } from "./manage/pages/schedule-management/schedule-management.component";
 import {RoleGuard} from "./iam/services/role.guard";
 import {AccessDeniedComponent} from "./shared/components/access-denied.component";
+import {SignInAdminComponent} from "./iam/pages/sign-in-admin/sign-in-admin.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,7 +36,7 @@ export const routes: Routes = [
     path: 'manage/clients',
     component: ClientsManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
-    data: { roles: ['veterinary', 'admin'] }
+    data: { roles: ['veterinary'] }
   },
   {
     path: 'manage/clients/add',
@@ -61,7 +62,7 @@ export const routes: Routes = [
     path: 'manage/pets',
     component: PetsManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
-    data: { roles: ['pet-owner', 'veterinary' ] }
+    data: { roles: ['pet-owner'] }
   },
   {
     path: 'manage/appointments',
@@ -87,6 +88,7 @@ export const routes: Routes = [
   // Public routes
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-in-admin', component: SignInAdminComponent },
   { path: 'sign-up-admin', component: SignUpAdminComponent },
   { path: 'select-role', component: RoleSelectionComponent },
   { path: 'access-denied', component: AccessDeniedComponent },
