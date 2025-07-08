@@ -1,47 +1,65 @@
 <mat-sidenav-container>
-    <mat-sidenav #drawer fixedInViewport>
-        <div class="header-sidenav">
-            <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
-            <span>
-                Pawfect Care
-            </span>
+  <mat-sidenav #drawer fixedInViewport>
+    <div class="header-sidenav">
+      <a [routerLink]="['/']">
+        <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
+      </a>
+      <span>Pawfect Care</span>
+    </div>
+
+    <mat-nav-list>
+      <!-- Si el usuario está autenticado -->
+      <ng-container *ngIf="isSignedIn; else notSignedIn">
+        <!-- Itera por las opciones ya filtradas según el rol -->
+        <ng-container *ngFor="let option of options">
+          <a
+            class="list-item-nav"
+            mat-list-item
+            [routerLink]="option.path"
+            routerLinkActive="active-link"
+          >
+            <div class="item-nav-wrapper">
+              <mat-icon *ngIf="option.icon" class="menu-icon">{{ option.icon }}</mat-icon>
+              <span>{{ option.title }}</span>
+            </div>
+          </a>
+        </ng-container>
+      </ng-container>
+
+      <!-- Si el usuario no está autenticado -->
+      <ng-template #notSignedIn>
+        <app-authentication-section></app-authentication-section>
+      </ng-template>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <div class="logo-container">
+        <button
+          mat-icon-button
+          (click)="drawer.toggle()"
+          type="button"
+          aria-label="Sidenav toggle icon"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a [routerLink]="['/']">
+          <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
+        </a>
+        <div class="logo-text">
+          <h2>Pawfect Care</h2>
+          <span>Take control of your veterinary practice.</span>
         </div>
+      </div>
+      <div class="left-buttons">
+        <app-authentication-section></app-authentication-section>
+        <app-language-switcher></app-language-switcher>
+      </div>
+    </mat-toolbar>
 
-        <mat-nav-list>
-            @if (isSignedIn) {
-            <ng-container *ngFor="let option of options">
-                <a class="list-item-nav" mat-list-item [routerLink]="option.path" routerLinkActive="active-link">
-                    <div class="item-nav-wrapper">
-                        <mat-icon *ngIf="option.icon" class="menu-icon">{{ option.icon }}</mat-icon>
-                        <span> {{ option.title}}</span>
-                    </div>
-            
-                </a>
-            </ng-container>
-            } @else {
-            <app-authentication-section></app-authentication-section>
-            }
-
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar>
-            <div class="logo-container">
-                <button mat-icon-button (click)="drawer.toggle()" type="button" aria-label="Sidenav toggle icon">
-                    <mat-icon>menu</mat-icon>
-                </button>
-                <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
-                <div class="logo-text">
-                    <h2>Pawfect Care</h2>
-                    <span>Take control of your veterinary practice.</span>
-                </div>
-            </div>
-            <div class="left-buttons">
-                <app-authentication-section></app-authentication-section>
-                <app-language-switcher></app-language-switcher>
-            </div>
-        </mat-toolbar>
-        <div class="router-container"><router-outlet /></div>
-        <!-- <router-outlet /> -->
-    </mat-sidenav-content>
+    <div class="router-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

@@ -117,8 +117,3 @@ mat-error {
   font-size: 14px;
   font-weight: 500;
 }
-
-.navigation-actions {
-  display: flex;
-  justify-content: center;
-}

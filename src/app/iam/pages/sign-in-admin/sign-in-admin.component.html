@@ -1,0 +1,68 @@
+<mat-card>
+  <h2>{{ 'login-container.login.title' | translate }}</h2>
+
+  <!-- Role indicator -->
+  <div class="role-indicator">
+    <p *ngIf="selectedRole === 'pet-owner'">
+      <mat-icon>pets</mat-icon>
+      Iniciar sesión como Dueño de Mascota
+    </p>
+    <p *ngIf="selectedRole === 'veterinary'">
+      <mat-icon>medical_services</mat-icon>
+      Iniciar sesión como Veterinario
+    </p>
+  </div>
+
+  <!-- Traditional Login Form -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>User Name</mat-label>
+      <input matInput placeholder="User Name" id="userName" name="userName" required formControlName="userName" />
+      @if (isInvalidControl(form, 'userName')) {
+        <mat-error>{{ errorMessagesForControl(form, 'userName')}}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>{{ 'login-container.login.passwordPlaceholder' | translate }}</mat-label>
+      <input matInput placeholder="Password" id="password" name="password" type="password" required
+             formControlName="password" />
+      @if (isInvalidControl(form, 'password')) {
+        <mat-error>{{ errorMessagesForControl(form, 'password')}}</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="container-actions">
+      <button class="button-primary" type="submit" mat-flat-button>
+        {{ 'login-container.login.submitButton' | translate }}
+      </button>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+      <span class="divider-text">o</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Google Sign-In Button -->
+    <div class="google-sign-in-container">
+      <div id="googleSignInBtn"></div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+      <span class="divider-text">o</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="navigation-actions">
+      <button type="button" mat-stroked-button (click)="navigateToRegister()">
+        Volver a selección de rol
+      </button>
+    </div>
+
+  </form>
+</mat-card>

@@ -62,7 +62,7 @@ export class RoleSelectionComponent {
    * Navigate to veterinary sign in
    */
   onSignInVeterinary() {
-    this.router.navigate(['/sign-in'], {
+    this.router.navigate(['/sign-in-admin'], {
       queryParams: { role: 'veterinary' }
     });
   }
