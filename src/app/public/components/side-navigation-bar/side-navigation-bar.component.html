@@ -1,7 +1,9 @@
 <mat-sidenav-container>
   <mat-sidenav #drawer fixedInViewport>
     <div class="header-sidenav">
-      <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
+      <a [routerLink]="['/']">
+        <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
+      </a>
       <span>Pawfect Care</span>
     </div>
 
@@ -42,7 +44,9 @@
         >
           <mat-icon>menu</mat-icon>
         </button>
-        <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
+        <a [routerLink]="['/']">
+          <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
+        </a>
         <div class="logo-text">
           <h2>Pawfect Care</h2>
           <span>Take control of your veterinary practice.</span>
