@@ -462,7 +462,7 @@ export class AuthenticationService {
     this.signedInUserId.next(0);
     this.signedInUserName.next('');
     localStorage.removeItem('token');
-    this.router.navigate(['/sign-in']).then();
+    this.router.navigate(['/']).then();
     this.currentUserRoleSubject.next(null);
     localStorage.removeItem('userRole');
   }
