@@ -168,9 +168,10 @@
                 {{ getFormattedDayName(day) }}
               </mat-option>
             </mat-select>
+            <!--
             <mat-error *ngIf="scheduleForm.get('availableDays')?.hasError('required')">
               Campo requerido
-            </mat-error>
+            </mat-error>-->
           </mat-form-field>
         </div>
 
@@ -178,9 +179,10 @@
           <mat-form-field appearance="outline">
             <mat-label>Fecha y Hora de Inicio</mat-label>
             <input matInput type="datetime-local" formControlName="startDateTime" />
+            <!--
             <mat-error *ngIf="scheduleForm.get('startDateTime')?.hasError('required')">
               Campo requerido
-            </mat-error>
+            </mat-error>-->
           </mat-form-field>
         </div>
 
@@ -188,9 +190,9 @@
           <mat-form-field appearance="outline">
             <mat-label>Fecha y Hora de Fin</mat-label>
             <input matInput type="datetime-local" formControlName="endDateTime" />
-            <mat-error *ngIf="scheduleForm.get('endDateTime')?.hasError('required')">
+           <!-- <mat-error *ngIf="scheduleForm.get('endDateTime')?.hasError('required')">
               Campo requerido
-            </mat-error>
+            </mat-error>-->
           </mat-form-field>
         </div>
 
@@ -198,12 +200,13 @@
           <mat-form-field appearance="outline">
             <mat-label>ID del Veterinario</mat-label>
             <input matInput type="number" formControlName="veterinarianId" min="1" />
-            <mat-error *ngIf="scheduleForm.get('veterinarianId')?.hasError('required')">
+            <!--<mat-error *ngIf="scheduleForm.get('veterinarianId')?.hasError('required')">
               Campo requerido
-            </mat-error>
+            </mat-error>-->
+            <!--
             <mat-error *ngIf="scheduleForm.get('veterinarianId')?.hasError('min')">
               El ID debe ser mayor a 0
-            </mat-error>
+            </mat-error>-->
           </mat-form-field>
         </div>
 

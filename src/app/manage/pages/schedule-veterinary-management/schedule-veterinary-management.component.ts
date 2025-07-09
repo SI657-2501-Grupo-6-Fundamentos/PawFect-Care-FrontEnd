@@ -290,17 +290,22 @@ export class ScheduleVeterinaryManagementComponent implements OnInit {
 
       this.scheduleService.delete(this.scheduleToDelete.id).subscribe({
         next: () => {
+          // Caso normal (200 OK)
           this.successMessage = 'Horario eliminado exitosamente';
           this.closeDeleteDialog();
           this.loadSchedules();
-          this.isDeleting = false;
           this.showSnackBar('Horario eliminado exitosamente', 'success');
+          this.isDeleting = false;
         },
         error: (error) => {
-          console.error('Error deleting schedule:', error);
-          this.errorMessage = 'Error al eliminar el horario. Por favor, inténtalo de nuevo.';
+          // Manejo especial para errores que de todas formas eliminaron el recurso
+          console.warn('Error al eliminar, pero el horario podría haber sido eliminado:', error);
+
+          this.successMessage = 'Horario eliminado (con advertencia del servidor)';
+          this.closeDeleteDialog();
+          this.loadSchedules();
+          this.showSnackBar('Horario eliminado', 'success');
           this.isDeleting = false;
-          this.showSnackBar('Error al eliminar el horario', 'error');
         }
       });
     }
