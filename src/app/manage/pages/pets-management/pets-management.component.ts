@@ -98,10 +98,6 @@ export class PetsManagementComponent implements OnInit {
   navigateToAddClient() {
     this.router.navigate(['/manage/clients/add']);
   }
-
-  navigAddPetToClientateToAddPet() {
-    this.router.navigate(['/manage/clients/add']);
-  }
   navigateToEditPet(idPet: number) {
     this.router.navigate([`/manage/pets/edit/${idPet}`]);
   }
