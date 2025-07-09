@@ -67,6 +67,7 @@ export class SideNavigationBarComponent {
     { path: '/manage/clients/add', title: 'Add Client', icon: 'person_add', roles: ['veterinary'] },
     { path: '/manage/veterinarians', title: 'List Veterinarians', icon: 'local_hospital', roles: ['veterinary'] },
     { path: '/manage/tariffs', title: 'List Services', icon: 'inventory', roles: ['veterinary'] },
+    { path: 'manage/veterinarians/schedules', title: 'Schedules', icon: 'schedule', roles: ['veterinary'] },
 
     // User routes
     { path: '/manage/pets', title: 'My Pets', icon: 'pets', roles: ['pet-owner'] },

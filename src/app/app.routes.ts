@@ -27,6 +27,9 @@ import { ScheduleManagementComponent } from "./manage/pages/schedule-management/
 import {RoleGuard} from "./iam/services/role.guard";
 import {AccessDeniedComponent} from "./shared/components/access-denied.component";
 import {SignInAdminComponent} from "./iam/pages/sign-in-admin/sign-in-admin.component";
+import {
+  ScheduleVeterinaryManagementComponent
+} from "./manage/pages/schedule-veterinary-management/schedule-veterinary-management.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -54,6 +57,12 @@ export const routes: Routes = [
   {
     path: 'manage/tariffs',
     component: TariffManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/veterinarians/schedules',
+    component: ScheduleVeterinaryManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
@@ -134,7 +143,7 @@ export const routes: Routes = [
     data: { roles: ['pet-owner', 'admin'] }
   },
   {
-    path: 'manage/veterinarians/schedules/:id',
+    path: 'manage/schedules/:id',
     component: ScheduleManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
