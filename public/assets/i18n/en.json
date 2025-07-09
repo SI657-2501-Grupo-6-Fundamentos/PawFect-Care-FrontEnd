@@ -255,6 +255,9 @@
   "role": {
     "sectionTitleH2": "Select your role",
     "sectionTitleLine": "Choose the type of account you want to create",
+    "back": "Back to role selection",
+    "log-as-veterinary": "Log in as Veterinarian",
+    "log-as-pet-owner": "Log in as Pet Owner",
     "petOwnerCard": {
       "title": "Pet Owner",
       "description": "To take care of your pets",
@@ -273,6 +276,7 @@
     },
     "signUpButton": "Sign Up",
     "signInButton": "Sign In",
-    "returnToHome": "Return to Home"
+    "returnToHome": "Return to Home",
+    "userNameLabel": "Username"
   }
 }

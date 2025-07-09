@@ -71,6 +71,7 @@ export class SideNavigationBarComponent {
     // User routes
     { path: '/manage/pets', title: 'My Pets', icon: 'pets', roles: ['pet-owner'] },
     { path: '/manage/appointments', title: 'Appointments', icon: 'event', roles: ['pet-owner'] },
+    { path: '/manage/schedules', title: 'Veterinarian Schedules', icon: 'schedule', roles: ['pet-owner'] },
 
     // Shared
     { path: '/manage/medicalHistory/:id', title: 'Medical History', icon: 'history', roles: ['pet-owner', 'veterinary'] },

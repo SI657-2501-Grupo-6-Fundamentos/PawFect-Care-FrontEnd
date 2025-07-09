@@ -44,6 +44,13 @@ export const routes: Routes = [
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
+  // Falta clients edit que se vuelva profile update del pet owner
+  {
+    path: 'manage/clients/edit/:id',
+    component: ClientEditComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
   {
     path: 'manage/veterinarians',
     component: VeterinaryManagementComponent,
@@ -56,6 +63,18 @@ export const routes: Routes = [
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
+  {
+    path: 'manage/tariffs/add',
+    component: TariffCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/tariffs/edit/:id',
+    component: TariffEditComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
 
   // Routes for Pet Owners (Users)
   {
@@ -65,8 +84,32 @@ export const routes: Routes = [
     data: { roles: ['pet-owner'] }
   },
   {
+    path: 'manage/pets/add',
+    component: PetCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/pets/edit/:id',
+    component: PetEditComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
     path: 'manage/appointments',
     component: AppointmentsManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/appointments/add',
+    component: AppointmentCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/appointments/edit/:id',
+    component: AppointmentEditComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
   },
@@ -83,6 +126,32 @@ export const routes: Routes = [
     component: ReviewsManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner', 'veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/appointments/add-review/:id',
+    component: ReviewCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner', 'veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/reviews/edit/:id',
+    component: ReviewEditComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner', 'admin'] }
+  },
+  {
+    path: 'manage/veterinarians/schedules/:id',
+    component: ScheduleManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+
+  //All Schedules of veterinarians
+  {
+    path: 'manage/schedules',
+    component: ScheduleManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
   },
 
   // Public routes

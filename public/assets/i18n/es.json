@@ -253,6 +253,9 @@
   "role": {
     "sectionTitleH2": "Selecciona tu rol",
     "sectionTitleLine": "Elige el tipo de cuenta que deseas crear",
+    "back": "Volver a selección de rol",
+    "log-as-veterinary": "Iniciar sesión como Veterinario",
+    "log-as-pet-owner": "Iniciar sesión como Dueño de Mascota",
     "petOwnerCard": {
       "title": "Dueño de Mascota",
       "description": "Para cuidar de tus mascotas",
@@ -271,7 +274,8 @@
     },
     "signUpButton": "Registrarse",
     "signInButton": "Iniciar Sesión",
-    "returnToHome": "Volver al inicio"
+    "returnToHome": "Volver al inicio",
+    "userNameLabel": "Nombre de usuario"
   }
 }
 

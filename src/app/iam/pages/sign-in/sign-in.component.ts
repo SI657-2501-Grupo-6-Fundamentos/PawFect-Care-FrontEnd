@@ -110,10 +110,11 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
     google.accounts.id.renderButton(
       document.getElementById("googleSignInBtn"),
       {
-        theme: "outline",
+        theme: "filled_black",
+        type: "standard",
         size: "large",
-        width: "100%",
-        text: "signin_with"
+        shape: "pill",
+        width: 355
       }
     );
   }
