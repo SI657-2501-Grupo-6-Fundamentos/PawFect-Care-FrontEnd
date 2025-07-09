@@ -172,7 +172,20 @@
     "petLabel": "Select your pet",
     "noSelectedPet": "No selected pet",
     "addButton": "Add",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "tariffLabel": "Select a tariff",
+    "noSelectedTariff": "No selected tariff",
+    "registrationDateLabel": "Enter your start date",
+    "veterinarianLabel": "Select a Veterinarian",
+    "noSelectedVeterinarian": "No selected Veterinarian",
+    "status": {
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "in_progress": "In Progress",
+      "cancelled": "Cancelled"
+    },
+    "searchByName": "Search",
+    "searchPlaceholder": "Search"
   },
   "editAppointment": {
     "appointmentName": "Edit appointment name",

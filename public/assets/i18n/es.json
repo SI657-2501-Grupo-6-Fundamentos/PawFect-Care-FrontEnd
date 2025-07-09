@@ -170,7 +170,20 @@
     "petLabel": "Selecciona tu mascota",
     "noSelectedPet": "No se seleccionó mascota",
     "addButton": "Agregar",
-    "cancelButton": "Cancelar"
+    "cancelButton": "Cancelar",
+    "tariffLabel": "Selecciona una tarifa",
+    "noSelectedTariff": "Tarifa no seleccionada",
+    "registrationDateLabel": "Ingresa una fecha limite de inicio",
+    "veterinarianLabel": "Selecciona un veterinario",
+    "noSelectedVeterinarian": "Veterinario no seleccionado",
+    "status": {
+      "scheduled": "Pendiente",
+      "completed": "Completado",
+      "in_progress": "En proceso",
+      "cancelled": "Cancelado"
+    },
+    "searchByName": "Buscar",
+    "searchPlaceholder": "Buscar"
   },
   "editAppointment": {
     "appointmentName": "Editar nombre de la cita",
