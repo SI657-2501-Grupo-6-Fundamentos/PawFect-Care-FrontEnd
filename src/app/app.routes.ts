@@ -119,12 +119,6 @@ export const routes: Routes = [
 
   // Shared routes (ambos roles)
   {
-    path: 'manage/medicalHistory/:id',
-    component: MedicalHistoryManagementComponent,
-    canActivate: [authenticationGuard, RoleGuard],
-    data: { roles: ['pet-owner', 'veterinary', 'admin'] }
-  },
-  {
     path: 'manage/appointments/review/:id',
     component: ReviewsManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],

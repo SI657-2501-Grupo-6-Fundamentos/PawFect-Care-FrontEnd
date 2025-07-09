@@ -18,6 +18,7 @@ import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Schedule } from '../../model/schedule.entity';
 import { ScheduleService } from '../../services/schedule.service';
+import {AuthenticationService} from "../../../iam/services/authentication.service";
 
 @Component({
   selector: 'app-schedule-veterinary-management',
@@ -87,7 +88,8 @@ export class ScheduleVeterinaryManagementComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthenticationService
   ) {
     this.initializeForm();
   }
@@ -191,8 +193,15 @@ export class ScheduleVeterinaryManagementComponent implements OnInit {
     this.isEditMode = false;
     this.scheduleToEdit = null;
     this.resetForm();
+
+    // ✅ Setear automáticamente el ID del veterinario autenticado
+    this.authService.currentUserId.subscribe(userId => {
+      this.scheduleForm.patchValue({ veterinarianId: userId });
+    });
+
     this.showDialog = true;
   }
+
 
   editSchedule(schedule: Schedule): void {
     this.isEditMode = true;

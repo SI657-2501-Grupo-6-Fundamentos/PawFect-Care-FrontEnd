@@ -196,20 +196,6 @@
           </mat-form-field>
         </div>
 
-        <div class="form-group">
-          <mat-form-field appearance="outline">
-            <mat-label>ID del Veterinario</mat-label>
-            <input matInput type="number" formControlName="veterinarianId" min="1" />
-            <!--<mat-error *ngIf="scheduleForm.get('veterinarianId')?.hasError('required')">
-              Campo requerido
-            </mat-error>-->
-            <!--
-            <mat-error *ngIf="scheduleForm.get('veterinarianId')?.hasError('min')">
-              El ID debe ser mayor a 0
-            </mat-error>-->
-          </mat-form-field>
-        </div>
-
         <div class="form-error" *ngIf="isDateRangeInvalid">
           <mat-icon>error</mat-icon>
           La fecha y hora de inicio debe ser anterior a la fecha y hora de fin.
