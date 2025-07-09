@@ -38,13 +38,6 @@ export const routes: Routes = [
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary'] }
   },
-  //Make Global to renzo view
-  {
-    path: 'manage/clients/add',
-    component: ClientCreateComponent,
-    canActivate: [authenticationGuard, RoleGuard],
-    data: { roles: ['veterinary', 'admin','pet-owner'] }
-  },
   // Falta clients edit que se vuelva profile update del pet owner
   {
     path: 'manage/clients/edit/:id',

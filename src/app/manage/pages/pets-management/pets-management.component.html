@@ -5,12 +5,10 @@
             <mat-label>Search pets</mat-label>
             <input matInput [(ngModel)]="searchQuery" (input)="applyFilter()" matInput placeholder="Search by name">
         </mat-form-field>
-        <button class="button-primary button-add" type="button" (click)="navigateToAddClient()"
+        <button class="button-primary button-add" type="button" (click)="navigateToAddPet()"
             mat-flat-button>{{'pets1.home.button' |
             translate}}</button>
     </div>
-
-
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
         <ng-container matColumnDef="id">

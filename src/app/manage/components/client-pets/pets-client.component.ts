@@ -81,7 +81,6 @@ export class PetsClientComponent implements OnInit {
     this.getAllPetsByOwnerId();
   }
 
-
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
