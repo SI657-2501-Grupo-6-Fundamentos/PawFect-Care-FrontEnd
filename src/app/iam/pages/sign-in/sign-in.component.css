@@ -1,7 +1,7 @@
 /* Título principal con efectos modernos */
 h2 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 2.5rem;
   font-weight: 700;
   background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
@@ -28,11 +28,11 @@ h2::after {
 mat-card {
   min-width: 450px;
   max-width: 500px;
-  padding: 3rem;
+  padding: 1rem;
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.1),
     0 8px 16px rgba(0, 0, 0, 0.06);
-  border-radius: 24px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -64,7 +64,7 @@ mat-card:hover {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 /* Campos del formulario */
@@ -91,7 +91,7 @@ mat-card:hover {
   font-size: 1.1rem;
   border: none;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+  box-shadow: 0 8px 12px rgba(255, 140, 0, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -126,7 +126,7 @@ mat-card:hover {
 
 /* Mensaje de registro */
 .register-prompt {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   text-align: center;
   color: #666;
   font-size: 1rem;
@@ -147,7 +147,7 @@ mat-card:hover {
   overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 .register-prompt button:hover {
@@ -155,7 +155,7 @@ mat-card:hover {
   background: rgba(255, 140, 0, 0.1);
   border-color: #ff8c00;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(255, 140, 0, 0.2);
+  box-shadow: 0 8px 12px rgba(255, 140, 0, 0.2);
 }
 
 .register-prompt button::before {
@@ -239,12 +239,12 @@ mat-error::before {
   color: white;
   border: none;
   border-radius: 16px;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+  box-shadow: 0 8px 12px rgba(255, 140, 0, 0.3);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
@@ -263,7 +263,7 @@ mat-error::before {
   background: transparent;
   border: 2px solid rgba(255, 140, 0, 0.3);
   border-radius: 16px;
-  padding: 0.875rem 2rem;
+  padding: 0.875rem 1rem;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
@@ -278,20 +278,20 @@ mat-error::before {
   background: rgba(255, 140, 0, 0.1);
   border-color: #ff8c00;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(255, 140, 0, 0.2);
+  box-shadow: 0 8px 12px rgba(255, 140, 0, 0.2);
 }
 
 /* Contenedor de acciones */
 .container-actions {
-  padding: 1.5rem;
-  gap: 1.5rem;
+  padding: 1rem;
+  gap: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  margin-top: 2rem;
+  box-shadow: 0 8px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
 }
 
 /* Texto centrado */
@@ -305,14 +305,16 @@ mat-error::before {
 
 /* Contenedor Google Sign-In */
 .google-sign-in-container {
-  width: 100%;
-  margin-bottom: 1.5rem;
+  width: 15rem;
+  margin-bottom: 1rem;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: left;
 }
 
 #googleSignInBtn {
-  width: 100% !important;
+  width: 1500px;
+  padding: 0.875rem 1.5rem;
   border-radius: 16px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -320,14 +322,14 @@ mat-error::before {
 
 #googleSignInBtn:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Divisor moderno */
 .divider-container {
   display: flex;
   align-items: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
   width: 100%;
   position: relative;
 }
@@ -351,7 +353,7 @@ mat-error::before {
 }
 
 .divider-text {
-  margin: 0 2rem;
+  margin: 0 1rem;
   color: #777;
   font-size: 0.875rem;
   font-weight: 600;
@@ -369,7 +371,7 @@ mat-error::before {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 /* Animaciones de entrada */
@@ -424,12 +426,12 @@ mat-card {
 @media (max-width: 768px) {
   mat-card {
     min-width: 300px;
-    padding: 2rem;
+    padding: 1rem;
     margin: 1rem;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .container-actions {
@@ -446,7 +448,7 @@ mat-card {
 @media (max-width: 480px) {
   mat-card {
     min-width: 280px;
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   h2 {
@@ -458,6 +460,6 @@ mat-card {
   .button-primary,
   .button-secondary {
     font-size: 0.9rem;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1rem;
   }
 }
