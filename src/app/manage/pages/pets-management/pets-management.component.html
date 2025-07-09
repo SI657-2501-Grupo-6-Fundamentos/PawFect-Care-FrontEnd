@@ -1,62 +1,63 @@
 <div class="pet-list">
-    <h2>{{'pets.home.title' | translate}}</h2>
-    <div class="header-actions">
-        <mat-form-field class="search-full-width">
-            <mat-label>Search pets</mat-label>
-            <input matInput [(ngModel)]="searchQuery" (input)="applyFilter()" matInput placeholder="Search by name">
-        </mat-form-field>
-        <button class="button-primary button-add" type="button" (click)="navigateToAddPet()"
-            mat-flat-button>{{'pets1.home.button' |
-            translate}}</button>
-    </div>
+  <h2>{{'pets.home.title' | translate}}</h2>
+  <div class="header-actions">
+    <mat-form-field class="search-full-width">
+      <mat-label>Search pets</mat-label>
+      <input matInput [(ngModel)]="searchQuery" (input)="applyFilter()" matInput placeholder="Search by name">
+    </mat-form-field>
+  </div>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Id">Id</th>
-            <td mat-cell *matCellDef="let pet">{{pet.id}}</td>
-        </ng-container>
-        <ng-container matColumnDef="petName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Name">Pet Name</th>
-            <td mat-cell *matCellDef="let pet">{{ pet.petName }}</td>
-        </ng-container>
-        <ng-container matColumnDef="birthDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Date">Birth Date</th>
-            <td mat-cell *matCellDef="let pet">{{ pet.birthDate }}</td>
-        </ng-container>
-        <ng-container matColumnDef="registrationDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Registration">
-                Registration Date</th>
-            <td mat-cell *matCellDef="let pet">{{ pet.registrationDate }}</td>
-        </ng-container>
-        <ng-container matColumnDef="animalType">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Type">Animal Type
-          </th>
-          <td mat-cell *matCellDef="let pet">{{ pet.animalType }}</td>
-        </ng-container>
-        <ng-container matColumnDef="animalBreed">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Breed">Animal Breed
-            </th>
-            <td mat-cell *matCellDef="let pet">{{ pet.animalBreed }}</td>
-        </ng-container>
-        <ng-container matColumnDef="petGender">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Gender">Pet's Gender
-            </th>
-            <td mat-cell *matCellDef="let pet">{{ pet.petGender }}</td>
-        </ng-container>
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Actions">Actions</th>
-            <td mat-cell *matCellDef="let pet">
-                <div class="container-actions">
-                    <button class="button-primary" (click)="navigateToEditPet(pet.id)" mat-flat-button>{{'pets.home.buttons.edit' |
-                        translate}}</button>
-                    <button class="button-secondary" (click)="navigateToMedicalHistory(pet.medicalHistoryId)"
-                        mat-raised-button>{{'pets.home.buttons.history' | translate}}</button>
-                </div>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-    </table>
-    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
-
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Id">Id</th>
+      <td mat-cell *matCellDef="let pet">{{pet.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="petName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Name">Pet Name</th>
+      <td mat-cell *matCellDef="let pet">{{ pet.petName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="birthDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Date">Birth Date</th>
+      <td mat-cell *matCellDef="let pet">{{ pet.birthDate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="registrationDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Registration">
+        Registration Date</th>
+      <td mat-cell *matCellDef="let pet">{{ pet.registrationDate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="animalType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Type">Animal Type
+      </th>
+      <td mat-cell *matCellDef="let pet">{{ pet.animalType }}</td>
+    </ng-container>
+    <ng-container matColumnDef="animalBreed">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Breed">Animal Breed
+      </th>
+      <td mat-cell *matCellDef="let pet">{{ pet.animalBreed }}</td>
+    </ng-container>
+    <ng-container matColumnDef="petGender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Gender">Pet's Gender
+      </th>
+      <td mat-cell *matCellDef="let pet">{{ pet.petGender }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Actions">Actions</th>
+      <td mat-cell *matCellDef="let pet">
+        <div class="container-actions">
+          <button class="button-primary" (click)="navigateToAddPet(pet.ownerId)" mat-flat-button>
+            {{'pets1.home.button' |
+            translate}}
+          </button>
+          <button class="button-primary" (click)="navigateToEditPet(pet.id)" mat-flat-button>
+            {{'pets.home.buttons.edit' | translate}}
+          </button>
+          <button class="button-secondary" (click)="navigateToMedicalHistory(pet.medicalHistoryId)"
+                  mat-raised-button>{{'pets.home.buttons.history' | translate}}</button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
 </div>

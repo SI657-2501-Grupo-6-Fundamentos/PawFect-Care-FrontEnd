@@ -45,7 +45,7 @@ mat-toolbar {
 
 .list-item-nav{
   margin-bottom: 0.5rem;
- 
+
 }
 .item-nav-wrapper{
   display: flex;
@@ -106,7 +106,7 @@ mat-stroked-button:hover {
   padding: 0.5rem;
 
 }
-.header-sidenav span{ 
+.header-sidenav span{
   font-size: 1.5rem;
   font-weight: 500;
 
