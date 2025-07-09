@@ -11,8 +11,14 @@ export class PetsService extends BaseService<Pet>{
     super();
     this.resourceEndPoint = '/pet-service/api/v1/pets';
   }
-  public getPetsByOwnerId(ownerId: number): Observable<Pet[]> {
+  /*public getPetsByOwnerId(ownerId: number): Observable<Pet[]> {
     const url = `${this.basePath}pet-service/api/v1/owners/${ownerId}/pets`;
+    return this.http.get<Pet[]>(url, this.httpOptions);
+  }*/
+
+  public getPetsByOwnerId(ownerId: number): Observable<Pet[]> {
+    const url = `${this.basePath}/pet-service/api/v1/pet-owners/${ownerId}/pets`;
+    console.log('GET URL:', url);  // Verifica que esté bien formada
     return this.http.get<Pet[]>(url, this.httpOptions);
   }
 }

@@ -1,78 +1,320 @@
-/* Contenedor principal del formulario */
-
-/* Título */
+/* Título principal con gradiente y efectos modernos */
 h2 {
   text-align: center;
-  font-size: 2.5rem;
-  /* Naranja pastel */
-  margin-bottom: 20px;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
   text-transform: uppercase;
-  font-weight: bold;
+  letter-spacing: 0.1rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #ff8c42, #ff6b35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  animation: fadeInDown 0.8s ease-out;
 }
 
-/* Estilo para el formulario */
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff8c42, #ff6b35);
+  border-radius: 2px;
+  animation: expandWidth 1s ease-out 0.5s both;
+}
+
+/* Contenedor del formulario con glassmorphism sutil */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.5rem;
   min-width: 520px;
-  padding: 2rem;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  /* Espaciado entre los campos */
+  padding: 2.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.6s ease-out;
 }
 
-/* Estilo para los campos de formulario */
+.form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff8c42, #ff6b35, #ff8c42);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Campos del formulario con efectos modernos */
 mat-form-field {
   width: 100%;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+mat-form-field:hover {
+  transform: translateY(-2px);
 }
 
 mat-form-field mat-label {
-  color: #333;
-  /* Color oscuro para las etiquetas */
+  color: #4a4a4a;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
+mat-form-field.mat-focused mat-label {
+  color: #ff6b35;
+}
 
+/* Estilo para inputs personalizados */
+.mat-form-field .mat-input-element {
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 107, 53, 0.15);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.7);
+}
 
-/* Estilo para el toggle de "Is Medical" */
+.mat-form-field .mat-input-element:focus {
+  outline: none;
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Toggle switch mejorado */
 mat-slide-toggle {
-  margin: 10px 0;
+  margin: 1rem 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+mat-slide-toggle:hover {
+  transform: translateX(4px);
+}
 
-.button-primary{
-  background-color: orange;
-  min-width: 120px;
+mat-slide-toggle .mat-slide-toggle-label {
+  color: #4a4a4a;
+  font-weight: 500;
+  margin-left: 8px;
 }
-.button-secondary:hover{
-background-color: rgba(255, 166, 0, 0.116);
+
+/* Botones con diseño moderno */
+.button-primary {
+  background: linear-gradient(135deg, #ff8c42, #ff6b35);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  min-width: 140px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.button-secondary{
-  color: orange;
-  min-width: 120px;
+
+.button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
 }
-.container-actions{
-  padding: 1rem;
-  gap: 1rem;
-  display:flex;
+
+.button-primary:hover::before {
+  left: 100%;
+}
+
+.button-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.35);
+}
+
+.button-primary:active {
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background: transparent;
+  color: #ff6b35;
+  border: 2px solid #ff6b35;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  min-width: 140px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.button-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #ff8c42, #ff6b35);
+  transition: width 0.4s ease;
+  z-index: -1;
+}
+
+.button-secondary:hover {
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+  border-color: transparent;
+}
+
+.button-secondary:hover::before {
+  width: 100%;
+}
+
+/* Contenedor de acciones mejorado */
+.container-actions {
+  padding: 1.5rem 0;
+  gap: 1.5rem;
+  display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-
-/* Responsividad */
-@media (max-width: 768px) {
-  .form-section {
-    padding: 1rem;
+/* Animaciones modernas */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+/* Efectos de entrada escalonados */
+mat-form-field:nth-child(1) { animation: slideInUp 0.6s ease-out 0.1s both; }
+mat-form-field:nth-child(2) { animation: slideInUp 0.6s ease-out 0.2s both; }
+mat-form-field:nth-child(3) { animation: slideInUp 0.6s ease-out 0.3s both; }
+mat-form-field:nth-child(4) { animation: slideInUp 0.6s ease-out 0.4s both; }
+mat-slide-toggle { animation: slideInUp 0.6s ease-out 0.5s both; }
+.container-actions { animation: slideInUp 0.6s ease-out 0.6s both; }
+
+/* Responsividad mejorada */
+@media (max-width: 768px) {
   .form {
-    gap: 12px;
-    /* Reducir el espacio entre los campos en pantallas pequeñas */
+    min-width: 90%;
+    padding: 2rem;
+    gap: 1.2rem;
+    margin: 1rem;
+    border-radius: 12px;
   }
 
   h2 {
     font-size: 2rem;
-    /* Reducir tamaño de fuente en pantallas pequeñas */
+    margin-bottom: 1.5rem;
   }
+
+  h2::after {
+    width: 60px;
+  }
+
+  .container-actions {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .button-primary,
+  .button-secondary {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .button-primary,
+  .button-secondary {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Efectos de focus mejorados */
+.form:focus-within {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Micro-interacciones */
+.form > * {
+  transition: all 0.3s ease;
+}
+
+.form > *:hover {
+  transform: translateX(2px);
 }

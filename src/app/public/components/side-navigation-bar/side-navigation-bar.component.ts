@@ -70,7 +70,7 @@ export class SideNavigationBarComponent {
     { path: 'manage/veterinarians/schedules', title: 'Schedules', icon: 'schedule', roles: ['veterinary'] },
 
     // User routes
-    { path: '/manage/pets', title: 'My Pets', icon: 'pets', roles: ['pet-owner'] },
+    { path: '/manage/owners/:ownerId/pets', title: 'My Pets', icon: 'pets', roles: ['pet-owner'] },
     { path: '/manage/appointments', title: 'Appointments', icon: 'event', roles: ['pet-owner'] },
     { path: '/manage/schedules', title: 'Veterinarian Schedules', icon: 'schedule', roles: ['pet-owner'] },
 
@@ -102,6 +102,13 @@ export class SideNavigationBarComponent {
 
   public toggle(): void {
     this.drawer.toggle();
+  }
+
+  resolvePath(path: string): string {
+    const ownerId = localStorage.getItem('ownerId');
+    if (!ownerId) return path;
+
+    return path.replace(':ownerId', ownerId);
   }
 }
 

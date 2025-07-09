@@ -1,23 +1,183 @@
+/* Botón Principal - Diseño moderno con gradientes y efectos */
 .button-primary {
-    background-color: orange  !important;
+  background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+  background: linear-gradient(135deg, #ff9500 0%, #ff7300 100%);
+}
+
+.button-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(255, 140, 0, 0.3);
+}
+
+.button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.button-primary:hover::before {
+  left: 100%;
+}
+
+/* Botón Secundario - Estilo outline moderno */
+.button-secondary {
+  background: transparent;
+  color: #ff8c00;
+  border: 2px solid #ff8c00;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .button-secondary:hover {
-    background-color: rgba(255, 166, 0, 0.116) !important;;
+  background: rgba(255, 140, 0, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.2);
+  border-color: #ff9500;
+  color: #ff9500;
 }
 
-.button-secondary {
-    color: orange !important;;
+.button-secondary:active {
+  transform: translateY(0);
 }
 
+.button-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.1), transparent);
+  transition: left 0.5s;
+  z-index: -1;
+}
+
+.button-secondary:hover::before {
+  left: 100%;
+}
+
+/* Contenedor de acciones - Layout moderno con flexbox */
 .container-actions {
-    padding: 1rem;
-    gap: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  padding: 2rem;
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
+.container-actions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.3), transparent);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container-actions {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .button-primary,
+  .button-secondary {
+    width: 100%;
+    min-width: 200px;
+  }
+}
+
+/* Texto centrado - Tipografía moderna */
 .text-center {
-    text-align: center;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Animaciones adicionales */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.button-primary:focus,
+.button-secondary:focus {
+  outline: none;
+  ring: 2px solid rgba(255, 140, 0, 0.5);
+  ring-offset: 2px;
+}
+
+/* Estados de carga */
+.button-primary.loading,
+.button-secondary.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  animation: pulse 1.5s infinite;
+}
+
+.button-primary.loading::after,
+.button-secondary.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

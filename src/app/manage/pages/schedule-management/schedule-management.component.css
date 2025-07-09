@@ -1,51 +1,55 @@
-mat-toolbar .title {
-  display: block;
-  width: 100%;
-  text-align: center;
-  font-weight: 600;
-}
-
 mat-toolbar {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 64px;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 600;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid #eee;
+}
+
+mat-toolbar .title {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
 }
 
 .schedule-management-container {
-  padding: 24px;
+  padding: 2rem;
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .schedule-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
   justify-content: center;
-  gap: 24px;
-  margin-top: 24px;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-
 .schedule-item-card {
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
   background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .schedule-item-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-item-card.highlight {
   position: relative;
-  padding-left: 16px;
+  padding-left: 1rem;
 }
 
 .schedule-item-card.highlight::before {
@@ -56,21 +60,23 @@ mat-toolbar {
   width: 5px;
   height: 100%;
   background: linear-gradient(180deg, #ffa726, #fb8c00);
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .schedule-details {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 8px;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
 }
 
 .detail-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 14px;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #444;
 }
 
 .detail-item mat-icon {
@@ -80,8 +86,8 @@ mat-toolbar {
 
 .detail-label {
   font-weight: 600;
-  color: #424242;
-  min-width: 90px;
+  color: #333;
+  min-width: 100px;
 }
 
 .detail-value {
@@ -92,40 +98,45 @@ mat-toolbar {
 .no-schedules {
   text-align: center;
   padding: 48px 20px;
-  color: #757575;
+  color: #9e9e9e;
 }
 
 .no-schedules-icon {
-  font-size: 52px;
-  color: #bdbdbd;
+  font-size: 56px;
+  color: #cfd8dc;
   margin-bottom: 20px;
 }
 
 .no-schedules h3 {
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #424242;
   margin: 16px 0 10px;
 }
 
 .no-schedules p {
-  font-size: 15px;
+  font-size: 1rem;
   margin: 0;
+  color: #666;
 }
 
 mat-card-title {
   color: #fb8c00;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
 mat-card-subtitle {
   color: #757575;
-  font-size: 15px;
+  font-size: 1rem;
 }
 
 mat-card-actions {
-  padding: 16px;
+  padding: 1rem 1.5rem;
   border-top: 1px solid #eeeeee;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 mat-card-actions button {
@@ -136,31 +147,31 @@ mat-card-actions button:last-child {
   margin-right: 0;
 }
 
-/* Tablets (de 768px a 1024px) */
+/* Responsive: Tablets */
 @media (max-width: 1024px) {
   .schedule-management-container {
-    padding: 20px;
+    padding: 1.5rem;
   }
 
   .schedule-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 1.25rem;
   }
 }
 
-/* Smartphones (hasta 767px) */
+/* Responsive: Smartphones */
 @media (max-width: 767px) {
   .schedule-management-container {
-    padding: 16px;
+    padding: 1rem;
   }
 
   .schedule-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 1rem;
   }
 
   .schedule-item-card {
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
   .detail-item {

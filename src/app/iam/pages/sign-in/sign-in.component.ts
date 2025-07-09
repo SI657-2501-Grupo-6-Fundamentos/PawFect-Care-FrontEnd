@@ -157,4 +157,5 @@ export class SignInComponent extends BaseFormComponent implements OnInit{
   navigateToRegister(): void {
     this.router.navigate(['/select-role']);
   }
+
 }

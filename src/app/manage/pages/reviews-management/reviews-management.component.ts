@@ -85,7 +85,7 @@ export class ReviewsManagementComponent implements OnInit {
   }
 
   navigateToAddReview(): void {
-    this.router.navigate(['/manage/reviews/add']);
+    this.router.navigate(['/manage/reviews/add/']);
   }
 
   navigateToEditReview(id: number): void {

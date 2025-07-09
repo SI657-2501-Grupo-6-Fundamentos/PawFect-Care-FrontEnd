@@ -81,13 +81,13 @@ export const routes: Routes = [
 
   // Routes for Pet Owners (Users)
   {
-    path: 'manage/pets',
+    path: 'manage/owners/:ownerId/pets',
     component: PetsManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
   },
   {
-    path: 'manage/pets/add',
+    path: 'manage/pets/add/:id',
     component: PetCreateComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
@@ -111,7 +111,7 @@ export const routes: Routes = [
     data: { roles: ['pet-owner'] }
   },
   {
-    path: 'manage/appointments/edit/:id',
+    path: 'manage/appointments/edit/:idAppointments',
     component: AppointmentEditComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
