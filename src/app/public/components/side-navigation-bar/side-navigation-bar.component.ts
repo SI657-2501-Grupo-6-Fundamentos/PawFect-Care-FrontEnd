@@ -76,7 +76,7 @@ export class SideNavigationBarComponent {
     { path: '/manage/schedules', title: 'Veterinarian Schedules', icon: 'schedule', roles: ['pet-owner'] },
 
     // Shared
-    { path: '/manage/appointments/review/:id', title: 'Review Appointment', icon: 'rate_review', roles: ['pet-owner', 'veterinary'] },
+
   ];
 
   constructor(
