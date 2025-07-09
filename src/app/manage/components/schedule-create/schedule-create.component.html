@@ -1,0 +1,51 @@
+<div class="schedule-form-container">
+  <h2>Crear Nuevo Horario</h2>
+
+  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="availableDays">Día Disponible</label>
+      <select id="availableDays" formControlName="availableDays">
+        <option value="" disabled>Seleccione un día</option>
+        <option *ngFor="let day of availableDays" [value]="day">
+          {{ getFormattedDayName(day) }}
+        </option>
+      </select>
+      <div class="error" *ngIf="scheduleForm.get('availableDays')?.touched && scheduleForm.get('availableDays')?.invalid">
+        Campo requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="startDateTime">Fecha y Hora de Inicio</label>
+      <input id="startDateTime" type="datetime-local" formControlName="startDateTime" />
+      <div class="error" *ngIf="scheduleForm.get('startDateTime')?.touched && scheduleForm.get('startDateTime')?.invalid">
+        Ingrese una fecha y hora válida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="endDateTime">Fecha y Hora de Fin</label>
+      <input id="endDateTime" type="datetime-local" formControlName="endDateTime" />
+      <div class="error" *ngIf="scheduleForm.get('endDateTime')?.touched && scheduleForm.get('endDateTime')?.invalid">
+        Ingrese una fecha y hora válida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="veterinarianId">ID del Veterinario</label>
+      <input id="veterinarianId" type="number" formControlName="veterinarianId" min="1" />
+      <div class="error" *ngIf="scheduleForm.get('veterinarianId')?.touched && scheduleForm.get('veterinarianId')?.invalid">
+        Ingrese un ID de veterinario válido.
+      </div>
+    </div>
+
+    <div class="error" *ngIf="isDateRangeInvalid">
+      La fecha y hora de inicio debe ser anterior a la fecha y hora de fin.
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" [disabled]="scheduleForm.invalid">Guardar Horario</button>
+      <button type="button" class="secondary" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

@@ -1,6 +1,14 @@
 .veterinary-management-card {
-  margin: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.veterinary-management-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 .spacer {
@@ -9,81 +17,110 @@
 
 .table-container {
   overflow-x: auto;
-  margin-top: 20px;
+  margin-top: 1.5rem;
 }
 
 .veterinary-table {
   width: 100%;
   border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .veterinary-table th {
-  font-weight: bold;
-  background-color: #f5f5f5;
-  padding: 12px;
+  font-weight: 600;
+  background-color: #f2f2f2;
+  padding: 14px 16px;
   text-align: left;
+  font-size: 0.95rem;
+  color: #333;
+  border-bottom: 1px solid #ddd;
 }
 
 .veterinary-table td {
-  padding: 12px;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  color: #555;
   border-bottom: 1px solid #e0e0e0;
 }
 
 .veterinary-table tr:hover {
-  background-color: #f9f9f9;
+  background-color: #fafafa;
+  transition: background-color 0.2s ease;
 }
 
 .action-buttons {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .action-buttons button {
   min-width: 40px;
   height: 40px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #fafafa;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.action-buttons button:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .speciality-badge {
-  background-color: #e3f2fd;
-  color: orange;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
+  background-color: #fff3e0;
+  color: #fb8c00;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
   display: inline-block;
+  white-space: nowrap;
 }
 
 .no-data-message {
   text-align: center;
-  padding: 40px;
-  color: #666;
+  padding: 3rem 1rem;
+  color: #757575;
 }
 
 .no-data-message mat-icon {
-  font-size: 48px;
-  height: 48px;
-  width: 48px;
-  color: #ccc;
-  margin-bottom: 16px;
+  font-size: 3rem;
+  height: 3rem;
+  width: 3rem;
+  color: #cfd8dc;
+  margin-bottom: 1rem;
 }
 
 .no-data-message p {
   margin: 0;
-  font-size: 16px;
+  font-size: 1rem;
+  color: #666;
 }
 
 .view-schedules-from-veterinarians {
-  color: orange;
+  color: #fb8c00;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
+.view-schedules-from-veterinarians:hover {
+  color: #ef6c00;
+  text-decoration: underline;
+}
+
+/* Responsive: Smartphones & Tablets */
 @media (max-width: 768px) {
   .veterinary-management-card {
-    margin: 10px;
+    margin: 1rem;
   }
 
   .table-container {
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .veterinary-table {
@@ -92,12 +129,12 @@
 
   .action-buttons {
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
 
   .action-buttons button {
     width: 100%;
     min-width: 32px;
-    height: 32px;
+    height: 36px;
   }
 }

@@ -1,0 +1,264 @@
+<div class="veterinary-schedule-management-container">
+  <mat-toolbar color="primary">
+    <span *ngIf="veterinarianId; else allSchedules">
+      Gestión de Horarios - Veterinario ID: {{ veterinarianId }}
+    </span>
+    <ng-template #allSchedules>
+      <span class="title">Gestión de Horarios Veterinarios</span>
+    </ng-template>
+    <span class="toolbar-spacer"></span>
+    <button mat-raised-button color="accent" (click)="openCreateDialog()" class="create-button">
+      <mat-icon>add</mat-icon>
+      Nuevo Horario
+    </button>
+  </mat-toolbar>
+
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Cargando horarios...</p>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="errorMessage" class="error-message">
+    <mat-icon>error</mat-icon>
+    <span>{{ errorMessage }}</span>
+    <button mat-button (click)="clearError()">Cerrar</button>
+  </div>
+
+  <!-- Success message -->
+  <div *ngIf="successMessage" class="success-message">
+    <mat-icon>check_circle</mat-icon>
+    <span>{{ successMessage }}</span>
+    <button mat-button (click)="clearSuccess()">Cerrar</button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters-container" *ngIf="!isLoading">
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar por veterinario</mat-label>
+      <mat-select [(value)]="selectedVeterinarianFilter" (selectionChange)="applyFilters()">
+        <mat-option value="">Todos los veterinarios</mat-option>
+        <mat-option *ngFor="let vetId of uniqueVeterinarians" [value]="vetId">
+          Veterinario ID: {{ vetId }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar por día</mat-label>
+      <mat-select [(value)]="selectedDayFilter" (selectionChange)="applyFilters()">
+        <mat-option value="">Todos los días</mat-option>
+        <mat-option *ngFor="let day of availableDays" [value]="day">
+          {{ getFormattedDayName(day) }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="clearFilters()" class="clear-filters-button">
+      <mat-icon>clear</mat-icon>
+      Limpiar Filtros
+    </button>
+  </div>
+
+  <!-- Schedules Grid -->
+  <div class="schedule-grid" *ngIf="filteredSchedules.length > 0 && !isLoading; else noSchedules">
+    <mat-card
+      *ngFor="let schedule of filteredSchedules; trackBy: trackByScheduleId"
+      class="schedule-item-card highlight">
+      <mat-card-header>
+        <mat-card-title>Horario #{{ schedule.id }}</mat-card-title>
+        <mat-card-subtitle>{{ formatAvailableDays(schedule.availableDays) }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="schedule-details">
+          <div class="detail-item">
+            <mat-icon>schedule</mat-icon>
+            <span class="detail-label">Inicio:</span>
+            <span class="detail-value">{{ formatDateTime(schedule.startDateTime) }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>schedule</mat-icon>
+            <span class="detail-label">Fin:</span>
+            <span class="detail-value">{{ formatDateTime(schedule.endDateTime) }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>person</mat-icon>
+            <span class="detail-label">Veterinario:</span>
+            <span class="detail-value">ID: {{ schedule.veterinarianId }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>info</mat-icon>
+            <span class="detail-label">Estado:</span>
+            <span class="detail-value status" [class.active]="isScheduleActive(schedule)">
+              {{ getScheduleStatus(schedule) }}
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="viewSchedule(schedule)">
+          <mat-icon>visibility</mat-icon>
+          Ver
+        </button>
+        <button mat-button color="accent" (click)="editSchedule(schedule)" [disabled]="!canEditSchedule(schedule)">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-button color="warn" (click)="deleteSchedule(schedule)" [disabled]="!canDeleteSchedule(schedule)">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #noSchedules>
+    <div class="no-schedules" *ngIf="!isLoading">
+      <mat-icon class="no-schedules-icon">event_busy</mat-icon>
+      <h3>No se encontraron horarios</h3>
+      <p *ngIf="hasActiveFilters(); else noSchedulesGeneral">
+        No hay horarios que coincidan con los filtros seleccionados.
+      </p>
+      <ng-template #noSchedulesGeneral>
+        <p *ngIf="veterinarianId; else noSchedulesAll">
+          No hay horarios registrados para este veterinario.
+        </p>
+        <ng-template #noSchedulesAll>
+          <p>No hay horarios registrados. ¡Crea el primer horario!</p>
+        </ng-template>
+      </ng-template>
+      <button mat-raised-button color="primary" (click)="openCreateDialog()">
+        <mat-icon>add</mat-icon>
+        Crear Primer Horario
+      </button>
+    </div>
+  </ng-template>
+
+  <!-- Pagination -->
+  <mat-paginator
+    *ngIf="filteredSchedules.length > 0"
+    [length]="filteredSchedules.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="onPageChange($event)"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>
+
+<!-- Create/Edit Dialog -->
+<div class="dialog-overlay" *ngIf="showDialog" (click)="closeDialog()">
+  <div class="dialog-content" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h2>{{ isEditMode ? 'Editar' : 'Crear' }} Horario</h2>
+      <button mat-icon-button (click)="closeDialog()" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="dialog-body">
+      <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Día Disponible</mat-label>
+            <mat-select formControlName="availableDays">
+              <mat-option *ngFor="let day of availableDays" [value]="day">
+                {{ getFormattedDayName(day) }}
+              </mat-option>
+            </mat-select>
+            <!--
+            <mat-error *ngIf="scheduleForm.get('availableDays')?.hasError('required')">
+              Campo requerido
+            </mat-error>-->
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha y Hora de Inicio</mat-label>
+            <input matInput type="datetime-local" formControlName="startDateTime" />
+            <!--
+            <mat-error *ngIf="scheduleForm.get('startDateTime')?.hasError('required')">
+              Campo requerido
+            </mat-error>-->
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha y Hora de Fin</mat-label>
+            <input matInput type="datetime-local" formControlName="endDateTime" />
+           <!-- <mat-error *ngIf="scheduleForm.get('endDateTime')?.hasError('required')">
+              Campo requerido
+            </mat-error>-->
+          </mat-form-field>
+        </div>
+
+        <div class="form-error" *ngIf="isDateRangeInvalid">
+          <mat-icon>error</mat-icon>
+          La fecha y hora de inicio debe ser anterior a la fecha y hora de fin.
+        </div>
+
+        <div class="form-error" *ngIf="isPastDateTime">
+          <mat-icon>error</mat-icon>
+          La fecha y hora de inicio no puede ser en el pasado.
+        </div>
+
+        <div class="dialog-actions">
+          <button mat-button type="button" (click)="closeDialog()">
+            Cancelar
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="scheduleForm.invalid || isSubmitting">
+            <mat-spinner *ngIf="isSubmitting" diameter="20"></mat-spinner>
+            {{ isEditMode ? 'Actualizar' : 'Crear' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div class="dialog-overlay" *ngIf="showDeleteDialog" (click)="closeDeleteDialog()">
+  <div class="dialog-content delete-dialog" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h2>Confirmar Eliminación</h2>
+      <button mat-icon-button (click)="closeDeleteDialog()" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="dialog-body">
+      <div class="delete-confirmation">
+        <mat-icon class="warning-icon">warning</mat-icon>
+        <p>¿Estás seguro de que deseas eliminar este horario?</p>
+        <div class="schedule-info" *ngIf="scheduleToDelete">
+          <strong>Horario #{{ scheduleToDelete.id }}</strong><br>
+          <strong>Día:</strong> {{ formatAvailableDays(scheduleToDelete.availableDays) }}<br>
+          <strong>Veterinario:</strong> ID {{ scheduleToDelete.veterinarianId }}
+        </div>
+        <p class="warning-text">Esta acción no se puede deshacer.</p>
+      </div>
+
+      <div class="dialog-actions">
+        <button mat-button (click)="closeDeleteDialog()">
+          Cancelar
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="confirmDelete()"
+          [disabled]="isDeleting">
+          <mat-spinner *ngIf="isDeleting" diameter="20"></mat-spinner>
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -64,17 +64,17 @@ export class SideNavigationBarComponent {
 
     // Admin routes
     { path: '/manage/clients', title: 'List Clients', icon: 'group', roles: ['veterinary'] },
-    { path: '/manage/clients/add', title: 'Add Client', icon: 'person_add', roles: ['veterinary'] },
-    { path: '/manage/veterinarians', title: 'List Veterinarians', icon: 'local_hospital', roles: ['veterinary'] },
     { path: '/manage/tariffs', title: 'List Services', icon: 'inventory', roles: ['veterinary'] },
+    { path: 'manage/veterinarians/schedules', title: 'Schedules', icon: 'schedule', roles: ['veterinary'] },
 
     // User routes
-    { path: '/manage/pets', title: 'My Pets', icon: 'pets', roles: ['pet-owner'] },
+    { path: '/manage/veterinarians', title: 'List Veterinarians', icon: 'local_hospital', roles: ['pet-owner'] },
+    { path: '/manage/owners/:ownerId/pets', title: 'My Pets', icon: 'pets', roles: ['pet-owner'] },
     { path: '/manage/appointments', title: 'Appointments', icon: 'event', roles: ['pet-owner'] },
+    { path: '/manage/schedules', title: 'Veterinarian Schedules', icon: 'schedule', roles: ['pet-owner'] },
 
     // Shared
-    { path: '/manage/medicalHistory/:id', title: 'Medical History', icon: 'history', roles: ['pet-owner', 'veterinary'] },
-    { path: '/manage/appointments/review/:id', title: 'Review Appointment', icon: 'rate_review', roles: ['pet-owner', 'veterinary'] }
+    { path: '/manage/appointments/review/:id', title: 'Review Appointment', icon: 'rate_review', roles: ['pet-owner', 'veterinary'] },
   ];
 
   constructor(
@@ -101,6 +101,13 @@ export class SideNavigationBarComponent {
 
   public toggle(): void {
     this.drawer.toggle();
+  }
+
+  resolvePath(path: string): string {
+    const ownerId = localStorage.getItem('ownerId');
+    if (!ownerId) return path;
+
+    return path.replace(':ownerId', ownerId);
   }
 }
 

@@ -1,0 +1,396 @@
+/* Contenedor del formulario */
+.schedule-form-container {
+  max-width: 580px;
+  margin: 60px auto;
+  padding: 3rem 2.5rem;
+  border: 1px solid #e9ecef;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+}
+
+/* Título del formulario */
+h2 {
+  text-align: center;
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+  border-radius: 2px;
+}
+
+/* Grupo de campos */
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Etiquetas */
+label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 12px;
+}
+
+label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 14px;
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+  border-radius: 2px;
+}
+
+/* Campos de entrada */
+input,
+select {
+  padding: 14px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #2c3e50;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  font-family: inherit;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #2196f3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+  transform: translateY(-2px);
+}
+
+input:hover,
+select:hover {
+  border-color: #2196f3;
+}
+
+/* Efectos de placeholder */
+input::placeholder {
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+input:focus::placeholder {
+  color: #adb5bd;
+  transform: translateY(-2px);
+}
+
+/* Botones */
+button {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+  background: linear-gradient(135deg, #1976d2 0%, #1e88e5 100%);
+}
+
+button:active {
+  transform: translateY(-1px);
+}
+
+/* Mensajes de error */
+.error {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+  font-weight: 500;
+  animation: slideInLeft 0.3s ease;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Contenedor de botones con padding entre ellos */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.form-buttons button {
+  width: auto;
+  min-width: 140px;
+  padding: 16px 32px;
+  flex: 1;
+}
+
+.form-buttons button + button {
+  margin-left: 1rem;
+}
+
+/* Botón secundario */
+.form-buttons button.secondary {
+  background: white;
+  color: #2196f3;
+  border: 2px solid #2196f3;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+}
+
+.form-buttons button.secondary::before {
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+}
+
+.form-buttons button.secondary:hover {
+  color: white;
+  border-color: #2196f3;
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+}
+
+/* Estados de validación */
+.form-group.valid input,
+.form-group.valid select {
+  border-color: #27ae60;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+}
+
+.form-group.invalid input,
+.form-group.invalid select {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+/* Efectos de carga */
+button.loading {
+  pointer-events: none;
+  opacity: 0.8;
+  position: relative;
+}
+
+button.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .schedule-form-container {
+    margin: 20px auto;
+    padding: 2rem 1.5rem;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    padding: 1.5rem 0;
+  }
+
+  .form-buttons button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .form-buttons button + button {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  input,
+  select {
+    font-size: 16px; /* Previene zoom en iOS */
+  }
+}
+
+/* Animaciones de entrada */
+.schedule-form-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.form-group:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+.form-group:nth-child(3n) {
+  animation-delay: 0.2s;
+}
+
+/* Estilos adicionales para select */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%232196f3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* Efectos de enfoque mejorados */
+.form-group:focus-within label {
+  color: #2196f3;
+  transform: scale(1.02);
+}
+
+.form-group:focus-within label::before {
+  height: 18px;
+  box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+}
+
+/* Estilos específicos para datetime-local */
+input[type="datetime-local"] {
+  position: relative;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  background: none;
+  color: #2196f3;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+  background: rgba(33, 150, 243, 0.1);
+}
+
+/* Estilos específicos para el botón de actualización */
+button[type="submit"] {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #1e7e34 0%, #17a2b8 100%);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* Indicador de edición */
+.schedule-form-container::after {
+  content: 'EDITANDO';
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}

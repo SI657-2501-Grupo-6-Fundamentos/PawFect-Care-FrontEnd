@@ -46,12 +46,19 @@ export class AuthenticationService {
   ) {
     const token = localStorage.getItem('token');
     const savedRole = localStorage.getItem('userRole');
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      this.signedInUserId.next(+storedUserId); // 👈 importante: convertirlo a número
+    }
 
-    console.log(token)
+    console.log(token);
     if (token) {
       this.signedIn.next(true);
       if (savedRole) {
         this.currentUserRoleSubject.next(savedRole);
+      }
+      if (storedUserId) {
+        this.signedInUserId.next(+storedUserId); // 👈 importante
       }
     } else {
       this.signedIn.next(false);
@@ -213,6 +220,8 @@ export class AuthenticationService {
           this.signedInUserId.next(response.id);
           this.signedInUserName.next(response.userName);
           localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', response.id.toString());
+
 
           // Get the user's role from localStorage (set during sign-up) or from server response
           const savedRole = localStorage.getItem('userRole');
@@ -225,8 +234,22 @@ export class AuthenticationService {
 
           console.log(`Signed in as ${response.userName} with token ${response.token} and role ${role}`);
 
-          // Redirects by the role
-          this.redirectAfterLogin(role);
+          if (role === 'pet-owner') {
+            this.http.get<any>(`${this.basePath}/pet-owner-service/api/v1/pet-owners/${response.id}`, this.httpOptions)
+              .subscribe({
+                next: (ownerData) => {
+                  console.log('Owner data:', ownerData);
+                  localStorage.setItem('ownerId', ownerData.id.toString());
+                  this.redirectAfterLogin(role);
+                },
+                error: (err) => {
+                  console.error('Error retrieving owner info', err);
+                  this.router.navigate(['/sign-in']).then();
+                }
+              });
+          } else {
+            this.redirectAfterLogin(role);
+          }
         },
         error: (error) => {
           console.error('Error signing in', error);
@@ -253,6 +276,8 @@ export class AuthenticationService {
           this.signedInUserId.next(response.id);
           this.signedInUserName.next(response.userName);
           localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', response.id.toString());
+
 
           // Get the user's role from localStorage (set during sign-up) or from server response
           const savedRole = localStorage.getItem('userRole');
@@ -472,6 +497,8 @@ export class AuthenticationService {
     this.signedInUserId.next(response.id);
     this.signedInUserName.next(name);
     localStorage.setItem('token', response.token);
+    localStorage.setItem('userId', response.id.toString());
+
 
     // Role should already be set during the Google sign-up process
     // but ensure it's set here as well

@@ -5,18 +5,18 @@
   <div class="role-indicator">
     <p *ngIf="selectedRole === 'pet-owner'">
       <mat-icon>pets</mat-icon>
-      Iniciar sesión como Dueño de Mascota
+      {{ 'role.log-as-pet-owner' | translate }}
     </p>
     <p *ngIf="selectedRole === 'veterinary'">
       <mat-icon>medical_services</mat-icon>
-      Iniciar sesión como Veterinario
+      {{ 'role.log-as-veterinary' | translate }}
     </p>
   </div>
 
   <!-- Traditional Login Form -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
     <mat-form-field appearance="fill" class="form-field">
-      <mat-label>User Name</mat-label>
+      <mat-label>{{ 'role.userNameLabel' | translate }}</mat-label>
       <input matInput placeholder="User Name" id="userName" name="userName" required formControlName="userName" />
       @if (isInvalidControl(form, 'userName')) {
         <mat-error>{{ errorMessagesForControl(form, 'userName')}}</mat-error>
@@ -60,7 +60,7 @@
     <!-- Navigation buttons -->
     <div class="navigation-actions">
       <button type="button" mat-stroked-button (click)="navigateToRegister()">
-        Volver a selección de rol
+        {{'role.back' | translate}}
       </button>
     </div>
 

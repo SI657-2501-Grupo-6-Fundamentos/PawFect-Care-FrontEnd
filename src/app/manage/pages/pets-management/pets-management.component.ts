@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import {  MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pets-management',
@@ -61,6 +62,7 @@ export class PetsManagementComponent implements OnInit {
     "actions"
   ];
 
+
   @ViewChild(MatSort, {static: false})
   protected sort!: MatSort;
 
@@ -72,13 +74,21 @@ export class PetsManagementComponent implements OnInit {
 
   private petService: PetsService = inject(PetsService);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
     this.petData = new Pet({});
     this.dataSource = new MatTableDataSource();
   }
 
-  ngOnInit() {
-    this.getAllPets();
+  ngOnInit(): void {
+    const ownerIdParam = this.route.snapshot.paramMap.get('ownerId');
+    const ownerId = +ownerIdParam!;
+    console.log('Param ownerId:', ownerId);
+
+    if (ownerId) {
+      this.getPetsByOwner(ownerId);
+    } else {
+      console.error('No se encontró ownerId en la ruta');
+    }
   }
 
 
@@ -91,17 +101,31 @@ export class PetsManagementComponent implements OnInit {
       this.dataSource.data = response;
     });
   }
+  getPetsByOwner(ownerId: number): void {
+    this.petService.getPetsByOwnerId(ownerId).subscribe({
+      next: (response: Pet[]) => {
+        this.dataSource.data = response;
+      },
+      error: (err) => {
+        console.error('Error al obtener mascotas por ownerId:', err);
+      }
+    });
+  }
+
   applyFilter() {
     this.dataSource.filter = this.searchQuery.trim().toLowerCase();
   }
 
-  navigateToAddClient() {
-    this.router.navigate(['/manage/clients/add']);
+  /*navigateToAddPet() {
+    console.log('ID del dueño recibido:');
+    this.router.navigate(['/manage/pets/add']);
+  }*/
+
+  navigateToAddPet(idOwner: number) {
+    console.log('ID del dueño recibido:', idOwner);
+    this.router.navigate(['/manage/pets/add', idOwner]);
   }
 
-  navigAddPetToClientateToAddPet() {
-    this.router.navigate(['/manage/clients/add']);
-  }
   navigateToEditPet(idPet: number) {
     this.router.navigate([`/manage/pets/edit/${idPet}`]);
   }

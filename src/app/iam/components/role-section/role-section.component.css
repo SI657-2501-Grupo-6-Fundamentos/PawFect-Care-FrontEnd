@@ -1,124 +1,223 @@
+/* Contenedor principal con diseño moderno */
 .role-selection-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   min-height: 100vh;
-
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  position: relative;
+  overflow-x: hidden;
 }
 
+.role-selection-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 152, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(251, 140, 0, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Header moderno con efectos visuales */
 .header {
   text-align: center;
-  margin-bottom: 2rem;
-  color: orange;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
 }
 
 .header h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 0.5rem;
-  font-weight: 300;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(255, 140, 0, 0.3);
+  position: relative;
+}
+
+.header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff8c00, #ff6b00);
+  border-radius: 2px;
 }
 
 .header p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  color: black;
+  font-size: 1.3rem;
+  opacity: 0.8;
+  color: #2c3e50;
+  font-weight: 400;
+  margin-top: 1rem;
+  line-height: 1.6;
 }
 
+/* Contenedor de tarjetas con mejor disposición */
 .role-cards {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
+/* Tarjetas de rol con diseño premium */
 .role-card {
-  width: 420px;
-  min-height: 320px;
-  transition: all 0.3s ease;
+  width: 450px;
+  min-height: 380px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  background-color: white;
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .role-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Tarjeta de dueño de mascota */
 .pet-owner-card {
-  border-top: 4px solid #ff9800;
+  border-top: 5px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(90deg, #ff9800, #ffc107);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
 }
 
-.pet-owner-card::before {
+.pet-owner-card::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 5px;
   background: linear-gradient(90deg, #ff9800, #ffc107);
+  border-radius: 20px 20px 0 0;
 }
 
+.pet-owner-card:hover::after {
+  height: 8px;
+  background: linear-gradient(90deg, #ff9800, #ffc107, #ffeb3b);
+}
+
+/* Tarjeta veterinaria */
 .veterinary-card {
-  border-top: 4px solid #fb8c00;
+  border-top: 5px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(90deg, #fb8c00, #ffb74d);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
 }
 
-.veterinary-card::before {
+.veterinary-card::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 5px;
   background: linear-gradient(90deg, #fb8c00, #ffb74d);
+  border-radius: 20px 20px 0 0;
 }
 
+.veterinary-card:hover::after {
+  height: 8px;
+  background: linear-gradient(90deg, #fb8c00, #ffb74d, #ffc107);
+}
+
+/* Estilos para Material Components */
 .role-card mat-card-header {
-  padding-bottom: 1.2rem;
+  padding-bottom: 1.5rem;
+  position: relative;
 }
 
 .role-card mat-icon[mat-card-avatar] {
-  font-size: 2rem;
-  width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.role-card:hover mat-icon[mat-card-avatar] {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .pet-owner-card mat-icon[mat-card-avatar] {
   color: #ff9800;
+  background: rgba(255, 152, 0, 0.1);
 }
 
 .veterinary-card mat-icon[mat-card-avatar] {
   color: #fb8c00;
+  background: rgba(251, 140, 0, 0.1);
 }
 
 .role-card mat-card-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: #212121;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
 }
 
 .role-card mat-card-subtitle {
-  font-size: 1rem;
-  opacity: 0.8;
+  font-size: 1.1rem;
+  opacity: 0.7;
+  color: #424242;
+  font-weight: 500;
 }
 
 .role-card mat-card-content {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .role-card mat-card-content p,
 .role-card mat-card-content li {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.7;
   color: #424242;
+  margin-bottom: 0.5rem;
 }
 
 .role-card mat-card-content ul {
@@ -126,56 +225,213 @@
   padding-left: 1.5rem;
 }
 
+.role-card mat-card-content li {
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.role-card mat-card-content li::marker {
+  color: #ff8c00;
+}
+
+/* Acciones de tarjeta con botones modernos */
 .role-card mat-card-actions {
-  padding-top: 1rem;
+  padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .role-card mat-card-actions button {
   width: 100%;
-  padding: 0.75rem;
-  font-weight: 500;
-  background-color: #fb8c00;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #fb8c00 0%, #ff8a65 100%);
   color: white;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(251, 140, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .role-card mat-card-actions button:hover {
-  background-color: #ff8a65;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(251, 140, 0, 0.4);
+  background: linear-gradient(135deg, #ff8a65 0%, #ffab40 100%);
 }
 
+.role-card mat-card-actions button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.role-card mat-card-actions button:hover::before {
+  left: 100%;
+}
+
+/* Acción de retroceso con estilo moderno */
 .back-action {
   margin-top: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .back-action button {
   color: #ff6f00;
-  border: 1px solid rgba(255, 111, 0, 0.5);
-  background-color: white;
+  border: 2px solid rgba(255, 111, 0, 0.3);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .back-action button:hover {
-  background-color: rgba(255, 111, 0, 0.1);
+  background: rgba(255, 111, 0, 0.1);
+  border-color: #ff6f00;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 111, 0, 0.2);
 }
 
-/* Responsive design */
+.back-action button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 111, 0, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.back-action button:hover::before {
+  left: 100%;
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.role-card {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.role-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.role-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+/* Responsive design mejorado */
 @media (max-width: 768px) {
+  .role-selection-container {
+    padding: 2rem 1rem;
+  }
+
   .role-cards {
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
   }
 
   .role-card {
     width: 100%;
-    max-width: 420px;
+    max-width: 450px;
+    min-height: 350px;
+  }
+
+  .header h2 {
+    font-size: 2.5rem;
+  }
+
+  .header p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .role-selection-container {
+    padding: 1.5rem 1rem;
   }
 
   .header h2 {
     font-size: 2rem;
   }
 
-  .role-selection-container {
-    padding: 1rem;
+  .role-card {
+    padding: 1.5rem;
+    min-height: 320px;
   }
+
+  .role-card mat-card-title {
+    font-size: 1.5rem;
+  }
+
+  .role-card mat-card-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Estados de focus para accesibilidad */
+.role-card:focus-visible {
+  outline: 3px solid rgba(255, 140, 0, 0.5);
+  outline-offset: 2px;
+}
+
+.role-card mat-card-actions button:focus-visible,
+.back-action button:focus-visible {
+  outline: 3px solid rgba(255, 140, 0, 0.5);
+  outline-offset: 2px;
+}
+
+/* Efectos de carga */
+.role-card.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.role-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid rgba(255, 140, 0, 0.3);
+  border-top-color: #ff8c00;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

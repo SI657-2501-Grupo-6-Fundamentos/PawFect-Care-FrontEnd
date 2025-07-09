@@ -172,7 +172,20 @@
     "petLabel": "Select your pet",
     "noSelectedPet": "No selected pet",
     "addButton": "Add",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "tariffLabel": "Select a tariff",
+    "noSelectedTariff": "No selected tariff",
+    "registrationDateLabel": "Enter your start date",
+    "veterinarianLabel": "Select a Veterinarian",
+    "noSelectedVeterinarian": "No selected Veterinarian",
+    "status": {
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "in_progress": "In Progress",
+      "cancelled": "Cancelled"
+    },
+    "searchByName": "Search",
+    "searchPlaceholder": "Search"
   },
   "editAppointment": {
     "appointmentName": "Edit appointment name",
@@ -255,6 +268,9 @@
   "role": {
     "sectionTitleH2": "Select your role",
     "sectionTitleLine": "Choose the type of account you want to create",
+    "back": "Back to role selection",
+    "log-as-veterinary": "Log in as Veterinarian",
+    "log-as-pet-owner": "Log in as Pet Owner",
     "petOwnerCard": {
       "title": "Pet Owner",
       "description": "To take care of your pets",
@@ -273,6 +289,7 @@
     },
     "signUpButton": "Sign Up",
     "signInButton": "Sign In",
-    "returnToHome": "Return to Home"
+    "returnToHome": "Return to Home",
+    "userNameLabel": "Username"
   }
 }

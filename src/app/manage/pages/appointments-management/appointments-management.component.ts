@@ -103,10 +103,10 @@ export class AppointmentsManagementComponent implements OnInit {
     this.router.navigate(['/manage/appointments/add']);
   }
   navigateToEditAppointment(idAppointments: number) {
-    this.router.navigate([`/manage/appointments/edit/${idAppointments}`]);
+    this.router.navigate([`/manage/appointments/edit/`, idAppointments]);
   }
 
   navigateToCreateReview(idAppointments: number) {
-    this.router.navigate([`/manage/appointments/add-review/${idAppointments}`]);
+    this.router.navigate([`/manage/appointments/add-review/`, idAppointments]);
   }
 }
