@@ -73,6 +73,12 @@ export const routes: Routes = [
     data: { roles: ['veterinary', 'admin'] }
   },
   {
+    path: 'manage/add-tariffs',
+    component: TariffCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
     path: 'manage/tariffs/edit/:id',
     component: TariffEditComponent,
     canActivate: [authenticationGuard, RoleGuard],
@@ -113,6 +119,12 @@ export const routes: Routes = [
   {
     path: 'manage/appointments/edit/:idAppointments',
     component: AppointmentEditComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/veterinarians/schedules/:id',
+    component: ScheduleManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
   },

@@ -64,8 +64,7 @@ export class SideNavigationBarComponent {
 
     // Admin routes
     { path: '/manage/clients', title: 'List Clients', icon: 'group', roles: ['veterinary'] },
-    { path: '/manage/clients/add', title: 'Add Client', icon: 'person_add', roles: ['veterinary'] },
-    { path: '/manage/veterinarians', title: 'List Veterinarians', icon: 'local_hospital', roles: ['veterinary'] },
+    { path: '/manage/veterinarians', title: 'List Veterinarians', icon: 'local_hospital', roles: ['pet-owner'] },
     { path: '/manage/tariffs', title: 'List Services', icon: 'inventory', roles: ['veterinary'] },
     { path: 'manage/veterinarians/schedules', title: 'Schedules', icon: 'schedule', roles: ['veterinary'] },
 
@@ -75,7 +74,7 @@ export class SideNavigationBarComponent {
     { path: '/manage/schedules', title: 'Veterinarian Schedules', icon: 'schedule', roles: ['pet-owner'] },
 
     // Shared
-    { path: '/manage/appointments/review/:id', title: 'Review Appointment', icon: 'rate_review', roles: ['pet-owner', 'veterinary'] }
+    { path: '/manage/appointments/review/:id', title: 'Review Appointment', icon: 'rate_review', roles: ['pet-owner', 'veterinary'] },
   ];
 
   constructor(
