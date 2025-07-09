@@ -52,7 +52,7 @@ export const routes: Routes = [
     path: 'manage/veterinarians',
     component: VeterinaryManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
-    data: { roles: ['veterinary', 'admin'] }
+    data: { roles: ['pet-owner'] }
   },
   {
     path: 'manage/tariffs',

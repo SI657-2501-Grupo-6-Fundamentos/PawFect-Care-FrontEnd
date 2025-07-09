@@ -64,11 +64,11 @@ export class SideNavigationBarComponent {
 
     // Admin routes
     { path: '/manage/clients', title: 'List Clients', icon: 'group', roles: ['veterinary'] },
-    { path: '/manage/veterinarians', title: 'List Veterinarians', icon: 'local_hospital', roles: ['pet-owner'] },
     { path: '/manage/tariffs', title: 'List Services', icon: 'inventory', roles: ['veterinary'] },
     { path: 'manage/veterinarians/schedules', title: 'Schedules', icon: 'schedule', roles: ['veterinary'] },
 
     // User routes
+    { path: '/manage/veterinarians', title: 'List Veterinarians', icon: 'local_hospital', roles: ['pet-owner'] },
     { path: '/manage/owners/:ownerId/pets', title: 'My Pets', icon: 'pets', roles: ['pet-owner'] },
     { path: '/manage/appointments', title: 'Appointments', icon: 'event', roles: ['pet-owner'] },
     { path: '/manage/schedules', title: 'Veterinarian Schedules', icon: 'schedule', roles: ['pet-owner'] },
