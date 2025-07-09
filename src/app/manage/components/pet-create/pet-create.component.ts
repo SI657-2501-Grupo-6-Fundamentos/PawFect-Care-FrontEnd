@@ -99,7 +99,7 @@ export class PetCreateComponent implements OnInit {
     this.petService.create(cleanedPet).subscribe({
       next: (response: Pet) => {
         console.log('Pet created successfully:', response);
-        this.router.navigate([`/manage/pets`]);
+        this.router.navigate([`/manage/owners/:ownerId/pets`]);
       },
       error: (error) => {
         console.error('Error creating pet:', error);
@@ -112,6 +112,6 @@ export class PetCreateComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate([`/manage/pets`]);
+    this.router.navigate([`/manage/owners/:ownerId/pets`]);
   }
 }
