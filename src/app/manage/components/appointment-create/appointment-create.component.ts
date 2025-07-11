@@ -49,14 +49,11 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatCard,
     DatePipe,
     CurrencyPipe,
-    MatCheckbox,
-    MatChipOption,
     MatDatepickerToggle,
     MatDatepicker,
     MatDatepickerInput,
     MatIcon,
     MatOptionModule,
-    MatChipListbox,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
@@ -108,6 +105,7 @@ export class AppointmentCreateComponent implements OnInit {
     this.getAllPets();
     this.getAllTariffs();
     this.getAllVeterinarians();
+    this.setDefaultAppointmentName();
   }
 
   generateTimeSlots() {
@@ -139,6 +137,14 @@ export class AppointmentCreateComponent implements OnInit {
       this.optionsVeterinarian = response;
     });
   }
+
+  setDefaultAppointmentName() {
+    this.appointmentService.getAll().subscribe((appointments: Appointment[]) => {
+      const nextId = appointments.length + 1;
+      this.appointment.appointmentName = `CITA-${nextId}`;
+    });
+  }
+
 
   // Método para establecer duración automáticamente
   setDuration(minutes: number) {
@@ -256,8 +262,11 @@ export class AppointmentCreateComponent implements OnInit {
       console.log('👉 Payload completo:', this.appointment);
 
       this.appointmentService.create(this.appointment).subscribe((response: Appointment) => {
-        this.router.navigate(['/manage/appointments']);
-        this.resetEditState();
+        const realName = `CITA-${response.id}`;
+        this.appointmentService.update(response.id, { appointmentName: realName }).subscribe(() => {
+          this.router.navigate(['/manage/appointments']);
+          this.resetEditState();
+        });
       });
 
     } catch (err) {

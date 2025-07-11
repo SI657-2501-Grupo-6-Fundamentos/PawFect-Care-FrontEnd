@@ -193,7 +193,19 @@
     "nameHint": "Ingresa el nombre de la cita",
     "dateTimeTitle": "Fecha y Hora",
     "statusTitle": "Estado",
-    "assignmentTitle": "Asignaciones"
+    "assignmentTitle": "Asignaciones",
+    "reminderTitle": "Recordatorio de Cita",
+    "enableReminder": "Habilitar Recordatorio",
+    "reminderTimeLabel": "Ingresa el tiempo del recordatorio antes del inicio de la cita",
+    "minutesBefore": "minutos antes de la cita",
+    "hourBefore": "horas antes de la cita",
+    "dayBefore": "días antes de la cita",
+    "previewButton": "Mostrar Vista Previa",
+    "summaryTitle": "Resumen de la Cita",
+    "petLabelSummary": "Mascota seleccionada",
+    "tariffLabelSummary": "Tarifa seleccionada",
+    "veterinaryLabelSummary": "Veterinario seleccionado",
+    "dateTimeLabelSummary": "Fecha seleccionada"
   },
   "editAppointment": {
     "appointmentName": "Editar nombre de la cita",
@@ -212,14 +224,7 @@
     "pet": "Selecciona una mascota",
     "noSelectedPet": "No se ha seleccionado una mascota",
     "updateButton": "Actualizar",
-    "cancelButton": "Cancelar",
-    "reminderTitle": "Recordatorio de Cita",
-    "enableReminder": "Habilitar Recordatorio",
-    "reminderTimeLabel": "Ingresa el tiempo del recordatorio antes del inicio de la cita",
-    "minutesBefore": "minutos antes de la cita",
-    "hourBefore": "horas antes de la cita",
-    "dayBefore": "días antes de la cita",
-    "previewButton": "Regresar"
+    "cancelButton": "Cancelar"
   },
   "newClient": {
     "title": "Nuevo Cliente",

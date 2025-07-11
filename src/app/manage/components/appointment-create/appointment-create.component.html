@@ -1,23 +1,6 @@
 <h2>{{ 'appointment.newAppointmentTitle' | translate }}</h2>
 <form #appointmentForm="ngForm" (submit)="onSubmit()" class="form">
 
-  <!-- Información básica de la cita -->
-  <div class="form-section">
-    <h3 class="section-title">{{ 'appointment.basicInfoTitle' | translate }}</h3>
-
-    <mat-form-field class="input-full-width">
-      <mat-label>{{ 'appointment.appointmentNameLabel' | translate }}</mat-label>
-      <input matInput
-             [(ngModel)]="appointment.appointmentName"
-             name="appointmentName"
-             placeholder="{{ 'appointment.appointmentNamePlaceholder' | translate }}"
-             type="text"
-             required
-             maxlength="100">
-      <mat-hint>{{ 'appointment.nameHint' | translate }}</mat-hint>
-    </mat-form-field>
-  </div>
-
   <!-- DATE FORM -->
   <div class="form-section">
     <h3 class="section-title">{{ 'appointment.dateTimeTitle' | translate }}</h3>
@@ -206,18 +189,18 @@
         <strong>{{ 'appointment.appointmentNameLabel' | translate }}:</strong> {{ appointment.appointmentName }}
       </div>
       <div class="summary-item">
-        <strong>{{ 'appointment.dateTimeLabel' | translate }}:</strong>
+        <strong>{{ 'appointment.dateTimeLabelSummary' | translate }}:</strong>
         {{ appointment.startDateAppointment | date }} {{ appointment.startTimeAppointment }} -
         {{ appointment.endDateAppointment | date }} {{ appointment.endTimeAppointment }}
       </div>
       <div class="summary-item">
-        <strong>{{ 'appointment.petLabel' | translate }}:</strong> {{ getSelectedPetName() }}
+        <strong>{{ 'appointment.petLabelSummary' | translate }}:</strong> {{ getSelectedPetName() }}
       </div>
       <div class="summary-item">
-        <strong>{{ 'appointment.veterinaryLabel' | translate }}:</strong> {{ getSelectedVeterinarianName() }}
+        <strong>{{ 'appointment.veterinaryLabelSummary' | translate }}:</strong> {{ getSelectedVeterinarianName() }}
       </div>
       <div class="summary-item">
-        <strong>{{ 'appointment.tariffLabel' | translate }}:</strong> {{ getSelectedTariffName() }}
+        <strong>{{ 'appointment.tariffLabelSummary' | translate }}:</strong> {{ getSelectedTariffName() }}
       </div>
     </mat-card-content>
   </mat-card>

@@ -188,7 +188,7 @@
     "searchByName": "Search by appointment name",
     "searchPlaceholder": "Search",
     "appointmentName": "Appointment Name",
-    "veterinaryLabel": "Selecciona un veterinario",
+    "veterinaryLabel": "Select a Veterinarian",
     "actions": "Actions",
     "registrationDate": "Registration date",
     "endDate": "End date",
@@ -203,7 +203,12 @@
     "minutesBefore": "minutes before the appointment start",
     "hourBefore": "hours before the appointment start",
     "dayBefore": "days before the appointment start",
-    "previewButton": "Back"
+    "previewButton": "Show Preview",
+    "summaryTitle": "Appointment Summary",
+    "petLabelSummary": "Pet selected",
+    "tariffLabelSummary": "Tariff selected",
+    "veterinaryLabelSummary": "Veterinarian selected",
+    "dateTimeLabelSummary": "Dates selected"
   },
   "editAppointment": {
     "appointmentName": "Edit appointment name",
