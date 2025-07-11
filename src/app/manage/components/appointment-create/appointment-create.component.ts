@@ -1,23 +1,12 @@
 import {Component, inject, Input, OnInit, ViewChild} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {FormsModule, NgForm} from "@angular/forms";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
+import {MatFormField, MatFormFieldModule, MatHint, MatLabel} from "@angular/material/form-field";
+import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
-import {Appointment} from "../../model/appointment.entity";
+import {Appointment, AppointmentStatus} from "../../model/appointment.entity";
 import {AppointmentsService} from "../../services/appointments.service";
-import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable, MatTableDataSource
-} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {TranslateModule} from "@ngx-translate/core";
 import {Pet} from "../../model/pet.entity";
 import {PetsService} from "../../services/pets.service";
@@ -25,18 +14,58 @@ import {Tariff} from "../../model/tariff.entity";
 import {TariffService} from "../../services/tariff.service";
 import {Veterinary} from "../../model/veterinary.entity";
 import {VeterinaryService} from "../../services/veterinary.service";
-import {MatOption} from "@angular/material/core";
+import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatSelect} from "@angular/material/select";
-import {NgForOf} from "@angular/common";
-import {Client} from "../../model/client.entity";
+import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatCheckbox} from "@angular/material/checkbox";
+import {MatChipListbox, MatChipOption} from '@angular/material/chips';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from "@angular/material/datepicker";
+import {MatIcon} from "@angular/material/icon";
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-appointment-create',
   standalone: true,
-  imports: [FormsModule,
+  imports: [
+    FormsModule,
     MatFormField,
     MatInput,
-    MatButton, MatLabel, MatSlideToggle, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatPaginator, MatRow, MatRowDef, MatSort, MatSortHeader, MatTable, TranslateModule, MatHeaderCellDef, MatOption, MatSelect, NgForOf],
+    MatButton,
+    MatLabel,
+    MatHint,
+    TranslateModule,
+    MatSelect,
+    NgForOf,
+    NgIf,
+    MatCardTitle,
+    MatCardContent,
+    MatCardHeader,
+    MatCard,
+    DatePipe,
+    CurrencyPipe,
+    MatCheckbox,
+    MatChipOption,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatIcon,
+    MatOptionModule,
+    MatChipListbox,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    CommonModule
+  ],
+  providers: [
+    provideNativeDateAdapter()
+  ],
   templateUrl: './appointment-create.component.html',
   styleUrl: './appointment-create.component.css'
 })
@@ -51,66 +80,191 @@ export class AppointmentCreateComponent implements OnInit {
   optionsVeterinarian: Veterinary[] = [];
   private veterinaryService: VeterinaryService = inject(VeterinaryService);
 
-
   @Input() appointment!: Appointment;
 
   @ViewChild('appointmentForm', { static: false }) protected appointmentForm!: NgForm;
 
-  constructor(private appointmentService: AppointmentsService,private router: Router) {
-    this.appointment=new Appointment({});
+  // Propiedades adicionales para el formulario mejorado
+  minDate = new Date();
+  maxDate = new Date();
+  showPreview = false;
+  timeSlots: string[] = [];
+
+  constructor(private appointmentService: AppointmentsService, private router: Router) {
+    this.appointment = new Appointment({});
+
+    // Configurar fechas mínimas y máximas
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
+
+    // Inicializar propiedades del appointment
+    this.appointment.status = AppointmentStatus.SCHEDULED
+    this.appointment.reminderEnabled = false;
+    this.appointment.reminderTime = '30';
+    this.appointment.notes = '';
   }
+
   ngOnInit() {
+    this.generateTimeSlots();
     this.getAllPets();
     this.getAllTariffs();
     this.getAllVeterinarians();
   }
-  getAllPets(){
+
+  generateTimeSlots() {
+    const slots: string[] = [];
+    for (let hour = 0; hour < 24; hour++) {
+      for (let min = 0; min < 60; min += 30) {
+        const hh = hour.toString().padStart(2, '0');
+        const mm = min.toString().padStart(2, '0');
+        slots.push(`${hh}:${mm}`);
+      }
+    }
+    this.timeSlots = slots;
+  }
+
+  getAllPets() {
     this.petService.getAll().subscribe((response: Array<Pet>) => {
-      this.optionsPet=response;
+      this.optionsPet = response;
     });
   }
 
   getAllTariffs() {
     this.tariffService.getAll().subscribe((response: Array<Tariff>) => {
-      this.optionsTariff=response;
+      this.optionsTariff = response;
     });
   }
 
-  getAllVeterinarians(){
+  getAllVeterinarians() {
     this.veterinaryService.getAll().subscribe((response: Array<Veterinary>) => {
-      this.optionsVeterinarian=response;
+      this.optionsVeterinarian = response;
     });
+  }
+
+  // Método para establecer duración automáticamente
+  setDuration(minutes: number) {
+    if (this.appointment.startDateAppointment && this.appointment.startTimeAppointment) {
+      const startDateTime = new Date(`${this.appointment.startDateAppointment}T${this.appointment.startTimeAppointment}`);
+      const endDateTime = new Date(startDateTime.getTime() + minutes * 60000);
+
+      this.appointment.endDateAppointment = endDateTime.toISOString().split('T')[0];
+      this.appointment.endTimeAppointment = endDateTime.toTimeString().split(' ')[0].substring(0, 5);
+    }
+  }
+
+  // Método para mostrar vista previa
+  onPreview() {
+    this.showPreview = !this.showPreview;
+  }
+
+  // Métodos para obtener nombres seleccionados
+  getSelectedPetName(): string {
+    const selectedPet = this.optionsPet.find(pet => pet.id === this.appointment.petId);
+    return selectedPet ? selectedPet.petName : '';
+  }
+
+  getSelectedVeterinarianName(): string {
+    const selectedVet = this.optionsVeterinarian.find(vet => vet.id === this.appointment.veterinarianId);
+    return selectedVet ? selectedVet.fullName || '' : '';
+  }
+
+  getSelectedTariffName(): string {
+    const selectedTariff = this.optionsTariff.find(tariff => tariff.id === this.appointment.tariffId);
+    return selectedTariff ? selectedTariff.serviceName : '';
+  }
+
+  // Validación personalizada para fechas
+  validateDates() {
+    if (this.appointment.startDateAppointment && this.appointment.endDateAppointment) {
+      const startDate = new Date(`${this.appointment.startDateAppointment}T${this.appointment.startTimeAppointment}`);
+      const endDate = new Date(`${this.appointment.endDateAppointment}T${this.appointment.endTimeAppointment}`);
+
+      if (endDate <= startDate) {
+        // Ajustar automáticamente con duración mínima de 30 minutos
+        this.setDuration(30);
+      }
+    }
   }
 
   private resetEditState() {
     this.appointmentForm.reset();
+    this.showPreview = false;
+    this.appointment = new Appointment({});
+    this.appointment.status = AppointmentStatus.SCHEDULED;
+    this.appointment.reminderEnabled = false;
+    this.appointment.reminderTime = '30';
+    this.appointment.notes = '';
   }
 
   private isValid(): boolean {
-    if(this.appointmentForm.value.tariffId==0)return false;
-    if(this.appointmentForm.value.petId==0)return false;
-    if(this.appointmentForm.value.veterinarianId==0)return false;
+    if (this.appointmentForm.value.tariffId == 0) return false;
+    if (this.appointmentForm.value.petId == 0) return false;
+    if (this.appointmentForm.value.veterinarianId == 0) return false;
+
+    // Validar que la fecha de fin sea posterior a la de inicio
+    if (this.appointment.startDateAppointment && this.appointment.endDateAppointment) {
+      const startDate = new Date(`${this.appointment.startDateAppointment}T${this.appointment.startTimeAppointment}`);
+      const endDate = new Date(`${this.appointment.endDateAppointment}T${this.appointment.endTimeAppointment}`);
+
+      if (endDate <= startDate) {
+        return false;
+      }
+    }
+
     return this.appointmentForm.valid || false;
   }
 
   onSubmit() {
+    // Validar fechas antes de enviar
+    this.validateDates();
+
     if (this.isValid()) {
       this.createAppointment();
-   this.resetEditState();
+      this.resetEditState();
     } else {
       console.error('Invalid form data');
+      // Aquí podrías mostrar un mensaje de error al usuario
     }
   }
 
   createAppointment() {
+    try {
+      const startDate = new Date(this.appointment.startDateAppointment);
+      const endDate = new Date(this.appointment.endDateAppointment);
 
-    this.appointment.registrationDate=`${this.appointmentForm.controls['startDateAppointment']?.value}T${this.appointmentForm.controls['startTimeAppointment']?.value}`
-    this.appointment.endDate=`${this.appointmentForm.controls['endDateAppointment']?.value}T${this.appointmentForm.controls['endTimeAppointment']?.value}`
-    this.appointmentService.create(this.appointment).subscribe((response: Appointment) => {
-      this.router.navigate(['/manage/appointments']);
-      this.resetEditState();
-    });
+      const [startHour, startMinute] = this.appointment.startTimeAppointment.split(':').map(Number);
+      const [endHour, endMinute] = this.appointment.endTimeAppointment.split(':').map(Number);
+
+      startDate.setHours(startHour, startMinute, 0, 0);
+      endDate.setHours(endHour, endMinute, 0, 0);
+
+      // ✅ Enviar hora LOCAL en formato ISO sin la "Z" de UTC
+      const formatLocalISO = (date: Date) => {
+        const tzOffset = date.getTimezoneOffset() * 60000;
+        return new Date(date.getTime() - tzOffset).toISOString().slice(0, -1); // sin "Z"
+      };
+
+      this.appointment.registrationDate = formatLocalISO(startDate);
+      this.appointment.endDate = formatLocalISO(endDate);
+
+      console.log('startDateAppointment:', this.appointment.startDateAppointment);
+      console.log('startTimeAppointment:', this.appointment.startTimeAppointment);
+      console.log('endDateAppointment:', this.appointment.endDateAppointment);
+      console.log('endTimeAppointment:', this.appointment.endTimeAppointment);
+      console.log('registrationDate:', this.appointment.registrationDate);
+      console.log('endDate:', this.appointment.endDate);
+      console.log('Veterinario ID:', this.appointment.veterinarianId);
+      console.log('👉 Payload completo:', this.appointment);
+
+      this.appointmentService.create(this.appointment).subscribe((response: Appointment) => {
+        this.router.navigate(['/manage/appointments']);
+        this.resetEditState();
+      });
+
+    } catch (err) {
+      console.error('Error creando cita:', err);
+    }
   }
+
 
   onCancel() {
     this.router.navigate(['/manage/appointments']);

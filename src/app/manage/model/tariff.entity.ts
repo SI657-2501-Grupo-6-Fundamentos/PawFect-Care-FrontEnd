@@ -4,19 +4,22 @@ export class Tariff {
   cost: number;
   minimumCost: number;
   maximumCost: number;
+  duration: number; // In minutes, if needed
 
   constructor(
     id: number,
     serviceName: Tariff.ServiceName,
     cost: number,
     minimumCost: number,
-    maximumCost: number
+    maximumCost: number,
+    duration?: number
   ) {
     this.id = id;
     this.serviceName = serviceName;
     this.cost = cost;
     this.minimumCost = minimumCost;
     this.maximumCost = maximumCost;
+    this.duration = duration || 30;
   }
 }
 

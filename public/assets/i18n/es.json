@@ -174,7 +174,7 @@
     "noSelectedTariff": "Tarifa no seleccionada",
     "registrationDateLabel": "Ingresa una fecha limite de inicio",
     "veterinarianLabel": "Selecciona un veterinario",
-    "noSelectedVeterinarian": "Veterinario no seleccionado",
+    "noSelectedVeterinary": "Veterinario no seleccionado",
     "status": {
       "label": "Estado",
       "scheduled": "Pendiente",
@@ -188,7 +188,12 @@
     "veterinaryLabel": "Selecciona un veterinario",
     "actions": "Acciones",
     "registrationDate": "Fecha de registro",
-    "endDate": "Fecha de finalización"
+    "endDate": "Fecha de finalización",
+    "basicInfoTitle": "Nombre de la cita",
+    "nameHint": "Ingresa el nombre de la cita",
+    "dateTimeTitle": "Fecha y Hora",
+    "statusTitle": "Estado",
+    "assignmentTitle": "Asignaciones"
   },
   "editAppointment": {
     "appointmentName": "Editar nombre de la cita",
@@ -207,7 +212,14 @@
     "pet": "Selecciona una mascota",
     "noSelectedPet": "No se ha seleccionado una mascota",
     "updateButton": "Actualizar",
-    "cancelButton": "Cancelar"
+    "cancelButton": "Cancelar",
+    "reminderTitle": "Recordatorio de Cita",
+    "enableReminder": "Habilitar Recordatorio",
+    "reminderTimeLabel": "Ingresa el tiempo del recordatorio antes del inicio de la cita",
+    "minutesBefore": "minutos antes de la cita",
+    "hourBefore": "horas antes de la cita",
+    "dayBefore": "días antes de la cita",
+    "previewButton": "Regresar"
   },
   "newClient": {
     "title": "Nuevo Cliente",
