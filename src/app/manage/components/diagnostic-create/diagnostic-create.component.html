@@ -11,27 +11,27 @@
     </div>
 
     <div class="form-group">
-      <label for="diagnosticDescription">Descripción</label>
+      <label for="description">Descripción</label>
       <textarea
-        id="diagnosticDescription"
-        formControlName="diagnosticDescription"
+        id="description"
+        formControlName="description"
         rows="3"
         placeholder="Ingrese una descripción"
       ></textarea>
-      <div class="error" *ngIf="diagnosticForm.get('diagnosticDescription')?.touched && diagnosticForm.get('diagnosticDescription')?.invalid">
+      <div class="error" *ngIf="diagnosticForm.get('description')?.touched && diagnosticForm.get('description')?.invalid">
         Campo requerido.
       </div>
     </div>
 
     <div class="form-group">
-      <label for="diagnosticType">Tipo de diagnóstico</label>
-      <select id="diagnosticType" formControlName="diagnosticType">
+      <label for="diagnosticSpecialty">Tipo de diagnóstico</label>
+      <select id="diagnosticSpecialty" formControlName="diagnosticSpecialty">
         <option value="" disabled>Seleccione un tipo de diagnóstico</option>
-        <option *ngFor="let type of diagnosticTypes" [value]="type">
+        <option *ngFor="let type of diagnosticSpecialties" [value]="type">
           {{ getFormattedDiagnosticName(type) }}
         </option>
       </select>
-      <div class="error" *ngIf="diagnosticForm.get('diagnosticType')?.touched && diagnosticForm.get('diagnosticType')?.invalid">
+      <div class="error" *ngIf="diagnosticForm.get('diagnosticSpecialty')?.touched && diagnosticForm.get('diagnosticSpecialty')?.invalid">
         Campo requerido.
       </div>
     </div>

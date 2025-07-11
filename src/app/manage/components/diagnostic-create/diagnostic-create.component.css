@@ -301,7 +301,7 @@ select {
   box-shadow: 0 0 8px rgba(212, 118, 26, 0.3);
 }
 
-textarea#diagnosticDescription {
+textarea#description {
   width: 100%;
   min-height: 80px;
   padding: 14px 16px;
@@ -318,13 +318,13 @@ textarea#diagnosticDescription {
   box-sizing: border-box;
 }
 
-textarea#diagnosticDescription:focus {
+textarea#description:focus {
   border-color: #d4761a;
   box-shadow: 0 0 0 3px rgba(212, 118, 26, 0.1);
   background-color: #f5faff;
   transform: translateY(-2px);
 }
 
-textarea#diagnosticDescription:hover {
+textarea#description:hover {
   border-color: #d4761a;
 }

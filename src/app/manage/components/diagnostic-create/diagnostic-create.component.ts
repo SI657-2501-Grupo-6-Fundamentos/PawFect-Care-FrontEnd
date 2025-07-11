@@ -19,7 +19,7 @@ export class DiagnosticCreateComponent {
   @Output() diagnosticCreated = new EventEmitter<void>();
   diagnosticForm: FormGroup;
 
-  diagnosticTypes = [
+  diagnosticSpecialties = [
     'GENERAL_MEDICINE',
     'VETERINARY_SURGERY',
     'VETERINARY_PATHOLOGY',
@@ -32,8 +32,8 @@ export class DiagnosticCreateComponent {
   constructor(private fb: FormBuilder, private diagnosticService: DiagnosticService, private router: Router) {
     this.diagnosticForm = this.fb.group({
       diagnosticDate: ['', Validators.required],
-      diagnosticDescription: ['', Validators.required],
-      diagnosticType: ['', Validators.required],
+      description: ['', Validators.required],
+      diagnosticSpecialty: ['', Validators.required],
     });
   }
 

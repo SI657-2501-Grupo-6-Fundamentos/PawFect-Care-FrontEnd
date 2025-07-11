@@ -31,6 +31,8 @@ import {
   ScheduleVeterinaryManagementComponent
 } from "./manage/pages/schedule-veterinary-management/schedule-veterinary-management.component";
 import {DiagnosticCreateComponent} from "./manage/components/diagnostic-create/diagnostic-create.component";
+import {DiagnosticManagementComponent} from "./manage/pages/diagnostic-management/diagnostic-management.component";
+import {DiagnosticEditComponent} from "./manage/components/diagnostic-edit/diagnostic-edit.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,14 +58,14 @@ export const routes: Routes = [
     data: { roles: ['pet-owner'] }
   },
   {
-    path: 'manage/tariffs',
-    component: TariffManagementComponent,
+    path: 'manage/veterinarians/schedules',
+    component: ScheduleVeterinaryManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
   {
-    path: 'manage/veterinarians/schedules',
-    component: ScheduleVeterinaryManagementComponent,
+    path: 'manage/tariffs',
+    component: TariffManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
@@ -81,13 +83,19 @@ export const routes: Routes = [
   },
   {
     path: 'manage/diagnostics',
-    component: DiagnosticCreateComponent,
+    component: DiagnosticManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
   {
     path: 'manage/diagnostics/add',
     component: DiagnosticCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/diagnostics/edit/:id',
+    component: DiagnosticEditComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
