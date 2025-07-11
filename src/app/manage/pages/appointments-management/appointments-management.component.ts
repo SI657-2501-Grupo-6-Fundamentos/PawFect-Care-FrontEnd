@@ -96,8 +96,8 @@ export class AppointmentsManagementComponent implements OnInit {
   navigateToAddAppointment() {
     this.router.navigate(['/manage/appointments/add']);
   }
-  navigateToEditAppointment(idAppointments: number) {
-    this.router.navigate([`/manage/appointments/edit/`, idAppointments]);
+  navigateToEditAppointment(id: number) {
+    this.router.navigate([`/manage/appointments/edit/`, id]);
   }
 
   navigateToCreateReview(idAppointments: number) {

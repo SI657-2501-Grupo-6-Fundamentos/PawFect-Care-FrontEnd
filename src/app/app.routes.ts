@@ -124,7 +124,7 @@ export const routes: Routes = [
     data: { roles: ['pet-owner'] }
   },
   {
-    path: 'manage/appointments/edit/:idAppointments',
+    path: 'manage/appointments/edit/:id',
     component: AppointmentEditComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }

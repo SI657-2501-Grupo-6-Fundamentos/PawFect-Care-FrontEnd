@@ -30,34 +30,9 @@
       <input matInput [(ngModel)]="appointment.status" name="status" placeholder="{{ 'editAppointment.statusPlaceholder' | translate }}" type="text" required />
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>{{ 'editAppointment.pet' | translate }}</mat-label>
-      <mat-select disabled name="petId" [(ngModel)]="appointment.petId">
-        <mat-option [value]="0">{{ 'editAppointment.noSelectedPet' | translate }}</mat-option>
-        <mat-option *ngFor="let option of optionsPet" [value]="option.id">{{ option.petName }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>{{ 'editAppointment.tariff' | translate }}</mat-label>
-      <mat-select disabled name="tariffId" [(ngModel)]="appointment.tariffId">
-        <mat-option [value]="0">{{ 'editAppointment.noSelectedTariff' | translate }}</mat-option>
-        <mat-option *ngFor="let option of optionsTariff" [value]="option.id">{{ option.serviceName }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>{{ 'editAppointment.veterinary' | translate }}</mat-label>
-      <mat-select disabled name="veterinarianId" [(ngModel)]="appointment.veterinarianId">
-        <mat-option [value]="0">{{ 'editAppointment.noSelectedVeterinary' | translate }}</mat-option>
-        <mat-option *ngFor="let option of optionsVeterinarian" [value]="option.id">{{ option.fullName }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
     <div class="container-actions">
       <button class="button-primary" mat-flat-button type="submit">{{ 'editAppointment.updateButton' | translate }}</button>
       <button class="button-secondary" mat-raised-button type="button" (click)="onCancel()">{{ 'editAppointment.cancelButton' | translate }}</button>
     </div>
 
   </form>
-
