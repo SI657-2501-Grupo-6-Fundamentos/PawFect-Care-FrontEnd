@@ -177,7 +177,7 @@
     "noSelectedTariff": "No selected tariff",
     "registrationDateLabel": "Enter your start date",
     "veterinarianLabel": "Select a Veterinarian",
-    "noSelectedVeterinarian": "No selected Veterinarian",
+    "noSelectedVeterinary": "No selected Veterinarian",
     "status": {
       "label": "Status",
       "scheduled": "Scheduled",
@@ -191,7 +191,19 @@
     "veterinaryLabel": "Selecciona un veterinario",
     "actions": "Actions",
     "registrationDate": "Registration date",
-    "endDate": "End date"
+    "endDate": "End date",
+    "basicInfoTitle": "Appointment Name",
+    "nameHint": "Enter the name of the appointment",
+    "dateTimeTitle": "Date and Time",
+    "statusTitle": "Status",
+    "assignmentTitle": "Assignment",
+    "reminderTitle": "Appointment Reminder",
+    "enableReminder": "Enable Reminder",
+    "reminderTimeLabel": "Enter the reminder time before the appointment starts",
+    "minutesBefore": "minutes before the appointment start",
+    "hourBefore": "hours before the appointment start",
+    "dayBefore": "days before the appointment start",
+    "previewButton": "Back"
   },
   "editAppointment": {
     "appointmentName": "Edit appointment name",
