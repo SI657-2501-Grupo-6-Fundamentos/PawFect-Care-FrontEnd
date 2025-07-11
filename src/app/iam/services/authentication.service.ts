@@ -312,7 +312,7 @@ export class AuthenticationService {
         this.router.navigate(['/manage/clients']).then();
         break;
       case 'pet-owner':
-        this.router.navigate(['/manage/pets']).then();
+        this.router.navigate(['/']).then();
         break;
       default:
         this.router.navigate(['/']).then();

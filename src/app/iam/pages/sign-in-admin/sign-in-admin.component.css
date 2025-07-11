@@ -1,7 +1,7 @@
 /* Título principal con efectos modernos */
 h2 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 2.5rem;
   font-weight: 700;
   background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
@@ -239,7 +239,7 @@ mat-error::before {
   color: white;
   border: none;
   border-radius: 16px;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
@@ -263,7 +263,7 @@ mat-error::before {
   background: transparent;
   border: 2px solid rgba(255, 140, 0, 0.3);
   border-radius: 16px;
-  padding: 0.875rem 2rem;
+  padding: 0.875rem 1rem;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
@@ -290,8 +290,8 @@ mat-error::before {
   align-items: center;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  margin-top: 2rem;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
 }
 
 /* Texto centrado */
@@ -327,7 +327,7 @@ mat-error::before {
 .divider-container {
   display: flex;
   align-items: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
   width: 100%;
   position: relative;
 }
@@ -351,7 +351,7 @@ mat-error::before {
 }
 
 .divider-text {
-  margin: 0 2rem;
+  margin: 0 1rem;
   color: #777;
   font-size: 0.875rem;
   font-weight: 600;
@@ -424,12 +424,12 @@ mat-card {
 @media (max-width: 768px) {
   mat-card {
     min-width: 300px;
-    padding: 2rem;
+    padding: 1rem;
     margin: 1rem;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .container-actions {

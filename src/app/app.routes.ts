@@ -85,6 +85,7 @@ export const routes: Routes = [
     data: { roles: ['veterinary', 'admin'] }
   },
 
+
   // Routes for Pet Owners (Users)
   {
     path: 'manage/owners/:ownerId/pets',
@@ -125,6 +126,12 @@ export const routes: Routes = [
   {
     path: 'manage/veterinarians/schedules/:id',
     component: ScheduleManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/appointments/edit-review/:id',
+    component: ReviewEditComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
   },

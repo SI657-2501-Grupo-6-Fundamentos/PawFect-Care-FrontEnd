@@ -11,6 +11,7 @@ import {LanguageSwitcherComponent} from "../language-switcher/language-switcher.
 import {Router, RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from "@angular/router";
 import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {AuthenticationService} from "../../../iam/services/authentication.service";
+import {TranslateModule} from "@ngx-translate/core";
 
 interface NavigationOption {
   path: string;
@@ -45,7 +46,8 @@ interface NavigationOption {
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslateModule
   ],
   templateUrl: './side-navigation-bar.component.html',
   styleUrl: './side-navigation-bar.component.css'
@@ -74,7 +76,7 @@ export class SideNavigationBarComponent {
     { path: '/manage/schedules', title: 'Veterinarian Schedules', icon: 'schedule', roles: ['pet-owner'] },
 
     // Shared
-    { path: '/manage/appointments/review/:id', title: 'Review Appointment', icon: 'rate_review', roles: ['pet-owner', 'veterinary'] },
+
   ];
 
   constructor(
