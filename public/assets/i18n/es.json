@@ -183,7 +183,9 @@
       "cancelled": "Cancelado"
     },
     "searchByName": "Buscar",
-    "searchPlaceholder": "Buscar"
+    "searchPlaceholder": "Buscar",
+    "appointmentName": "Nombre de la cita",
+    "veterinaryLabel": "Selecciona un veterinario"
   },
   "editAppointment": {
     "appointmentName": "Editar nombre de la cita",

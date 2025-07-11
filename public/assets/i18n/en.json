@@ -185,7 +185,9 @@
       "cancelled": "Cancelled"
     },
     "searchByName": "Search",
-    "searchPlaceholder": "Search"
+    "searchPlaceholder": "Search",
+    "appointmentName": "Appointment Name",
+    "veterinaryLabel": "Selecciona un veterinario"
   },
   "editAppointment": {
     "appointmentName": "Edit appointment name",

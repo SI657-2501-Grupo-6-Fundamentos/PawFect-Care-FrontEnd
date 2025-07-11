@@ -27,7 +27,14 @@ export class TariffCreateComponent {
     'VETERINARY_RADIOLOGY',
     'VETERINARY_NUTRITION',
     'VETERINARY_BEHAVIOR',
-    'EMERGENCY_AND_CRITICAL_CARE'
+    'VETERINARY_OPHTHALMOLOGY',
+    'VETERINARY_DERMATOLOGY',
+    'VETERINARY_CARDIOLOGY',
+    'VETERINARY_ONCOLOGY',
+    'VETERINARY_NEUROLOGY',
+    'VETERINARY_ORTHOPEDICS',
+    'VETERINARY_PHYSIOTHERAPY',
+    'EMERGENCY_AND_CRITICAL_CARE',
   ];
 
   constructor(private fb: FormBuilder, private tariffService: TariffService, private router: Router) {

@@ -9,6 +9,10 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {DatePipe, NgForOf} from "@angular/common";
 import {Pet} from "../../model/pet.entity";
 import {PetsService} from "../../services/pets.service";
+import {Tariff} from "../../model/tariff.entity";
+import {TariffService} from "../../services/tariff.service";
+import {Veterinary} from "../../model/veterinary.entity";
+import {VeterinaryService} from "../../services/veterinary.service";
 import {Appointment} from "../../model/appointment.entity";
 import {AppointmentsService} from "../../services/appointments.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -43,16 +47,26 @@ export class AppointmentEditComponent implements ngOnInit{
 
   @ViewChild('appointmentForm', { static: false }) protected appointmentForm!: NgForm;
 
-  options: Pet[] = [];
+  optionsPet: Pet[] = [];
+  optionsTariff: Tariff[] = [];
+  optionsVeterinarian: Veterinary[] = [];
   appointmentId!: number;
 
-  constructor(private datePipe: DatePipe,private route: ActivatedRoute,private petService: PetsService,private appointmentService: AppointmentsService,private router: Router) {
+  constructor(private datePipe: DatePipe,
+              private route: ActivatedRoute,
+              private petService: PetsService,
+              private tariffService: TariffService,
+              private veterinaryService: VeterinaryService,
+              private appointmentService: AppointmentsService,
+              private router: Router) {
     this.appointment = new Appointment({});
   }
 
   ngOnInit() {
     this.appointmentId = +this.route.snapshot.paramMap.get('id')!;
     this.getAllPets();
+    this.getAllTariffs();
+    this.getAllVeterinarians();
     this.getAppointmentById();
   }
 
@@ -67,7 +81,19 @@ export class AppointmentEditComponent implements ngOnInit{
 
   getAllPets(){
     this.petService.getAll().subscribe((response: Pet[]) => {
-      this.options=response;
+      this.optionsPet=response;
+    });
+  }
+
+  getAllTariffs() {
+    this.tariffService.getAll().subscribe((response: Tariff[]) => {
+      this.optionsTariff=response;
+    });
+  }
+
+  getAllVeterinarians(){
+    this.veterinaryService.getAll().subscribe((response: Veterinary[]) => {
+      this.optionsVeterinarian=response;
     });
   }
 
@@ -82,7 +108,6 @@ export class AppointmentEditComponent implements ngOnInit{
       this.appointment.startTimeAppointment=timeOnlyStart;
       this.appointment.endDateAppointment=dateOnlyEnd;
       this.appointment.endTimeAppointment=timeOnlyEnd;
-
     });
   }
 
@@ -109,7 +134,5 @@ export class AppointmentEditComponent implements ngOnInit{
   onCancel() {
     this.router.navigate(['/manage/appointments']);
   }
-
-
 
 }

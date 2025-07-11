@@ -19,7 +19,6 @@ import {TranslateModule} from "@ngx-translate/core";
 import {Pet} from "../../model/pet.entity";
 import {PetsService} from "../../services/pets.service";
 import {Router} from "@angular/router";
-import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {Appointment} from "../../model/appointment.entity";
 import {AppointmentsService} from "../../services/appointments.service";
 
@@ -42,12 +41,9 @@ import {AppointmentsService} from "../../services/appointments.service";
     MatHeaderCellDef,
     MatButtonModule,
     TranslateModule,
-    MatButtonToggleGroup,
-    MatButtonToggle,
     FormsModule,
     MatFormFieldModule,
     MatInputModule
-
   ],
   templateUrl: './appointments-management.component.html',
   styleUrl: './appointments-management.component.css'
@@ -60,7 +56,6 @@ export class AppointmentsManagementComponent implements OnInit {
     "registrationDate",
     "endDate",
     "status",
-    "isMedical",
     "actions"
   ];
   protected   searchQuery: string = '';
@@ -86,7 +81,6 @@ export class AppointmentsManagementComponent implements OnInit {
   ngOnInit() {
     this.getAllAppointments();
   }
-
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

@@ -26,8 +26,6 @@
       <input matInput name="endTimeAppointment" [(ngModel)]="appointment.endTimeAppointment" type="time" placeholder="{{ 'appointment.endTimePlaceholder' | translate }}" required />
     </mat-form-field>
 
-    <p><mat-slide-toggle [(ngModel)]="appointment.isMedical" name="isMedical" labelPosition="before">{{ 'appointment.isMedicalLabel' | translate }}</mat-slide-toggle></p>
-
     <mat-form-field class="input-full-width">
       <mat-label>{{ 'appointment.statusLabel' | translate }}</mat-label>
       <input matInput [(ngModel)]="appointment.status" name="status" placeholder="{{ 'appointment.statusPlaceholder' | translate }}" type="text" required />
@@ -37,8 +35,28 @@
       <mat-label>{{ 'appointment.petLabel' | translate }}</mat-label>
       <mat-select name="petId" [(ngModel)]="appointment.petId">
         <mat-option [value]="0">{{ 'appointment.noSelectedPet' | translate }}</mat-option>
-        <mat-option *ngFor="let option of options" [value]="option.id">
+        <mat-option *ngFor="let option of optionsPet" [value]="option.id">
           {{ option.petName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="input-full-width">
+      <mat-label>{{ 'appointment.tariffLabel' | translate }}</mat-label>
+      <mat-select name="tariffId" [(ngModel)]="appointment.tariffId">
+        <mat-option [value]="0">{{ 'appointment.noSelectedTariff' | translate }}</mat-option>
+        <mat-option *ngFor="let option of optionsTariff" [value]="option.id">
+          {{ option.serviceName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="input-full-width">
+      <mat-label>{{ 'appointment.veterinaryLabel' | translate }}</mat-label>
+      <mat-select name="veterinarianId" [(ngModel)]="appointment.veterinarianId">
+        <mat-option [value]="0">{{ 'appointment.noSelectedVeterinary' | translate }}</mat-option>
+        <mat-option *ngFor="let option of optionsVeterinarian" [value]="option.id">
+          {{ option.fullName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -48,4 +66,3 @@
       <button class="button-secondary" mat-raised-button type="button" (click)="onCancel()">{{ 'appointment.cancelButton' | translate }}</button>
     </div>
   </form>
-
