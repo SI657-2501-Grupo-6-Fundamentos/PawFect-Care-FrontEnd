@@ -179,15 +179,19 @@
     "veterinarianLabel": "Select a Veterinarian",
     "noSelectedVeterinarian": "No selected Veterinarian",
     "status": {
+      "label": "Status",
       "scheduled": "Scheduled",
       "completed": "Completed",
       "in_progress": "In Progress",
       "cancelled": "Cancelled"
     },
-    "searchByName": "Search",
+    "searchByName": "Search by appointment name",
     "searchPlaceholder": "Search",
     "appointmentName": "Appointment Name",
-    "veterinaryLabel": "Selecciona un veterinario"
+    "veterinaryLabel": "Selecciona un veterinario",
+    "actions": "Actions",
+    "registrationDate": "Registration date",
+    "endDate": "End date"
   },
   "editAppointment": {
     "appointmentName": "Edit appointment name",

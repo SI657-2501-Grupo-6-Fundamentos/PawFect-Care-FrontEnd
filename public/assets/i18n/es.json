@@ -164,7 +164,6 @@
     "endDatePlaceholder": "Selecciona la fecha",
     "endTimeLabel": "Ingresa la hora de finalización",
     "endTimePlaceholder": "Selecciona la hora",
-    "isMedicalLabel": "¿Es una cita médica?",
     "statusLabel": "Ingresa tu estado",
     "statusPlaceholder": "Estado",
     "petLabel": "Selecciona tu mascota",
@@ -177,15 +176,19 @@
     "veterinarianLabel": "Selecciona un veterinario",
     "noSelectedVeterinarian": "Veterinario no seleccionado",
     "status": {
+      "label": "Estado",
       "scheduled": "Pendiente",
       "completed": "Completado",
       "in_progress": "En proceso",
       "cancelled": "Cancelado"
     },
-    "searchByName": "Buscar",
+    "searchByName": "Buscar por nombre de la cita",
     "searchPlaceholder": "Buscar",
     "appointmentName": "Nombre de la cita",
-    "veterinaryLabel": "Selecciona un veterinario"
+    "veterinaryLabel": "Selecciona un veterinario",
+    "actions": "Acciones",
+    "registrationDate": "Fecha de registro",
+    "endDate": "Fecha de finalización"
   },
   "editAppointment": {
     "appointmentName": "Editar nombre de la cita",
