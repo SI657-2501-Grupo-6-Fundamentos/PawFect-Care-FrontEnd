@@ -1,1 +1,44 @@
-<p>diagnostic-create works!</p>
+<div class="diagnostic-form-container">
+  <h2>Crear nuevo Diagnóstico</h2>
+
+  <form [formGroup]="diagnosticForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="diagnosticDate">Fecha</label>
+      <input id="diagnosticDate" type="date" formControlName="diagnosticDate" />
+      <div class="error" *ngIf="diagnosticForm.get('diagnosticDate')?.touched && diagnosticForm.get('diagnosticDate')?.invalid">
+        Campo requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="diagnosticDescription">Descripción</label>
+      <textarea
+        id="diagnosticDescription"
+        formControlName="diagnosticDescription"
+        rows="3"
+        placeholder="Ingrese una descripción"
+      ></textarea>
+      <div class="error" *ngIf="diagnosticForm.get('diagnosticDescription')?.touched && diagnosticForm.get('diagnosticDescription')?.invalid">
+        Campo requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="diagnosticType">Tipo de diagnóstico</label>
+      <select id="diagnosticType" formControlName="diagnosticType">
+        <option value="" disabled>Seleccione un tipo de diagnóstico</option>
+        <option *ngFor="let type of diagnosticTypes" [value]="type">
+          {{ getFormattedDiagnosticName(type) }}
+        </option>
+      </select>
+      <div class="error" *ngIf="diagnosticForm.get('diagnosticType')?.touched && diagnosticForm.get('diagnosticType')?.invalid">
+        Campo requerido.
+      </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" [disabled]="diagnosticForm.invalid">Guardar Diagnóstico</button>
+      <button type="button" class="secondary" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

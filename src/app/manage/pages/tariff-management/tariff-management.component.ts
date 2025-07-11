@@ -35,7 +35,7 @@ export class TariffManagementComponent implements OnInit {
   }
 
   onEditTariff(tariff: Tariff): void {
-    this.router.navigate(['/manage/edit-tariff', tariff.id]);
+    this.router.navigate(['manage/tariffs/edit', tariff.id]);
   }
 
   onCreateAppointment(tariff: Tariff): void {
@@ -49,7 +49,7 @@ export class TariffManagementComponent implements OnInit {
   }
 
   createTariff(): void {
-    this.router.navigate(['/manage/add-tariffs']);
+    this.router.navigate(['/manage/tariffs/add']);
   }
 }
 

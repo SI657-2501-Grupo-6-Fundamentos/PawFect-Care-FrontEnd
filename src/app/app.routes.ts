@@ -30,6 +30,7 @@ import {SignInAdminComponent} from "./iam/pages/sign-in-admin/sign-in-admin.comp
 import {
   ScheduleVeterinaryManagementComponent
 } from "./manage/pages/schedule-veterinary-management/schedule-veterinary-management.component";
+import {DiagnosticCreateComponent} from "./manage/components/diagnostic-create/diagnostic-create.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -73,18 +74,23 @@ export const routes: Routes = [
     data: { roles: ['veterinary', 'admin'] }
   },
   {
-    path: 'manage/add-tariffs',
-    component: TariffCreateComponent,
-    canActivate: [authenticationGuard, RoleGuard],
-    data: { roles: ['veterinary', 'admin'] }
-  },
-  {
     path: 'manage/tariffs/edit/:id',
     component: TariffEditComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['veterinary', 'admin'] }
   },
-
+  {
+    path: 'manage/diagnostics',
+    component: DiagnosticCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
+  {
+    path: 'manage/diagnostics/add',
+    component: DiagnosticCreateComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary', 'admin'] }
+  },
 
   // Routes for Pet Owners (Users)
   {
