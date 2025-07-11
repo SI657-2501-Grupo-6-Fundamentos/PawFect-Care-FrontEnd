@@ -8,7 +8,6 @@ export class Veterinary {
   veterinarianSpeciality?: VeterinarianSpeciality;
   availableStartTime?: string;
   availableEndTime?: string;
-  availability?: string; // Optional field for availability status
 
   constructor(
     id: number = 0,
@@ -20,8 +19,6 @@ export class Veterinary {
     veterinarianSpeciality: VeterinarianSpeciality = VeterinarianSpeciality.GENERAL,
     availableStartTime: string = '',
     availableEndTime: string = '',
-    availability: string = '',
-
   ) {
     this.id = id ?? '0';
     this.userId = userId ?? '0';
@@ -32,7 +29,6 @@ export class Veterinary {
     this.veterinarianSpeciality = veterinarianSpeciality ?? '';
     this.availableStartTime = availableStartTime ?? '';
     this.availableEndTime = availableEndTime ?? '';
-    this.availability = availability || '';
   }
 }
 

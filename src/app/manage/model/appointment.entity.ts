@@ -39,7 +39,7 @@ export class Appointment {
     endDateAppointment?: string;
     notes?: string;
     reminderEnabled?: boolean;
-    reminderTime?: string
+    reminderTime?: string;
   } = {}) {
     this.id = appointment.id || 0;
     this.appointmentName = appointment.appointmentName || '';

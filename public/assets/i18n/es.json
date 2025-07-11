@@ -179,7 +179,7 @@
       "label": "Estado",
       "scheduled": "Pendiente",
       "completed": "Completado",
-      "in_progress": "En proceso",
+      "inProgress": "En proceso",
       "cancelled": "Cancelado"
     },
     "searchByName": "Buscar por nombre de la cita",
@@ -205,7 +205,11 @@
     "petLabelSummary": "Mascota seleccionada",
     "tariffLabelSummary": "Tarifa seleccionada",
     "veterinaryLabelSummary": "Veterinario seleccionado",
-    "dateTimeLabelSummary": "Fecha seleccionada"
+    "dateTimeLabelSummary": "Fecha seleccionada",
+    "petHint": "Selecciona una mascota",
+    "tariffHint": "Selecciona una tarifa",
+    "veterinaryHint": "Selecciona un veterinario",
+    "costLabel": "Costo de la cita"
   },
   "editAppointment": {
     "appointmentName": "Editar nombre de la cita",

@@ -18,8 +18,6 @@ import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatSelect} from "@angular/material/select";
 import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
-import {MatCheckbox} from "@angular/material/checkbox";
-import {MatChipListbox, MatChipOption} from '@angular/material/chips';
 import {
   MatDatepicker,
   MatDatepickerInput,
@@ -28,6 +26,7 @@ import {
 } from "@angular/material/datepicker";
 import {MatIcon} from "@angular/material/icon";
 import { provideNativeDateAdapter } from '@angular/material/core';
+import {ClientsService} from "../../services/clients.service";
 
 @Component({
   selector: 'app-appointment-create',
@@ -76,7 +75,6 @@ export class AppointmentCreateComponent implements OnInit {
 
   optionsVeterinarian: Veterinary[] = [];
   private veterinaryService: VeterinaryService = inject(VeterinaryService);
-
   @Input() appointment!: Appointment;
 
   @ViewChild('appointmentForm', { static: false }) protected appointmentForm!: NgForm;
@@ -87,7 +85,9 @@ export class AppointmentCreateComponent implements OnInit {
   showPreview = false;
   timeSlots: string[] = [];
 
-  constructor(private appointmentService: AppointmentsService, private router: Router) {
+  constructor(private appointmentService: AppointmentsService,
+              private router: Router,
+              private clientsService: ClientsService) {
     this.appointment = new Appointment({});
 
     // Configurar fechas mínimas y máximas
@@ -108,6 +108,10 @@ export class AppointmentCreateComponent implements OnInit {
     this.setDefaultAppointmentName();
   }
 
+  get selectedTariff(): Tariff | undefined {
+    return this.optionsTariff.find(t => t.id === this.appointment.tariffId);
+  }
+
   generateTimeSlots() {
     const slots: string[] = [];
     for (let hour = 0; hour < 24; hour++) {
@@ -123,8 +127,19 @@ export class AppointmentCreateComponent implements OnInit {
   getAllPets() {
     this.petService.getAll().subscribe((response: Array<Pet>) => {
       this.optionsPet = response;
+
+      // Obtener los dueños de las mascotas
+      this.optionsPet.forEach(pet => {
+        if (pet.ownerId) {
+          this.clientsService.getOwnerById(pet.ownerId).subscribe(owner => {
+            // 👉 Añadir dinámicamente el nombre del dueño al objeto `pet`
+            (pet as any).ownerName = owner.fullName;
+          });
+        }
+      });
     });
   }
+
 
   getAllTariffs() {
     this.tariffService.getAll().subscribe((response: Array<Tariff>) => {
@@ -243,27 +258,26 @@ export class AppointmentCreateComponent implements OnInit {
       startDate.setHours(startHour, startMinute, 0, 0);
       endDate.setHours(endHour, endMinute, 0, 0);
 
-      // ✅ Enviar hora LOCAL en formato ISO sin la "Z" de UTC
       const formatLocalISO = (date: Date) => {
         const tzOffset = date.getTimezoneOffset() * 60000;
-        return new Date(date.getTime() - tzOffset).toISOString().slice(0, -1); // sin "Z"
+        return new Date(date.getTime() - tzOffset).toISOString().slice(0, -1);
       };
 
       this.appointment.registrationDate = formatLocalISO(startDate);
       this.appointment.endDate = formatLocalISO(endDate);
 
-      console.log('startDateAppointment:', this.appointment.startDateAppointment);
-      console.log('startTimeAppointment:', this.appointment.startTimeAppointment);
-      console.log('endDateAppointment:', this.appointment.endDateAppointment);
-      console.log('endTimeAppointment:', this.appointment.endTimeAppointment);
-      console.log('registrationDate:', this.appointment.registrationDate);
-      console.log('endDate:', this.appointment.endDate);
-      console.log('Veterinario ID:', this.appointment.veterinarianId);
       console.log('👉 Payload completo:', this.appointment);
 
       this.appointmentService.create(this.appointment).subscribe((response: Appointment) => {
         const realName = `CITA-${response.id}`;
-        this.appointmentService.update(response.id, { appointmentName: realName }).subscribe(() => {
+
+        // 👇 SOLUCIÓN: Enviar todos los datos necesarios en el update
+        const updateData = {
+          ...response, // Mantener todos los datos de la respuesta
+          appointmentName: realName // Solo cambiar el nombre
+        };
+
+        this.appointmentService.update(response.id, updateData).subscribe(() => {
           this.router.navigate(['/manage/appointments']);
           this.resetEditState();
         });
@@ -273,7 +287,6 @@ export class AppointmentCreateComponent implements OnInit {
       console.error('Error creando cita:', err);
     }
   }
-
 
   onCancel() {
     this.router.navigate(['/manage/appointments']);

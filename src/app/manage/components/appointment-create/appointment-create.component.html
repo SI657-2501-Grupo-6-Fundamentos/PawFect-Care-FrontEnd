@@ -69,13 +69,13 @@
           <mat-icon>schedule</mat-icon>
           {{ 'appointment.status.scheduled' | translate }}
         </mat-option>
-        <mat-option value="CONFIRMED">
+        <mat-option value="COMPLETED">
           <mat-icon>check_circle</mat-icon>
-          {{ 'appointment.status.confirmed' | translate }}
+          {{ 'appointment.status.completed' | translate }}
         </mat-option>
-        <mat-option value="PENDING">
+        <mat-option value="IN_PROGRESS">
           <mat-icon>hourglass_empty</mat-icon>
-          {{ 'appointment.status.pending' | translate }}
+          {{ 'appointment.status.inProgress' | translate }}
         </mat-option>
         <mat-option value="CANCELLED">
           <mat-icon>cancel</mat-icon>
@@ -96,7 +96,6 @@
         <mat-option *ngFor="let option of optionsPet" [value]="option.id">
           <div class="select-option-with-info">
             <span class="option-name">{{ option.petName }}</span>
-            <span class="option-detail">{{ option.animalBreed }} - {{ option.ownerName }}</span>
           </div>
         </mat-option>
       </mat-select>
@@ -108,13 +107,16 @@
       <mat-select name="tariffId" [(ngModel)]="appointment.tariffId" required>
         <mat-option [value]="0" disabled>{{ 'appointment.noSelectedTariff' | translate }}</mat-option>
         <mat-option *ngFor="let option of optionsTariff" [value]="option.id">
-          <div class="select-option-with-info">
-            <span class="option-name">{{ option.serviceName }}</span>
-            <span class="option-detail">{{ option.cost | currency }} - {{ option.duration }} min</span>
-          </div>
+          {{ option.serviceName }}
         </mat-option>
       </mat-select>
       <mat-hint>{{ 'appointment.tariffHint' | translate }}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="input-full-width">
+      <mat-label>{{ 'appointment.costLabel' | translate }}</mat-label>
+      <input matInput [value]="selectedTariff?.cost | currency : 'USD'" readonly [disabled]="!selectedTariff">
+      <mat-hint>{{ 'appointment.costHint' | translate }}</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="input-full-width">
@@ -124,7 +126,7 @@
         <mat-option *ngFor="let option of optionsVeterinarian" [value]="option.id">
           <div class="select-option-with-info">
             <span class="option-name">{{ option.fullName }}</span>
-            <span class="option-detail">{{ option.veterinarianSpeciality }} - {{ option.availability }}</span>
+            <span class="option-detail">{{ option.veterinarianSpeciality }}</span>
           </div>
         </mat-option>
       </mat-select>
@@ -185,9 +187,6 @@
       <mat-card-title>{{ 'appointment.summaryTitle' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="summary-item">
-        <strong>{{ 'appointment.appointmentNameLabel' | translate }}:</strong> {{ appointment.appointmentName }}
-      </div>
       <div class="summary-item">
         <strong>{{ 'appointment.dateTimeLabelSummary' | translate }}:</strong>
         {{ appointment.startDateAppointment | date }} {{ appointment.startTimeAppointment }} -

@@ -182,7 +182,7 @@
       "label": "Status",
       "scheduled": "Scheduled",
       "completed": "Completed",
-      "in_progress": "In Progress",
+      "inProgress": "In Progress",
       "cancelled": "Cancelled"
     },
     "searchByName": "Search by appointment name",
@@ -208,7 +208,11 @@
     "petLabelSummary": "Pet selected",
     "tariffLabelSummary": "Tariff selected",
     "veterinaryLabelSummary": "Veterinarian selected",
-    "dateTimeLabelSummary": "Dates selected"
+    "dateTimeLabelSummary": "Dates selected",
+    "petHint": "Select a pet for the appointment",
+    "tariffHint": "Select a tariff for the appointment",
+    "veterinaryHint": "Select a veterinarian for the appointment",
+    "costLabel": "Cost"
   },
   "editAppointment": {
     "appointmentName": "Edit appointment name",

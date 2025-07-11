@@ -21,4 +21,9 @@ export class PetsService extends BaseService<Pet>{
     console.log('GET URL:', url);  // Verifica que esté bien formada
     return this.http.get<Pet[]>(url, this.httpOptions);
   }
+
+  getPetById(petId: number): Observable<Pet> {
+    const url = `${this.basePath}/pet-service/api/v1/pets/${petId}`;
+    return this.http.get<Pet>(url, this.httpOptions);
+  }
 }
