@@ -70,6 +70,7 @@ export class DiagnosticCreateComponent {
       this.diagnosticForm.markAllAsTouched();
     }
   }
+
   getFormattedDiagnosticName(name: string): string {
     return name.replace(/_/g, ' ');
   }

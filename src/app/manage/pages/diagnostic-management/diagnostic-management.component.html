@@ -1,1 +1,82 @@
-<p>diagnostic-management works!</p>
+<div class="diagnostic-container">
+  <div class="header-section">
+    <h1 class="main-title">Lista de Diagnósticos</h1>
+    <p class="subtitle">Gestiona y visualiza todos los diagnósticos veterinarios registrados.</p>
+  </div>
+
+  <div class="search-and-controls">
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Buscar por descripción o especialidad..."
+        class="search-input"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="filter-controls">
+      <select
+        class="filter-select"
+        [(ngModel)]="selectedSpecialty"
+        (change)="onSpecialtyChange()">
+        <option value="">Todas las Especialidades</option>
+        <option *ngFor="let specialty of getAllSpecialties()" [value]="specialty.value">
+          {{ specialty.label }}
+        </option>
+      </select>
+
+      <button class="clear-filters-btn" (click)="clearFilters()" *ngIf="searchTerm || selectedSpecialty">
+        <span class="clear-icon">✖️</span>
+        Limpiar Filtros
+      </button>
+
+      <button class="add-button" (click)="createDiagnostic()">
+        <span class="plus-icon">+</span>
+        Agregar Diagnóstico
+      </button>
+    </div>
+  </div>
+
+  <div class="results-info" *ngIf="filteredDiagnostics.length !== diagnostics.length">
+    <p>Mostrando {{ filteredDiagnostics.length }} de {{ diagnostics.length }} diagnósticos</p>
+  </div>
+
+  <div *ngIf="diagnostics.length === 0" class="empty-state">
+    <div class="empty-icon">📋</div>
+    <h3>No hay diagnósticos registrados</h3>
+    <p>Comienza agregando tu primer diagnóstico veterinario.</p>
+  </div>
+
+  <div *ngIf="diagnostics.length > 0 && filteredDiagnostics.length === 0" class="empty-state">
+    <div class="empty-icon">🔍</div>
+    <h3>No se encontraron diagnósticos</h3>
+    <p>Intenta con otros términos de búsqueda o filtros.</p>
+  </div>
+
+  <div class="diagnostic-grid" *ngIf="filteredDiagnostics.length > 0">
+    <div *ngFor="let diagnostic of filteredDiagnostics" class="diagnostic-card">
+      <div class="card-header">
+        <h3 class="diagnostic-title">{{ getFormattedSpecialtyName(diagnostic.diagnosticSpecialty) }}</h3>
+        <span class="diagnostic-date">{{ diagnostic.diagnosticDate | date: 'dd/MM/yyyy' }}</span>
+      </div>
+
+      <div class="card-content">
+        <p class="diagnostic-description">{{ diagnostic.description }}</p>
+      </div>
+
+      <div class="card-footer">
+        <div class="specialty-tags">
+          <span class="specialty-tag">{{ getFormattedSpecialtyName(diagnostic.diagnosticSpecialty) }}</span>
+        </div>
+
+        <div class="card-actions">
+          <button class="edit-btn" (click)="onEditDiagnostic(diagnostic)">
+            <span class="edit-icon">✏️</span>
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
