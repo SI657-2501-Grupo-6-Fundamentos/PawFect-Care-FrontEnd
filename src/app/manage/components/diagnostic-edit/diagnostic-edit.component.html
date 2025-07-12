@@ -1,1 +1,47 @@
-<p>diagnostic-edit works!</p>
+<div class="diagnostic-form-container">
+  <h2>Editar Diagnóstico</h2>
+
+  <form *ngIf="diagnosticForm" [formGroup]="diagnosticForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="diagnosticDate">Fecha</label>
+      <input id="diagnosticDate" type="date" formControlName="diagnosticDate" />
+      <div class="error" *ngIf="diagnosticForm.get('diagnosticDate')?.touched && diagnosticForm.get('diagnosticDate')?.invalid">
+        <span *ngIf="diagnosticForm.get('diagnosticDate')?.errors?.['required']">Campo requerido.</span>
+      </div>
+      <div class="error" *ngIf="diagnosticForm.errors?.['diagnosticDateInvalid']">
+        La fecha del diagnóstico no puede ser anterior a hoy.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descripción</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="3"
+        placeholder="Ingrese una descripción"
+      ></textarea>
+      <div class="error" *ngIf="diagnosticForm.get('description')?.touched && diagnosticForm.get('description')?.invalid">
+        Campo requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="diagnosticSpecialty">Tipo de diagnóstico</label>
+      <select id="diagnosticSpecialty" formControlName="diagnosticSpecialty">
+        <option value="" disabled>Seleccione un tipo de diagnóstico</option>
+        <option *ngFor="let type of diagnosticSpecialties" [value]="type">
+          {{ getFormattedDiagnosticName(type) }}
+        </option>
+      </select>
+      <div class="error" *ngIf="diagnosticForm.get('diagnosticSpecialty')?.touched && diagnosticForm.get('diagnosticSpecialty')?.invalid">
+        Campo requerido.
+      </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" [disabled]="diagnosticForm.invalid">Actualizar Diagnóstico</button>
+      <button type="button" class="cancel-btn" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>
