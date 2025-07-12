@@ -6,8 +6,6 @@
       <mat-label>Search clients</mat-label>
       <input matInput [(ngModel)]="searchQuery" (input)="applyFilter()" placeholder="Search by name">
     </mat-form-field>
-    <button type="button" class="button-primary button-add" mat-flat-button (click)="navigateToAddClient()">{{'clients1.home.button' |
-      translate}}</button>
   </div>
 
   <!-- DATA TABLE -->
@@ -31,15 +29,6 @@
     <ng-container matColumnDef="address">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Address">Address</th>
       <td mat-cell *matCellDef="let client">{{ client.address }}</td>
-    </ng-container>
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Actions">Actions</th>
-      <td mat-cell *matCellDef="let client">
-        <div class="container-actions">
-          <button type="button" (click)="navigateToEditClient(client.id)" class="button-primary" mat-flat-button>{{'clients.home.buttons.edit' |
-            translate}}</button>
-        </div>
-      </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>

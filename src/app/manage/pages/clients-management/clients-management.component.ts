@@ -25,24 +25,24 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
   selector: 'app-clients-management',
   standalone: true,
   imports: [
-    CommonModule, 
-    MatCell, 
-    MatCellDef, 
-    MatColumnDef, 
-    MatHeaderCell, 
-    MatHeaderRow, 
-    MatHeaderRowDef, 
-    MatPaginator, 
-    MatRow, 
-    MatRowDef, 
-    MatSort, 
-    MatSortHeader, 
-    MatTable, 
+    CommonModule,
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatPaginator,
+    MatRow,
+    MatRowDef,
+    MatSort,
+    MatSortHeader,
+    MatTable,
     MatHeaderCellDef,
     MatButtonModule,
     TranslateModule,
-    FormsModule, 
-    MatFormFieldModule, 
+    FormsModule,
+    MatFormFieldModule,
     MatInputModule
   ],
   templateUrl: './clients-management.component.html',
@@ -56,14 +56,13 @@ export class ClientsManagementComponent {
     "fullName",
     "phoneNumber",
     "email",
-    "address",
-    'actions'
+    "address"
   ];
 
 
   @ViewChild(MatSort, {static: false})
   protected sort!: MatSort;
-  protected   searchQuery: string = ''; 
+  protected   searchQuery: string = '';
   @ViewChild(MatPaginator, {static: false})
   protected paginator!: MatPaginator;
 
@@ -90,7 +89,7 @@ export class ClientsManagementComponent {
     });
   }
   applyFilter() {
-    this.dataSource.filter = this.searchQuery.trim().toLowerCase();  
+    this.dataSource.filter = this.searchQuery.trim().toLowerCase();
   }
 
 
@@ -101,6 +100,6 @@ export class ClientsManagementComponent {
   navigateToEditClient(idClient: number) {
     this.router.navigate([`/manage/clients/edit/${idClient}`]);
   }
-  
+
 
 }

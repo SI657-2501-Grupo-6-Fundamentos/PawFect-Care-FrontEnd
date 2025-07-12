@@ -101,8 +101,8 @@ export class PetsManagementComponent implements OnInit {
     this.router.navigate([`/manage/pets/edit/${idPet}`]);
   }
 
-  navigateToMedicalHistory(medicalHistoryId: number) {
-    this.router.navigate([`/manage/medicalHistory/${medicalHistoryId}`]);
+  navigateToAppointment(petId: number) {
+    this.router.navigate([`/manage/appointment/pets/${petId}`]);
   }
 
   getCurrentOwnerId(): number {

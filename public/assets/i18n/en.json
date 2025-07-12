@@ -272,7 +272,10 @@
     "cancelButton": "Cancel",
     "dog": "Dog",
     "cat": "Cat",
-    "parrot": "Parrot"
+    "parrot": "Parrot",
+    "petImageLabel": "Upload Pet Image",
+    "clickToUploadImage": "Select an image",
+    "supportedFormats": "Supported formats: "
   },
   "petEdit": {
     "editPetTitle": "Edit Pet",
@@ -319,5 +322,11 @@
     "returnToHome": "Return to Home",
     "userNameLabel": "Username"
   },
-  "Take control of your veterinary practice.": "Take control of your veterinary practice."
+  "Take control of your veterinary practice.": "Take control of your veterinary practice.",
+  "provider": {
+    "appointments": {
+      "title": "Appointments",
+      "description": "Manage your appointments efficiently with our intuitive scheduling system. Whether you're a pet owner or a veterinary professional, you can easily create, edit, and track appointments to ensure the best care for your pets."
+    }
+  }
 }

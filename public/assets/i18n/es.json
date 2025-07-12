@@ -269,7 +269,10 @@
     "cancelButton": "Cancelar",
     "dog": "Perro",
     "cat": "Gato",
-    "parrot": "Loro"
+    "parrot": "Loro",
+    "petImageLabel": "Sube una imagen de tu mascota",
+    "clickToUploadImage": "Selecciona una imagen",
+    "supportedFormats": "Formatos admitidos: "
   },
   "petEdit": {
     "editPetTitle": "Editar Mascota",
@@ -316,6 +319,11 @@
     "returnToHome": "Volver al inicio",
     "userNameLabel": "Nombre de usuario"
   },
-  "Take control of your veterinary practice.": "Toma el control de tu práctica veterinaria."
+  "Take control of your veterinary practice.": "Toma el control de tu práctica veterinaria.",
+  "provider": {
+    "appointments": {
+      "title": "Citas"
+    }
+  }
 }
 

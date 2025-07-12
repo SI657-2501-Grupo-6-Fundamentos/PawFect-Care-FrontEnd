@@ -87,12 +87,12 @@ export class PetEditComponent implements OnInit {
   editPet() {
     this.petService.update(this.pet.id,this.pet).subscribe((response: Pet) => {
       console.log(response)
-      this.router.navigate(['/manage/owners/:ownerId/pets']);
+      this.router.navigate([`/manage/owners/${this.pet.ownerId}/pets`]);
       this.resetEditState();
     });
   }
 
   onCancel() {
-    this.router.navigate(['/manage/owners/:ownerId/pets']);
+    this.router.navigate([`/manage/owners/${this.pet.ownerId}/pets`]);
   }
 }
