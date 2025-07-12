@@ -42,8 +42,73 @@
     <mat-radio-button value="FEMALE">{{ 'pet.female' | translate }}</mat-radio-button>
   </mat-radio-group>
 
+  <!-- Image Upload Section -->
+  <div class="image-upload-section">
+    <h3>{{ 'pet.petImageLabel' | translate }}</h3>
+
+    <!-- Hidden file input -->
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+      style="display: none;"
+    />
+
+    <!-- Image preview or placeholder -->
+    <div class="image-preview-container">
+      <div *ngIf="imagePreview; else noImageTemplate" class="image-preview">
+        <img [src]="imagePreview" alt="Pet preview" class="preview-image" />
+        <div class="image-actions">
+          <button type="button" mat-mini-fab color="primary" (click)="triggerFileInput()" class="change-image-btn">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button type="button" mat-mini-fab color="warn" (click)="removeImage()" class="remove-image-btn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <ng-template #noImageTemplate>
+        <div class="no-image-placeholder" (click)="triggerFileInput()">
+          <mat-icon class="upload-icon">add_photo_alternate</mat-icon>
+          <p>{{ 'pet.clickToUploadImage' | translate }}</p>
+          <small>{{ 'pet.supportedFormats' | translate }}: JPEG, PNG, GIF, WebP (max 10MB)</small>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Upload progress indicator -->
+    <div *ngIf="isUploadingImage" class="upload-progress">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <p>{{ 'pet.uploading' | translate }}...</p>
+    </div>
+
+    <!-- Upload status messages -->
+    <div *ngIf="uploadError" class="upload-error">
+      <mat-icon color="warn">error</mat-icon>
+      <span>{{ uploadError }}</span>
+    </div>
+  </div>
+
   <div class="container-actions">
-    <button class="button-primary" mat-flat-button type="submit">{{ 'pet.addButton' | translate }}</button>
-    <button class="button-secondary" mat-raised-button type="button" (click)="onCancel()">{{ 'pet.cancelButton' | translate }}</button>
+    <button
+      class="button-primary"
+      mat-flat-button
+      type="submit"
+      [disabled]="isUploadingImage"
+    >
+      <span *ngIf="isUploadingImage">{{ 'pet.uploading' | translate }}...</span>
+      <span *ngIf="!isUploadingImage">{{ 'pet.addButton' | translate }}</span>
+    </button>
+    <button
+      class="button-secondary"
+      mat-raised-button
+      type="button"
+      (click)="onCancel()"
+      [disabled]="isUploadingImage"
+    >
+      {{ 'pet.cancelButton' | translate }}
+    </button>
   </div>
 </form>

@@ -195,6 +195,58 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
+/* Primary Orange Button */
+.button-orange {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-orange:hover {
+  background-color: #fb8c00;
+}
+
+/* Outlined Orange Button */
+.button-orange-outline {
+  background-color: transparent;
+  color: #ff9800;
+  border: 2px solid #ff9800;
+  padding: 8px 18px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button-orange-outline:hover {
+  background-color: #fff3e0;
+  border-color: #fb8c00;
+  color: #fb8c00;
+}
+
+/* Light Orange Button (for subtle actions) */
+.button-orange-light {
+  background-color: #fff3e0;
+  color: #ff9800;
+  border: 1px solid #ffe0b2;
+  padding: 8px 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-orange-light:hover {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
 .panel-header h3 {
   margin: 0;
   font-size: 1.25rem;
