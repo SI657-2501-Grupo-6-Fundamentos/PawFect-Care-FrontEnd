@@ -1,8 +1,8 @@
 <div class="tariff-form-container">
   <h2>Editar servicio</h2>
 
-  <form [formGroup]="tariffForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+  <form *ngIf="tariffForm" [formGroup]="tariffForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
       <label for="serviceName">Servicio</label>
       <select id="serviceName" formControlName="serviceName">
         <option value="" disabled>Seleccione un servicio</option>
@@ -25,16 +25,16 @@
 
     <div class="form-group">
       <label for="minimumCost">Costo Mínimo</label>
-      <input id="minimumCost" type="number" formControlName="minCost" />
-      <div class="error" *ngIf="tariffForm.get('minCost')?.touched && tariffForm.get('minCost')?.invalid">
+      <input id="minimumCost" type="number" formControlName="minimumCost" />
+      <div class="error" *ngIf="tariffForm.get('minimumCost')?.touched && tariffForm.get('minimumCost')?.invalid">
         Ingrese un mínimo válido.
       </div>
     </div>
 
     <div class="form-group">
       <label for="maximumCost">Costo Máximo</label>
-      <input id="maximumCost" type="number" formControlName="maxCost" />
-      <div class="error" *ngIf="tariffForm.get('maxCost')?.touched && tariffForm.get('maxCost')?.invalid">
+      <input id="maximumCost" type="number" formControlName="maximumCost" />
+      <div class="error" *ngIf="tariffForm.get('maximumCost')?.touched && tariffForm.get('maximumCost')?.invalid">
         Ingrese un máximo válido.
       </div>
     </div>

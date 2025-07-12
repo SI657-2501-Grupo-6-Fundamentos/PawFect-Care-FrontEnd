@@ -4,6 +4,8 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Tariff} from "../../model/tariff.entity";
 import {TariffService} from "../../services/tariff.service";
 import {Router} from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-tariff-edit',
@@ -30,27 +32,54 @@ export class TariffEditComponent implements OnInit {
     'VETERINARY_RADIOLOGY',
     'VETERINARY_NUTRITION',
     'VETERINARY_BEHAVIOR',
-    'EMERGENCY_AND_CRITICAL_CARE'
+    'VETERINARY_OPHTHALMOLOGY',
+    'VETERINARY_DERMATOLOGY',
+    'VETERINARY_CARDIOLOGY',
+    'VETERINARY_ONCOLOGY',
+    'VETERINARY_NEUROLOGY',
+    'VETERINARY_ORTHOPEDICS',
+    'VETERINARY_PHYSIOTHERAPY',
+    'EMERGENCY_AND_CRITICAL_CARE',
   ];
 
-  constructor(private fb: FormBuilder, private tariffService: TariffService, private router: Router) {}
+  constructor(private fb: FormBuilder, private tariffService: TariffService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.tariffService.getById(id).subscribe({
+        next: (tariff) => {
+          this.tariffData = tariff;
+          this.initializeForm();
+        },
+        error: (err) => {
+          console.error('Error al cargar tarifa', err);
+          this.router.navigate(['/manage/tariffs']);
+        }
+      });
+    } else {
+      console.error('ID de tarifa no proporcionado en la ruta');
+      this.router.navigate(['/manage/tariffs']);
+    }
+  }
+
+  initializeForm(): void {
     this.tariffForm = this.fb.group(
       {
         serviceName: [this.tariffData?.serviceName || '', Validators.required],
         cost: [this.tariffData?.cost || 0, [Validators.required, Validators.min(0)]],
-        minCost: [this.tariffData?.minimumCost || 0, [Validators.required, Validators.min(0)]],
-        maxCost: [this.tariffData?.maximumCost || 0, [Validators.required, Validators.min(0)]],
+        minimumCost: [this.tariffData?.minimumCost || 0, [Validators.required, Validators.min(0)]],
+        maximumCost: [this.tariffData?.maximumCost || 0, [Validators.required, Validators.min(0)]],
       },
       { validators: this.validateCostRange }
     );
   }
 
+
   validateCostRange(group: FormGroup) {
-    const min = group.get('minCost')?.value;
+    const min = group.get('minimumCost')?.value;
     const cost = group.get('cost')?.value;
-    const max = group.get('maxCost')?.value;
+    const max = group.get('maximumCost')?.value;
 
     if (min != null && cost != null && max != null) {
       return min <= cost && cost <= max ? null : { costRangeInvalid: true };
@@ -63,7 +92,7 @@ export class TariffEditComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.tariffForm.valid) {
+    if (this.tariffForm.valid && this.tariffData) {
       const updatedTariff = {
         id: this.tariffData.id,
         ...this.tariffForm.value
@@ -79,6 +108,9 @@ export class TariffEditComponent implements OnInit {
       });
     } else {
       this.tariffForm.markAllAsTouched();
+      if (!this.tariffData) {
+        console.error('tariffData no ha sido definido');
+      }
     }
   }
 
