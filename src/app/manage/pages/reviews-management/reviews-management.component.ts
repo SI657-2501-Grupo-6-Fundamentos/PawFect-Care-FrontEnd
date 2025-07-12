@@ -12,11 +12,15 @@ import {
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatFabButton, MatIconButton} from "@angular/material/button";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import { ActivatedRoute } from '@angular/router';
+import {MatIcon} from "@angular/material/icon";
+import {NgForOf, NgIf, SlicePipe} from "@angular/common";
+import {MatChip, MatChipSet} from "@angular/material/chips";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'app-reviews-management',
@@ -40,7 +44,18 @@ import { ActivatedRoute } from '@angular/router';
     MatRowDef,
     MatSort,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIcon,
+    SlicePipe,
+    NgIf,
+    MatChipSet,
+    MatChip,
+    MatFabButton,
+    MatIconButton,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+    NgForOf
   ],
   styleUrls: ['./reviews-management.component.css']
 })
@@ -66,13 +81,6 @@ export class ReviewsManagementComponent implements OnInit {
   }
 
   loadReviews(medicalAppointmentId: number): void {
-    /*this.reviewService.getReviewsByMedicalAppointmentId(medicalAppointmentId).subscribe((reviews: Review[]) => {
-      this.dataSource = new MatTableDataSource(reviews);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });*/
-
-
     this.reviewService.getAllReviewsByMedicalAppointmentId(medicalAppointmentId).subscribe((reviews: Review[]) => {
       this.dataSource = new MatTableDataSource(reviews);
       this.dataSource.paginator = this.paginator;

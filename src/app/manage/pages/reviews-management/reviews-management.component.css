@@ -1,95 +1,234 @@
-:root {
-  --primary-color: #1a73e8;
-  --background-color: #ffffff;
-  --text-color: #555;
-  --header-bg: #f5f7fa;
-  --border-color: #e0e0e0;
-  --accent-hover: rgba(26, 115, 232, 0.1);
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* Contenedor de la barra superior (buscador + botones) */
+/* Estilos generales del componente */
+/* Estilos generales del componente */
 .toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+  background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%); /* Naranja un poco más vibrante */
+  padding: 20px 25px; /* Ajuste de padding */
+  border-radius: 15px 15px 0 0; /* Bordes ligeramente más redondeados */
+  box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4); /* Sombra más pronunciada pero suave */
+  margin-bottom: 0;
+  display: flex; /* Usar flexbox para mejor alineación */
+  justify-content: flex-end; /* Alinea el campo de búsqueda a la derecha */
+  align-items: center; /* Centra verticalmente */
 }
 
-/* Campo de búsqueda con transiciones y mejor padding */
 .search-input {
-  flex: 1;
-  min-width: 280px;
-  max-width: 400px;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-}
-
-.search-input:focus {
-  border-color: var(--primary-color);
-  outline: none;
-}
-
-/* Tabla estilizada con sombras y bordes redondeados */
-table {
   width: 100%;
-  border-radius: 8px;
-  background-color: var(--background-color);
-  box-shadow: var(--shadow);
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  overflow: hidden;
-  border-collapse: separate;
+  max-width: 380px; /* Ligeramente más estrecho para un look más compacto */
 }
 
-/* Encabezados */
-mat-header-cell {
-  font-weight: 600;
-  background-color: var(--header-bg);
-  color: #333;
-  font-size: 0.95rem;
-  padding: 12px 16px;
+.search-input .mat-form-field-wrapper {
+  padding-bottom: 0;
 }
 
-/* Celdas */
-mat-cell {
-  font-size: 0.95rem;
-  padding: 12px 16px;
-  color: var(--text-color);
-  border-bottom: 1px solid var(--border-color);
+.search-input .mat-form-field-outline-start,
+.search-input .mat-form-field-outline-gap,
+.search-input .mat-form-field-outline-end {
+  border-color: rgba(255, 255, 255, 0.7) !important; /* Más visible */
+  border-width: 2px !important;
+  transition: border-color 0.3s ease; /* Transición suave para el borde */
 }
 
-/* Filas alternadas */
-mat-row:nth-child(even) {
-  background-color: #fafafa;
+.search-input .mat-form-field-outline-thick .mat-form-field-outline-start,
+.search-input .mat-form-field-outline-thick .mat-form-field-outline-gap,
+.search-input .mat-form-field-outline-thick .mat-form-field-outline-end {
+  border-color: white !important;
+  border-width: 2px !important;
 }
 
-/* Botón de acción estilizado */
-button[mat-stroked-button] {
-  font-size: 0.875rem;
-  padding: 8px 20px;
-  border-radius: 6px;
+.search-input .mat-form-field-label {
+  color: rgba(255, 255, 255, 0.9) !important; /* Más opaco */
   font-weight: 500;
-  border: 1px solid var(--primary-color);
-  background-color: transparent;
-  color: var(--primary-color);
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease; /* Transición suave para el color de la etiqueta */
 }
 
-button[mat-stroked-button]:hover {
-  background-color: var(--accent-hover);
+.search-input .mat-form-field-label.mat-focused {
+  color: white !important;
+  transform: translateY(-8px) scale(0.85); /* Pequeña animación al enfocar */
+}
+
+.search-input input {
+  color: white !important;
+  font-weight: 500;
+  caret-color: white; /* Color del cursor */
+}
+
+.search-input input::placeholder {
+  color: rgba(255, 255, 255, 0.75) !important; /* Ligeramente más visible */
+}
+
+/* Estilos de la tabla */
+/* Estilos de la tabla */
+.mat-table {
+  background: white;
+  border-radius: 0 0 15px 15px; /* Coincide con el toolbar */
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); /* Sombra un poco más profunda */
+  border: none;
+}
+
+.mat-header-row {
+  background: linear-gradient(135deg, #ff8a65 0%, #ff5722 100%); /* Un gradiente más definido para el encabezado */
+  box-shadow: 0 3px 10px rgba(255, 87, 34, 0.25); /* Sombra mejorada */
+}
+
+.mat-header-cell {
+  color: white !important;
+  font-weight: 600;
+  font-size: 15px; /* Un poco más grande */
+  letter-spacing: 0.6px; /* Ajuste del espaciado entre letras */
+  text-transform: uppercase;
+  border-bottom: none !important;
+  padding: 18px 24px; /* Más padding para mayor impacto */
+}
+
+.mat-row {
+  background: white;
+  transition: all 0.3s ease-out; /* Transición más suave */
+  border-bottom: 1px solid #f0f0f0; /* Color de borde más sutil */
+}
+
+.mat-row:last-child {
+  border-bottom: none; /* Elimina el borde inferior de la última fila */
+}
+
+.mat-row:hover {
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.04) 0%, rgba(255, 140, 66, 0.07) 100%); /* Naranja muy sutil */
+  transform: translateY(-2px); /* Un poco más de levantamiento al pasar el ratón */
+  box-shadow: 0 6px 18px rgba(255, 87, 34, 0.18); /* Sombra más definida */
+}
+
+.mat-cell {
+  color: #444; /* Un gris un poco más oscuro para mejor contraste */
+  font-size: 14.5px; /* Ligeramente más grande */
+  padding: 16px 24px;
+  border-bottom: none !important;
+}
+
+/* Estilos específicos por columna */
+/* Estilos específicos por columna */
+.mat-column-id {
+  width: 80px;
+  font-weight: 700; /* Más audaz */
+  color: #ff5722; /* Coincide con el naranja principal */
+}
+
+.mat-column-rating {
+  width: 120px;
+  text-align: center;
+}
+
+.mat-column-rating .mat-cell {
+  font-weight: 700; /* Más audaz */
+  color: #ff8c42;
+  font-size: 17px; /* Más grande para destacar */
+}
+
+.mat-column-content {
+  max-width: 320px; /* Ligeramente más ancho */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-column-medicalAppointmentId {
+  width: 160px; /* Ligeramente más ancho */
+  color: #777; /* Un gris más neutro */
+  font-family: 'Roboto Mono', monospace; /* Una fuente monoespaciada moderna */
+}
+
+.mat-column-actions {
+  width: 130px; /* Ligeramente más ancho para el botón */
+  text-align: center;
+}
+
+/* Botones */
+.mat-stroked-button {
+  border: 2px solid #ff5722 !important; /* Naranja principal */
+  color: #ff5722 !important;
+  background: white;
+  border-radius: 10px; /* Bordes más redondeados */
+  padding: 9px 18px; /* Más padding */
+  font-weight: 600;
+  font-size: 13.5px; /* Ligeramente más grande */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Curva de transición más sofisticada */
+  box-shadow: 0 3px 8px rgba(255, 87, 34, 0.2);
+}
+
+.mat-stroked-button:hover {
+  background: #ff5722 !important;
+  color: white !important;
+  transform: translateY(-3px); /* Mayor efecto de levantamiento */
+  box-shadow: 0 6px 18px rgba(255, 87, 34, 0.5); /* Sombra más intensa al hover */
 }
 
 /* Paginador */
-mat-paginator {
-  margin-top: 1rem;
-  background-color: var(--background-color);
-  border-top: 1px solid var(--border-color);
-  padding: 0.5rem 1rem;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.02);
+.mat-paginator {
+  background: white; /* Blanco puro para el paginador */
+  border-radius: 0 0 15px 15px; /* Coincide con la tabla */
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08); /* Sombra superior más prominente */
+  border-top: 1px solid #eee; /* Borde superior más sutil */
+  padding: 10px 25px; /* Ajuste de padding */
+}
+
+.mat-paginator-page-size-select {
+  color: #ff5722;
+  font-weight: 600;
+}
+
+.mat-paginator-range-label {
+  color: #555; /* Un gris medio */
+  font-weight: 500;
+}
+
+.mat-icon-button {
+  color: #ff5722 !important; /* Naranja principal */
+  transition: all 0.3s ease;
+}
+
+.mat-icon-button:hover {
+  background: rgba(255, 87, 34, 0.1) !important; /* Un hover más suave */
+  transform: scale(1.08); /* Pequeña escala */
+}
+
+.mat-icon-button:disabled {
+  color: rgba(255, 87, 34, 0.35) !important; /* Más visible cuando está deshabilitado */
+}
+
+/* Efectos adicionales */
+.mat-sort-header-arrow {
+  color: rgba(255, 255, 255, 0.9); /* Más opaco */
+}
+
+.mat-sort-header-button {
+  color: white !important;
+}
+
+.mat-sort-header-button:hover {
+  color: white !important; /* Mantiene blanco al pasar el ratón */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 15px 20px;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    padding: 10px 15px; /* Menos padding en móviles */
+    font-size: 12.5px; /* Texto ligeramente más pequeño */
+  }
+
+  .mat-column-content {
+    max-width: 150px; /* Más estrecho en móviles */
+  }
+
+  .mat-stroked-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 }
