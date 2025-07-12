@@ -3,7 +3,7 @@ export class MedicalRecord {
   title: string;
   notes: string;
   diagnosticId?: number;
-  medicalAppointmentId?: number;
+  appointmentId?: number;
   recordedAt: Date;
 
   constructor(medicalRecord: {
@@ -11,14 +11,14 @@ export class MedicalRecord {
     title?: string;
     notes?: string;
     diagnosticId?: number;
-    medicalAppointmentId?: number;
+    appointmentId?: number;
     recordedAt?: Date;
   }) {
     this.id = medicalRecord.id || 0;
     this.title = medicalRecord.title || '';
     this.notes = medicalRecord.notes || '';
     this.diagnosticId = medicalRecord.diagnosticId;
-    this.medicalAppointmentId = medicalRecord.medicalAppointmentId;
+    this.appointmentId = medicalRecord.appointmentId;
     this.recordedAt = medicalRecord.recordedAt || new Date();
   }
 }

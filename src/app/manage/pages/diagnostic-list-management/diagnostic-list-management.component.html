@@ -1,0 +1,30 @@
+<div class="diagnostic-container">
+  <h2 class="diagnostic-title">Lista de diagnósticos</h2>
+
+  <div *ngIf="diagnostics.length === 0" class="empty-message">
+    No hay diagnósticos registrados.
+  </div>
+
+  <div class="diagnostic-grid">
+    <div *ngFor="let diagnostic of diagnostics" class="diagnostic-card">
+      <div class="card-header">
+        <h3 class="diagnostic-service">{{ getFormattedDiagnosticName(diagnostic.diagnosticSpecialty) }}</h3>
+        <span class="diagnostic-date">{{ diagnostic.diagnosticDate | date: 'dd/MM/yyyy' }}</span>
+      </div>
+
+      <div class="card-content">
+        <p class="diagnostic-description">{{ diagnostic.description }}</p>
+      </div>
+
+      <div class="card-footer">
+        <div class="specialty-info">
+          <span class="specialty-tag">{{ getFormattedDiagnosticName(diagnostic.diagnosticSpecialty) }}</span>
+        </div>
+
+        <div class="diagnostic-actions">
+          <button class="view-btn" (click)="onViewDiagnostic(diagnostic)">Ver Detalles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

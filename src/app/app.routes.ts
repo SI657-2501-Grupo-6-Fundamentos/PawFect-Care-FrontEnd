@@ -35,6 +35,9 @@ import {TariffListManagementComponent} from "./manage/pages/tariff-list-manageme
 import {
   VeterinaryAppointmentsManagementComponent
 } from "./manage/pages/veterinary-appointments-management/veterinary-appointments-management.component";
+import {
+  DiagnosticListManagementComponent
+} from "./manage/pages/diagnostic-list-management/diagnostic-list-management.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -160,6 +163,12 @@ export const routes: Routes = [
   {
     path: 'manage/list-tariffs',
     component: TariffListManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/list-diagnostics',
+    component: DiagnosticListManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
   },
