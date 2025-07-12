@@ -5,12 +5,10 @@ import { PetsManagementComponent } from './manage/pages/pets-management/pets-man
 import { AppointmentsManagementComponent } from "./manage/pages/appointments-management/appointments-management.component";
 import { ClientsManagementComponent } from './manage/pages/clients-management/clients-management.component';
 import { AppointmentCreateComponent } from "./manage/components/appointment-create/appointment-create.component";
-import { ClientCreateComponent } from './manage/components/client-create/client-create.component';
 import { PetCreateComponent } from './manage/components/pet-create/pet-create.component';
 import { PetEditComponent } from './manage/components/pet-edit/pet-edit.component';
 import { ClientEditComponent } from './manage/components/client-edit/client-edit.component';
 import { AppointmentEditComponent } from "./manage/components/appointment-edit/appointment-edit.component";
-import { MedicalHistoryManagementComponent } from "./manage/pages/medicalHistory-management/medical-history-management.component";
 import { SignInComponent } from './iam/pages/sign-in/sign-in.component';
 import { SignUpComponent } from './iam/pages/sign-up/sign-up.component';
 import { authenticationGuard } from './iam/services/authentication.guard';
