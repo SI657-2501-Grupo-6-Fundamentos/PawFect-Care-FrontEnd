@@ -33,6 +33,7 @@ import {
 import {DiagnosticCreateComponent} from "./manage/components/diagnostic-create/diagnostic-create.component";
 import {DiagnosticManagementComponent} from "./manage/pages/diagnostic-management/diagnostic-management.component";
 import {DiagnosticEditComponent} from "./manage/components/diagnostic-edit/diagnostic-edit.component";
+import {TariffListManagementComponent} from "./manage/pages/tariff-list-management/tariff-list-management.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -146,6 +147,12 @@ export const routes: Routes = [
   {
     path: 'manage/appointments/edit-review/:id',
     component: ReviewEditComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['pet-owner'] }
+  },
+  {
+    path: 'manage/list-tariffs',
+    component: TariffListManagementComponent,
     canActivate: [authenticationGuard, RoleGuard],
     data: { roles: ['pet-owner'] }
   },

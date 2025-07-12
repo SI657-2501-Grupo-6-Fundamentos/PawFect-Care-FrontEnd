@@ -1,0 +1,19 @@
+<div class="tariff-container">
+  <h2 class="tariff-title">Lista de servicios</h2>
+
+  <div *ngIf="tariffs.length === 0" class="empty-message">
+    No hay servicios registradas.
+  </div>
+
+  <div class="tariff-grid">
+    <div *ngFor="let tariff of tariffs" class="tariff-card">
+      <h3 class="tariff-service">{{ getFormattedServiceName(tariff.serviceName) }}</h3>
+      <p><strong>Costo:</strong> S/ {{ tariff.cost }}</p>
+      <p><strong>Rango:</strong> S/ {{ tariff.minimumCost }} - {{ tariff.maximumCost }}</p>
+
+      <div class="tariff-actions">
+        <button class="book-btn" (click)="onCreateAppointment(tariff)">Sacar Cita</button>
+      </div>
+    </div>
+  </div>
+</div>

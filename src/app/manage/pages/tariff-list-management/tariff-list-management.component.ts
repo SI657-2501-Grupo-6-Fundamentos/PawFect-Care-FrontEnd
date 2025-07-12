@@ -3,22 +3,20 @@ import { Tariff } from '../../model/tariff.entity';
 import { TariffService } from '../../services/tariff.service';
 import {NgForOf, NgIf} from "@angular/common";
 import {TariffCreateComponent} from "../../components/tariff-create/tariff-create.component";
-import {TariffEditComponent} from "../../components/tariff-edit/tariff-edit.component";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-tariff-management',
-  templateUrl: './tariff-management.component.html',
+  selector: 'app-list-tariff-management',
+  templateUrl: './tariff-list-management.component.html',
   standalone: true,
   imports: [
     NgForOf,
     TariffCreateComponent,
-    TariffEditComponent,
     NgIf
   ],
-  styleUrls: ['./tariff-management.component.css']
+  styleUrls: ['./tariff-list-management.component.css']
 })
-export class TariffManagementComponent implements OnInit {
+export class TariffListManagementComponent implements OnInit {
   tariffs: Tariff[] = [];
 
   constructor(private tariffService: TariffService, private router: Router) {}
@@ -34,16 +32,13 @@ export class TariffManagementComponent implements OnInit {
     });
   }
 
-  onEditTariff(tariff: Tariff): void {
-    this.router.navigate(['manage/tariffs/edit', tariff.id]);
+  onCreateAppointment(tariff: Tariff): void {
+    console.log('Crear cita para', tariff.serviceName);
+    this.router.navigate(['/manage/appointments/add']);
+
   }
 
   getFormattedServiceName(name: string): string {
     return name.replace(/_/g, ' ');
   }
-
-  createTariff(): void {
-    this.router.navigate(['/manage/tariffs/add']);
-  }
 }
-
