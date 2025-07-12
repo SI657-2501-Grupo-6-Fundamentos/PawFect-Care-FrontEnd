@@ -44,11 +44,18 @@ export class DiagnosticCreateComponent {
     });
   }
 
+  formatLocalISO(date: Date): string {
+    const tzOffset = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - tzOffset).toISOString().slice(0, -1);
+  }
+
   onSubmit() {
     if (this.diagnosticForm.valid) {
-      const diagnostic = this.diagnosticForm.value;
+      const formValue = this.diagnosticForm.value;
+      // Convierte diagnosticDate a formato ISO local
+      formValue.diagnosticDate = this.formatLocalISO(new Date(formValue.diagnosticDate));
 
-      this.diagnosticService.create(diagnostic).subscribe({
+      this.diagnosticService.create(formValue).subscribe({
         next: () => {
           console.log('Diagnóstico creado con éxito');
           this.diagnosticCreated.emit();
@@ -63,7 +70,6 @@ export class DiagnosticCreateComponent {
       this.diagnosticForm.markAllAsTouched();
     }
   }
-
   getFormattedDiagnosticName(name: string): string {
     return name.replace(/_/g, ' ');
   }
