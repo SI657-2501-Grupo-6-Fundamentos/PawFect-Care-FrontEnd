@@ -1,0 +1,243 @@
+.diagnostic-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.diagnostic-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 32px 0;
+  letter-spacing: -0.025em;
+  text-align: center;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: white;
+  border-radius: 16px;
+  border: 2px dashed #e2e8f0;
+  color: #64748b;
+  font-size: 1.125rem;
+  margin-bottom: 32px;
+}
+
+.empty-message::before {
+  content: "📋";
+  display: block;
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.diagnostic-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.diagnostic-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 calc(33.333% - 16px);
+  min-width: 320px;
+}
+
+.diagnostic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: #ea580c;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.diagnostic-service {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.diagnostic-date {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+  background-color: #f1f5f9;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.card-content {
+  margin-bottom: 20px;
+}
+
+.diagnostic-description {
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: auto;
+  gap: 16px;
+}
+
+.specialty-info {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.specialty-tag {
+  background: linear-gradient(135deg, #ffe5c7 0%, #ffd6b0 100%);
+  color: #ea580c;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid #ffb26b;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .diagnostic-card {
+    flex: 0 0 calc(50% - 12px);
+  }
+}
+
+@media (max-width: 768px) {
+  .diagnostic-container {
+    padding: 24px 16px;
+  }
+
+  .diagnostic-title {
+    font-size: 2rem;
+  }
+
+  .diagnostic-grid {
+    flex-direction: column;
+  }
+
+  .diagnostic-card {
+    flex: 1 1 auto;
+    min-width: unset;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .diagnostic-date {
+    align-self: flex-start;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .specialty-info {
+    align-self: flex-start;
+  }
+}
+
+/* Mejoras adicionales */
+.diagnostic-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ea580c, #c2410c);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.diagnostic-card:hover::before {
+  opacity: 1;
+}
+
+/* Animación de entrada */
+.diagnostic-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para estados de carga */
+.diagnostic-card.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.diagnostic-card.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Mejoras para accesibilidad */
+.diagnostic-card:focus-within {
+  outline: 2px solid #ea580c;
+  outline-offset: 2px;
+}
+
+/* Variante para tarjetas destacadas */
+.diagnostic-card.featured {
+  border-color: #ea580c;
+  box-shadow: 0 8px 16px rgba(234, 88, 12, 0.1);
+}
+
+.diagnostic-card.featured::before {
+  opacity: 1;
+}
