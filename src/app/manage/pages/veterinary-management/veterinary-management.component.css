@@ -17,7 +17,7 @@
   justify-content: center;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #e67e22; /* naranja cálido */
   margin: 0 0 8px 0;
   gap: 12px;
 }
@@ -26,7 +26,7 @@
   font-size: 2.5rem;
   width: 2.5rem;
   height: 2.5rem;
-  color: orange;
+  color: #e67e22;
 }
 
 .subtitle {
@@ -80,7 +80,9 @@
 }
 
 .sort-button:hover {
-  background: #e9ecef;
+  background: #fef3e7;
+  border-color: #f5cba7;
+  color: #e67e22;
   transform: translateY(-1px);
 }
 
@@ -152,7 +154,7 @@
 }
 
 .vet-specialty {
-  background: #4CAF50;
+  background: #e67e22;
   color: white;
   padding: 4px 12px;
   border-radius: 20px;
@@ -175,7 +177,7 @@
 }
 
 .info-icon {
-  color: #7f8c8d;
+  color: #e67e22;
   font-size: 1.2rem;
   width: 1.2rem;
   height: 1.2rem;
