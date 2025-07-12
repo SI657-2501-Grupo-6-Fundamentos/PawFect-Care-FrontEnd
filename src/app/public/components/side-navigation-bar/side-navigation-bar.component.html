@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav #drawer fixedInViewport>
+  <mat-sidenav #drawer [mode]="sidenavMode" [fixedInViewport]="isSmallScreen" [opened]="!isSmallScreen">
     <div class="header-sidenav">
       <a [routerLink]="['/']">
         <img src="assets/images/perro.png" alt="Pawfect Care Logo" class="logo-img" />
@@ -17,6 +17,7 @@
             mat-list-item
             [routerLink]="resolvePath(option.path)"
             routerLinkActive="active-link"
+            (click)="isSmallScreen ? drawer.close() : null"
           >
             <div class="item-nav-wrapper">
               <mat-icon *ngIf="option.icon" class="menu-icon">{{ option.icon }}</mat-icon>
@@ -53,8 +54,12 @@
         </div>
       </div>
       <div class="left-buttons">
-        <app-authentication-section></app-authentication-section>
-        <app-language-switcher></app-language-switcher>
+        <div class="auth-toolbar-section">
+          <app-authentication-section></app-authentication-section>
+        </div>
+        <div class="language-toolbar-section">
+          <app-language-switcher></app-language-switcher>
+        </div>
       </div>
     </mat-toolbar>
 

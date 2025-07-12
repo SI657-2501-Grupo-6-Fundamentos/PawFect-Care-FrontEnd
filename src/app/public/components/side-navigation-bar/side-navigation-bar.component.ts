@@ -12,6 +12,7 @@ import {Router, RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from "
 import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {AuthenticationService} from "../../../iam/services/authentication.service";
 import {TranslateModule} from "@ngx-translate/core";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 interface NavigationOption {
   path: string;
@@ -59,6 +60,9 @@ export class SideNavigationBarComponent {
   public userRole: string | null = null;
   public options: NavigationOption[] = [];
 
+  isSmallScreen: boolean = false;
+  sidenavMode: 'side' | 'over' = 'side';
+
   private allOptions: NavigationOption[] = [
 
     // Home
@@ -83,18 +87,36 @@ export class SideNavigationBarComponent {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private breakpointObserver: BreakpointObserver
   ) {
+    // Detectar si el usuario está autenticado
     this.authenticationService.isSignedIn.subscribe(isSignedIn => {
       this.isSignedIn = isSignedIn;
     });
 
+    // Detectar rol del usuario
     this.authenticationService.currentUserRole.subscribe(role => {
       console.log('[DEBUG] User role received in sidenav:', role);
       this.userRole = role;
       this.updateMenuOptions();
     });
 
+    // Observar cambios de tamaño de pantalla
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isSmallScreen = result.matches;
+        this.sidenavMode = this.isSmallScreen ? 'over' : 'side';
+
+        // Si cambia a modo "over", cerrar el sidenav automáticamente
+        if (this.drawer) {
+          if (this.isSmallScreen) {
+            this.drawer.close();
+          } else {
+            this.drawer.open();
+          }
+        }
+      });
   }
 
   public updateMenuOptions(): void {

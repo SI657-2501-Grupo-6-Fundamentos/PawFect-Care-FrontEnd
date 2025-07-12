@@ -110,20 +110,19 @@
   background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.3), transparent);
 }
 
+/* Estilo base para botones */
+.container-actions button {
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .container-actions {
-    flex-direction: column;
-    padding: 1.5rem;
-    gap: 1rem;
-  }
-
-  .button-primary,
-  .button-secondary {
-    width: 100%;
-    min-width: 200px;
+    display: none;
   }
 }
+
 
 /* Texto centrado - Tipografía moderna */
 .text-center {
