@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Veterinary, VeterinarianSpeciality } from '../../model/veterinary.entity';
 import { VeterinaryService } from '../../services/veterinary.service';
-import {MatTooltip} from "@angular/material/tooltip";
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-veterinary-management',
@@ -42,8 +42,12 @@ import {MatTooltip} from "@angular/material/tooltip";
 })
 export class VeterinaryManagementComponent implements OnInit {
   veterinarians: Veterinary[] = [];
+  filteredVeterinarians: Veterinary[] = [];
   displayedColumns: string[] = ['id', 'fullName', 'email', 'phoneNumber', 'dni', 'veterinarianSpeciality', 'availableStartTime', 'availableEndTime', 'actions'];
   specialities = Object.values(VeterinarianSpeciality);
+  sortAscending = true;
+  currentFilter = 'all';
+  selectedVetId: string | 'all' = 'all';
 
   constructor(
     private veterinaryService: VeterinaryService,
@@ -59,6 +63,8 @@ export class VeterinaryManagementComponent implements OnInit {
     this.veterinaryService.getAll().subscribe({
       next: (data) => {
         this.veterinarians = data;
+        this.filteredVeterinarians = [...data];
+        this.applySort();
       },
       error: (error) => {
         console.error('Error loading veterinarians:', error);
@@ -75,9 +81,71 @@ export class VeterinaryManagementComponent implements OnInit {
     this.router.navigate(['/manage/veterinarians/schedules', veterinarian.id]);
   }
 
+  onFilterChange(event: any): void {
+    this.currentFilter = event.value;
+    this.applyFilter();
+  }
+
+  toggleSort(): void {
+    this.sortAscending = !this.sortAscending;
+    this.applySort();
+  }
+
+  applyFilter(): void {
+    if (this.currentFilter === 'all') {
+      this.filteredVeterinarians = [...this.veterinarians];
+    } else {
+      this.filteredVeterinarians = this.veterinarians.filter(
+        vet => String(vet.id) === String(this.currentFilter)
+      );
+    }
+    this.applySort();
+  }
+
+  applySort(): void {
+    this.filteredVeterinarians.sort((a, b) => {
+      const dateA = a.availableStartTime ? new Date(a.availableStartTime).getTime() : 0;
+      const dateB = b.availableStartTime ? new Date(b.availableStartTime).getTime() : 0;
+
+      if (this.sortAscending) {
+        return dateA - dateB;
+      } else {
+        return dateB - dateA;
+      }
+    });
+  }
+
   formatDateTime(dateTime: string): string {
     if (!dateTime) return '';
     return new Date(dateTime).toLocaleString();
+  }
+
+  formatDate(dateTime: string): string {
+    if (!dateTime) return '';
+    return new Date(dateTime).toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  formatTime(dateTime: string): string {
+    if (!dateTime) return '';
+    return new Date(dateTime).toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+  }
+
+  getInitials(fullName: string): string {
+    if (!fullName) return '';
+    return fullName
+      .split(' ')
+      .map(name => name.charAt(0))
+      .join('')
+      .substring(0, 2)
+      .toUpperCase();
   }
 
   getSpecialityDisplayName(speciality: VeterinarianSpeciality | undefined | null): string {

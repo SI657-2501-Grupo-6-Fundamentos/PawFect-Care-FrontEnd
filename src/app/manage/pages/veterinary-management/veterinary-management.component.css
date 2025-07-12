@@ -1,140 +1,315 @@
-.veterinary-management-card {
-  margin: 2rem;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  transition: box-shadow 0.3s ease;
+.veterinary-management-container {
+  padding: 24px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.veterinary-management-card:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+/* Header Section */
+.header-section {
+  text-align: center;
+  margin-bottom: 32px;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
-
-.table-container {
-  overflow-x: auto;
-  margin-top: 1.5rem;
-}
-
-.veterinary-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-}
-
-.veterinary-table th {
-  font-weight: 600;
-  background-color: #f2f2f2;
-  padding: 14px 16px;
-  text-align: left;
-  font-size: 0.95rem;
-  color: #333;
-  border-bottom: 1px solid #ddd;
-}
-
-.veterinary-table td {
-  padding: 14px 16px;
-  font-size: 0.95rem;
-  color: #555;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.veterinary-table tr:hover {
-  background-color: #fafafa;
-  transition: background-color 0.2s ease;
-}
-
-.action-buttons {
+.page-title {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+  gap: 12px;
 }
 
-.action-buttons button {
-  min-width: 40px;
-  height: 40px;
-  padding: 0.5rem;
+.title-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: orange;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Filters Section */
+.filters-section {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-label {
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.filter-select {
+  min-width: 200px;
+}
+
+.sort-button {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
   border-radius: 8px;
-  border: none;
-  background-color: #fafafa;
-  transition: background-color 0.3s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
 }
 
-.action-buttons button:hover {
-  background-color: #f0f0f0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+.sort-button:hover {
+  background: #e9ecef;
+  transform: translateY(-1px);
 }
 
-.speciality-badge {
-  background-color: #fff3e0;
-  color: #fb8c00;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
+/* Veterinarians Grid */
+.veterinarians-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.vet-card {
+  position: relative;
+}
+
+.veterinarian-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+
+.veterinarian-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.veterinarian-card .mat-card-content {
+  padding: 24px;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.vet-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   font-weight: 600;
-  display: inline-block;
-  white-space: nowrap;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }
 
+.vet-info {
+  flex: 1;
+}
+
+.vet-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 4px 0;
+}
+
+.vet-specialty {
+  background: #4CAF50;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-block;
+  margin: 0;
+}
+
+/* Card Body */
+.card-body {
+  margin-bottom: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.info-icon {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.info-text {
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+/* Availability Section */
+.availability-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.availability-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.schedule-icon {
+  color: #4CAF50;
+  font-size: 1.3rem;
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.schedule-info {
+  flex: 1;
+}
+
+.schedule-date {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.schedule-time {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.action-button {
+  background: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.action-button:hover {
+  background: #45a049;
+  transform: scale(1.1);
+}
+
+.action-button mat-icon {
+  font-size: 1.2rem;
+}
+
+/* No Data Message */
 .no-data-message {
   text-align: center;
-  padding: 3rem 1rem;
-  color: #757575;
+  padding: 48px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.no-data-message mat-icon {
-  font-size: 3rem;
-  height: 3rem;
-  width: 3rem;
-  color: #cfd8dc;
-  margin-bottom: 1rem;
+.no-data-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: #bdc3c7;
+  margin-bottom: 16px;
+}
+
+.no-data-message h3 {
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
 }
 
 .no-data-message p {
+  color: #7f8c8d;
   margin: 0;
   font-size: 1rem;
-  color: #666;
 }
 
-.view-schedules-from-veterinarians {
-  color: #fb8c00;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.view-schedules-from-veterinarians:hover {
-  color: #ef6c00;
-  text-decoration: underline;
-}
-
-/* Responsive: Smartphones & Tablets */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .veterinary-management-card {
-    margin: 1rem;
+  .veterinary-management-container {
+    padding: 16px;
   }
 
-  .table-container {
-    overflow-x: auto;
+  .veterinarians-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .veterinary-table {
-    min-width: 800px;
-  }
-
-  .action-buttons {
+  .filter-row {
     flex-direction: column;
-    gap: 6px;
+    align-items: stretch;
+    gap: 16px;
   }
 
-  .action-buttons button {
-    width: 100%;
-    min-width: 32px;
-    height: 36px;
+  .filter-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
   }
 }
