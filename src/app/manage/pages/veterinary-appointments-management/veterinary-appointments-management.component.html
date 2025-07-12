@@ -1,0 +1,264 @@
+<div class="appointments-container">
+  <div class="header">
+    <h1 class="page-title">{{ 'provider.appointments.title' | translate }}</h1>
+    <div class="header-controls">
+      <button mat-icon-button (click)="toggleView()" class="view-toggle">
+        <mat-icon>{{ viewMode === 'calendar' ? 'view_list' : 'calendar_today' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Calendar View -->
+  <div *ngIf="viewMode === 'calendar'" class="calendar-view">
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <button mat-icon-button (click)="previousMonth()" class="nav-button">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <h2 class="month-year">{{ getCurrentMonthName() }}</h2>
+        <button mat-icon-button (click)="nextMonth()" class="nav-button">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="calendar-header-row">
+          <div class="day-header">Dom</div>
+          <div class="day-header">Lun</div>
+          <div class="day-header">Mar</div>
+          <div class="day-header">Mié</div>
+          <div class="day-header">Jue</div>
+          <div class="day-header">Vie</div>
+          <div class="day-header">Sáb</div>
+        </div>
+
+        <div class="calendar-days">
+          <div *ngFor="let day of calendarDays"
+               class="calendar-day"
+               [class.other-month]="!day.isCurrentMonth"
+               [class.today]="day.isToday"
+               [class.selected]="day.isSelected"
+               [class.has-appointments]="day.hasAppointments"
+               (click)="selectDate(day)">
+            <span class="day-number">{{ day.date.getDate() }}</span>
+            <div *ngIf="day.hasAppointments" class="appointment-indicator">
+              <span class="appointment-count">{{ day.appointmentsCount }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="appointments-panel">
+      <div class="panel-header">
+        <h3>Citas para {{ selectedDate | date:'EEEE, MMMM d' }}</h3>
+      </div>
+
+      <div class="appointments-list" *ngIf="filteredAppointments.length > 0">
+        <mat-card *ngFor="let appointment of filteredAppointments" class="appointment-card">
+          <mat-card-header>
+            <mat-card-title>{{ appointment.appointmentName }}</mat-card-title>
+            <mat-card-subtitle>
+              <mat-icon class="time-icon">schedule</mat-icon>
+              {{ formatTime(appointment.registrationDate) }}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="appointment-details">
+              <div class="detail-item">
+                <mat-icon>event</mat-icon>
+                <span>Inicio: {{ appointment.registrationDate | date:'h:mm a' }}</span>
+              </div>
+              <div class="detail-item">
+                <mat-icon>event_available</mat-icon>
+                <span>Fin: {{ appointment.endDate | date:'h:mm a' }}</span>
+              </div>
+              <div class="detail-item">
+                <mat-icon>info</mat-icon>
+                <span [class]="'status-' + appointment.status.toLowerCase()">{{ appointment.status }}</span>
+              </div>
+              <div class="detail-item">
+                <mat-icon>person</mat-icon>
+                <span>Cliente: {{ appointment.petId || 'N/A' }}</span>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="acceptAppointment(appointment)">
+              <mat-icon>check_circle</mat-icon>
+              {{ 'provider.appointments.buttons.accept' | translate }}
+            </button>
+            <button mat-button color="warn" (click)="declineAppointment(appointment)">
+              <mat-icon>cancel</mat-icon>
+              {{ 'provider.appointments.buttons.decline' | translate }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <div *ngIf="filteredAppointments.length === 0" class="no-appointments">
+        <mat-icon class="no-appointments-icon">event_busy</mat-icon>
+        <p>No hay citas pendientes para este día</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completed Appointments -->
+  <div class="appointments-panel completed-section" *ngIf="completedAppointments.length > 0">
+    <div class="panel-header">
+      <h3>Citas Completadas</h3>
+    </div>
+
+    <div class="appointments-list">
+      <mat-card *ngFor="let appointment of completedAppointments" class="appointment-card completed">
+        <mat-card-header>
+          <mat-card-title>{{ appointment.appointmentName }}</mat-card-title>
+          <mat-card-subtitle>
+            <mat-icon class="time-icon">schedule</mat-icon>
+            {{ formatTime(appointment.registrationDate) }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="appointment-details">
+            <div class="detail-item">
+              <mat-icon>event</mat-icon>
+              <span>Inicio: {{ appointment.registrationDate | date:'h:mm a' }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>event_available</mat-icon>
+              <span>Fin: {{ appointment.endDate | date:'h:mm a' }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>info</mat-icon>
+              <span class="status-completed">Completada</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Cancelled Appointments -->
+  <div class="appointments-panel cancelled-section" *ngIf="cancelledAppointments.length > 0">
+    <div class="panel-header">
+      <h3>Citas Canceladas</h3>
+    </div>
+
+    <div class="appointments-list">
+      <mat-card *ngFor="let appointment of cancelledAppointments" class="appointment-card cancelled">
+        <mat-card-header>
+          <mat-card-title>{{ appointment.appointmentName }}</mat-card-title>
+          <mat-card-subtitle>
+            <mat-icon class="time-icon">schedule</mat-icon>
+            {{ formatTime(appointment.registrationDate) }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="appointment-details">
+            <div class="detail-item">
+              <mat-icon>event</mat-icon>
+              <span>Inicio: {{ appointment.registrationDate | date:'h:mm a' }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>event_available</mat-icon>
+              <span>Fin: {{ appointment.endDate | date:'h:mm a' }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>info</mat-icon>
+              <span class="status-cancelled">Cancelada</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Table View -->
+  <div *ngIf="viewMode === 'table'" class="table-view">
+    <div class="table-header">
+      <mat-form-field class="search-field">
+        <mat-label>{{ 'appointment.searchPlaceholder' | translate }}</mat-label>
+        <input matInput [(ngModel)]="searchQuery" (input)="applyFilter()"
+               placeholder="{{ 'appointment.searchByName' | translate }}">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="appointments-table mat-elevation-z2" matSort>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let appointment">{{ appointment.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="appointmentName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'appointment.appointmentName' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let appointment">{{ appointment.appointmentName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="clientName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'appointment.clientName' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let appointment">{{ appointment.clientName || 'N/A' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="registrationDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'appointment.registrationDate' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let appointment">
+            {{ appointment.registrationDate | date:'dd/MM/yyyy, h:mm a' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'appointment.endDate' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let appointment">
+            {{ appointment.endDate | date:'dd/MM/yyyy, h:mm a' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'appointment.status.label' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let appointment">
+            <span [class]="'status-badge status-' + appointment.status.toLowerCase()">
+              {{ appointment.status }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>{{ 'appointment.actions' | translate }}</th>
+          <td mat-cell *matCellDef="let appointment">
+            <div class="action-buttons">
+              <button mat-raised-button color="primary" (click)="acceptAppointment(appointment)"
+                      matTooltip="{{ 'provider.appointments.buttons.accept' | translate }}">
+                <mat-icon>check_circle</mat-icon>
+                Aceptar
+              </button>
+              <button mat-button color="warn" (click)="declineAppointment(appointment)"
+                      matTooltip="{{ 'provider.appointments.buttons.decline' | translate }}">
+                <mat-icon>cancel</mat-icon>
+                Rechazar
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]"
+                     showFirstLastButtons aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

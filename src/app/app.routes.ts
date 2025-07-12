@@ -32,11 +32,20 @@ import {DiagnosticCreateComponent} from "./manage/components/diagnostic-create/d
 import {DiagnosticManagementComponent} from "./manage/pages/diagnostic-management/diagnostic-management.component";
 import {DiagnosticEditComponent} from "./manage/components/diagnostic-edit/diagnostic-edit.component";
 import {TariffListManagementComponent} from "./manage/pages/tariff-list-management/tariff-list-management.component";
+import {
+  VeterinaryAppointmentsManagementComponent
+} from "./manage/pages/veterinary-appointments-management/veterinary-appointments-management.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
 
   // Routes for veterinarians (UserAdmins)
+  {
+    path: 'manage/veterinary-appointments',
+    component: VeterinaryAppointmentsManagementComponent,
+    canActivate: [authenticationGuard, RoleGuard],
+    data: { roles: ['veterinary'] }
+  },
   {
     path: 'manage/clients',
     component: ClientsManagementComponent,

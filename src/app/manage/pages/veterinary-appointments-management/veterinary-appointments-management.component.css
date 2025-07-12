@@ -1,0 +1,248 @@
+/* Container Styling */
+.appointments-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ff6f00; /* orange */
+  margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.view-toggle mat-icon {
+  color: #ff6f00;
+  transition: transform 0.3s;
+}
+
+.view-toggle:hover mat-icon {
+  transform: rotate(20deg);
+}
+
+/* Calendar Styles */
+.calendar-container {
+  background: #fff8f0;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.6s ease;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.month-year {
+  color: #e65100;
+  font-size: 1.5rem;
+}
+
+.nav-button mat-icon {
+  color: #fb8c00;
+}
+
+.calendar-grid {
+  margin-top: 16px;
+}
+
+.calendar-header-row, .calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day-header {
+  font-weight: bold;
+  text-align: center;
+  padding: 8px;
+  color: #ff8f00;
+}
+
+/* Day Styles */
+.calendar-day {
+  padding: 10px;
+  border-radius: 8px;
+  margin: 2px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.calendar-day:hover {
+  background: #ffe0b2;
+  transform: scale(1.05);
+}
+
+.calendar-day.today {
+  border: 2px solid #fb8c00;
+}
+
+.calendar-day.selected {
+  background: #ffcc80;
+  font-weight: bold;
+}
+
+.calendar-day.has-appointments .appointment-indicator {
+  background: #ff6f00;
+  color: white;
+  border-radius: 8px;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* Appointments Panel */
+.appointments-panel {
+  margin-top: 24px;
+  animation: fadeIn 0.5s ease;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  color: #e65100;
+}
+
+.appointment-count-badge {
+  background: #ff8f00;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+}
+
+/* Card Styling */
+.appointment-card {
+  margin: 12px 0;
+  border-left: 6px solid #fb8c00;
+  transition: box-shadow 0.3s;
+}
+
+.appointment-card:hover {
+  box-shadow: 0 4px 14px rgba(255, 111, 0, 0.4);
+}
+
+.appointment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.detail-item mat-icon {
+  vertical-align: middle;
+  margin-right: 6px;
+  color: #ff7043;
+}
+
+.status-pending {
+  color: #ff9800;
+}
+
+.status-completed {
+  color: #4caf50;
+}
+
+.status-cancelled {
+  color: #e53935;
+}
+
+/* Table View */
+.table-container {
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+.appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 16px;
+}
+
+/* Action Buttons */
+.action-buttons button {
+  margin-right: 8px;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: #fb8c00;
+}
+
+.mat-button.mat-warn {
+  color: #e53935;
+}
+
+/* No Appointments Message */
+.no-appointments {
+  text-align: center;
+  color: #999;
+  margin-top: 40px;
+}
+
+.no-appointments-icon {
+  font-size: 48px;
+  color: #ffc107;
+  margin-bottom: 10px;
+}
+
+/* Responsive Behavior */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .appointment-details {
+    font-size: 0.9rem;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
